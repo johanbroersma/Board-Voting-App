@@ -1,0 +1,9 @@
+# Live election data — do not commit (regenerated at runtime)
+election_state.json
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
