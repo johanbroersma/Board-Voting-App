@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Church Voting App — Admin Hub</title>
+  <title>Board Voting App — Admin Hub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -37,14 +37,10 @@
       --navy-mid: #243460;
       --gold: #b8942a;
       --gold-light: #d4aa3a;
-      --elder-dark: #7c3d12;
-      --elder-mid: #9a4f1a;
-      --elder-tint: #fdf0e6;
-      --elder-border: #f0c090;
-      --deacon-dark: #1a3a5c;
-      --deacon-mid: #1e4976;
-      --deacon-tint: #e8f0fa;
-      --deacon-border: #9bbde8;
+      --election-dark: #1a3a5c;
+      --election-mid: #1e4976;
+      --election-tint: #e8f0fa;
+      --election-border: #9bbde8;
       --cream: #f8f5ef;
       --green: #2d6a4f;
       --red: #9b2335;
@@ -83,10 +79,8 @@
     .btn-red { background: var(--red); color: #fff; }
     .btn-red:hover:not(:disabled) { background: #7a1a28; }
     .btn-ghost { background: transparent; border: 1.5px solid currentColor; }
-    .btn-elder { background: var(--elder-dark); color: #fff; }
-    .btn-elder:hover:not(:disabled) { background: var(--elder-mid); }
-    .btn-deacon { background: var(--deacon-dark); color: #fff; }
-    .btn-deacon:hover:not(:disabled) { background: var(--deacon-mid); }
+    .btn-election { background: var(--election-dark); color: #fff; }
+    .btn-election:hover:not(:disabled) { background: var(--election-mid); }
     .btn-sm { padding: 0.35rem 0.8rem; font-size: 0.85rem; }
     .btn-lg { padding: 0.75rem 1.6rem; font-size: 1.05rem; }
     .btn-full { width: 100%; justify-content: center; }
@@ -98,8 +92,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
     .card-navy { background: var(--navy); color: #fff; }
-    .card-elder { background: var(--elder-tint); border: 1px solid var(--elder-border); }
-    .card-deacon { background: var(--deacon-tint); border: 1px solid var(--deacon-border); }
+    .card-election { background: var(--election-tint); border: 1px solid var(--election-border); }
 
     .form-group { margin-bottom: 1rem; }
     .form-group label { display: block; font-weight: 600; margin-bottom: 0.35rem; font-size: 0.9rem; }
@@ -126,8 +119,7 @@
       letter-spacing: 0.03em;
       text-transform: uppercase;
     }
-    .badge-elder { background: var(--elder-dark); color: #fff; }
-    .badge-deacon { background: var(--deacon-dark); color: #fff; }
+    .badge-election { background: var(--election-dark); color: #fff; }
     .badge-green { background: var(--green); color: #fff; }
     .badge-gold { background: var(--gold); color: #fff; }
 
@@ -147,7 +139,7 @@
     }
     .alert-error { background: #fce8ea; color: var(--red); border: 1px solid #f0b8be; }
     .alert-success { background: #e6f4ee; color: var(--green); border: 1px solid #a0d4bb; }
-    .alert-info { background: #e8f0fa; color: var(--deacon-dark); border: 1px solid var(--deacon-border); }
+    .alert-info { background: #e8f0fa; color: var(--election-dark); border: 1px solid var(--election-border); }
     .alert-warning { background: #fff8e6; color: #7a5a00; border: 1px solid #e8cc80; }
 
     /* ===== TABS ===== */
@@ -679,8 +671,7 @@
       user-select: none;
     }
     .ballot-candidate:hover { border-color: #bbb; }
-    .ballot-candidate.selected-elder { border-color: var(--elder-dark); background: var(--elder-tint); }
-    .ballot-candidate.selected-deacon { border-color: var(--deacon-dark); background: var(--deacon-tint); }
+    .ballot-candidate.selected-election { border-color: var(--election-dark); background: var(--election-tint); }
     .ballot-candidate .cand-cb {
       width: 22px; height: 22px;
       border-radius: 4px;
@@ -690,8 +681,7 @@
       flex-shrink: 0;
       transition: border-color 0.15s, background 0.15s;
     }
-    .ballot-candidate.selected-elder .cand-cb { border-color: var(--elder-dark); background: var(--elder-dark); color: #fff; }
-    .ballot-candidate.selected-deacon .cand-cb { border-color: var(--deacon-dark); background: var(--deacon-dark); color: #fff; }
+    .ballot-candidate.selected-election .cand-cb { border-color: var(--election-dark); background: var(--election-dark); color: #fff; }
     .ballot-candidate .cand-name { font-size: 1rem; font-weight: 600; }
     .ballot-log { margin-top: 2rem; }
     .ballot-log-entry {
@@ -765,14 +755,15 @@
 <div id="screen-landing-auth" class="screen">
   <div class="login-card">
     <div style="text-align:center;margin-bottom:1.25rem">
-      <svg width="72" height="36" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Cross">
-        <line x1="0" y1="30" x2="42" y2="30" stroke="#b8942a" stroke-width="1.5" stroke-dasharray="4 3"/>
-        <line x1="78" y1="30" x2="120" y2="30" stroke="#b8942a" stroke-width="1.5" stroke-dasharray="4 3"/>
-        <rect x="54" y="4" width="12" height="52" rx="3" fill="#d4aa3a"/>
-        <rect x="38" y="20" width="44" height="12" rx="3" fill="#d4aa3a"/>
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Ballot">
+        <rect x="7" y="4" width="34" height="40" rx="3" stroke="#d4aa3a" stroke-width="2.5" fill="none"/>
+        <line x1="13" y1="15" x2="35" y2="15" stroke="#d4aa3a" stroke-width="2"/>
+        <line x1="13" y1="22" x2="35" y2="22" stroke="#d4aa3a" stroke-width="2"/>
+        <line x1="13" y1="29" x2="26" y2="29" stroke="#d4aa3a" stroke-width="2"/>
+        <polyline points="29,26 32,33 40,21" stroke="#2d9a5f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
-    <h2 class="font-playfair" style="text-align:center;margin-bottom:0.2rem">Church Voting App</h2>
+    <h2 class="font-playfair" style="text-align:center;margin-bottom:0.2rem">Board Voting App</h2>
     <p style="text-align:center">Enter the access password to continue.</p>
     <div id="landing-auth-default-warn" class="alert alert-warning" style="display:none;font-size:0.85rem">
       You are using the default password. Please change it in <strong>App Settings</strong> to secure this system.
@@ -791,25 +782,26 @@
 <!-- ===== SCREEN: HOME ===== -->
 <div id="screen-home" class="screen">
   <div class="landing-cross" id="home-logo" style="margin:2.5rem 0 1.5rem">
-    <svg width="120" height="60" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Cross">
-      <line x1="0" y1="30" x2="42" y2="30" stroke="#b8942a" stroke-width="1.5" stroke-dasharray="4 3"/>
-      <line x1="78" y1="30" x2="120" y2="30" stroke="#b8942a" stroke-width="1.5" stroke-dasharray="4 3"/>
-      <rect x="54" y="4" width="12" height="52" rx="3" fill="#d4aa3a"/>
-      <rect x="38" y="20" width="44" height="12" rx="3" fill="#d4aa3a"/>
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Ballot">
+      <rect x="9" y="5" width="46" height="54" rx="4" stroke="#d4aa3a" stroke-width="3" fill="none"/>
+      <line x1="17" y1="20" x2="47" y2="20" stroke="#d4aa3a" stroke-width="2.5"/>
+      <line x1="17" y1="29" x2="47" y2="29" stroke="#d4aa3a" stroke-width="2.5"/>
+      <line x1="17" y1="38" x2="34" y2="38" stroke="#d4aa3a" stroke-width="2.5"/>
+      <polyline points="39,34 43,44 55,26" stroke="#2d9a5f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </div>
-  <h1 class="landing-title">Church Voting App</h1>
-  <p class="landing-sub" id="home-subtitle">Congregational Membership Meeting</p>
+  <h1 class="landing-title" id="home-title">Board Voting App</h1>
+  <p class="landing-sub" id="home-subtitle">Board Election System</p>
 
   <div id="home-default-pwd-warn" class="alert alert-warning" style="display:none;max-width:560px;width:100%;margin:0.75rem auto 0;font-size:0.88rem">
     ⚠️ You are using the <strong>default app password</strong>. Please change it in <strong>App Settings</strong> before use.
   </div>
 
   <div class="home-tiles">
-    <button class="home-tile" onclick="showElectionHub()" aria-label="Office Bearer Election">
-      <span class="ht-icon">⛪</span>
-      <span class="ht-title">Office Bearer Election</span>
-      <span class="ht-desc">Elect elders &amp; deacons by ballot</span>
+    <button class="home-tile" onclick="showElectionHub()" aria-label="Board Election">
+      <span class="ht-icon">🗳️</span>
+      <span class="ht-title">Board Election</span>
+      <span class="ht-desc">Multi-round candidate election by ballot</span>
     </button>
     <button class="home-tile" onclick="showVotingHub()" aria-label="Congregational Vote">
       <span class="ht-icon">🗳️</span>
@@ -819,7 +811,7 @@
     <button class="home-tile" onclick="goLogin('paperballet')" aria-label="Paper Ballot Entry">
       <span class="ht-icon">📝</span>
       <span class="ht-title">Paper Ballot Entry</span>
-      <span class="ht-desc">Enter paper votes for both elections &amp; motions</span>
+      <span class="ht-desc">Enter paper votes for the election &amp; motions</span>
     </button>
     <button class="home-tile" onclick="goLogin('tokens')" aria-label="Voter Tokens">
       <span class="ht-icon">🎟️</span>
@@ -828,7 +820,7 @@
     </button>
   </div>
 
-  <p class="landing-note" style="margin-top:1.5rem">Reformed Church Voting System · All data stored on this server</p>
+  <p class="landing-note" style="margin-top:1.5rem">Board Voting App · All data stored on this server</p>
   <p style="margin-top:0.4rem"><a href="#" onclick="showAppSettings();return false;" style="color:var(--nav-back-color);font-size:0.77rem;text-decoration:none">⚙ Settings</a></p>
 </div>
 
@@ -837,7 +829,7 @@
   <div style="background:var(--navy);color:#fff;padding:1.5rem 2rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
     <div>
       <h1 style="font-size:1.6rem;color:var(--gold-light)">⚙ App Settings</h1>
-      <div style="font-size:0.85rem;color:#8090b0;margin-top:0.2rem">Church identity, integration &amp; access passwords</div>
+      <div style="font-size:0.85rem;color:#8090b0;margin-top:0.2rem">Organization identity, integration &amp; access passwords</div>
     </div>
     <button class="btn btn-ghost btn-sm" style="color:var(--nav-back-color);border-color:var(--nav-back-border)" onclick="showHome()">← Home</button>
   </div>
@@ -845,21 +837,17 @@
 
     <!-- Church Identity -->
     <div class="card" style="margin-bottom:1.25rem">
-      <h3 class="section-title">Church Identity</h3>
+      <h3 class="section-title">Organization Identity</h3>
       <div class="form-group">
-        <label for="app-church">Congregation Name</label>
-        <input type="text" id="app-church" class="form-control" placeholder="e.g. First Reformed Church">
+        <label for="app-org">Organization Name</label>
+        <input type="text" id="app-org" class="form-control" placeholder="e.g. NRCEA School Board">
       </div>
       <div class="form-group">
-        <label for="app-denomination">Denomination</label>
-        <select id="app-denomination" class="form-control">
-          <option value="">— Select denomination —</option>
-          <option value="Free Reformed">Free Reformed</option>
-          <option value="United Reformed">United Reformed</option>
-        </select>
+        <label for="app-election-name">Election Name</label>
+        <input type="text" id="app-election-name" class="form-control" placeholder="e.g. Board of Directors Election 2025">
       </div>
       <div class="form-group">
-        <label>Church Logo</label>
+        <label>Organization Logo</label>
         <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
           <div id="app-logo-preview" style="width:80px;height:80px;border:1.5px solid #ccc;border-radius:8px;display:flex;align-items:center;justify-content:center;background:#f8f5ef;overflow:hidden;flex-shrink:0"></div>
           <div style="display:flex;flex-direction:column;gap:0.5rem">
@@ -1026,34 +1014,33 @@
   <div style="width:100%;max-width:520px;display:flex;justify-content:flex-start;margin-bottom:0.5rem">
     <button class="btn btn-ghost btn-sm" style="color:var(--nav-back-color);border-color:var(--nav-back-border);margin-top:1rem" onclick="showHome()">← Home</button>
   </div>
-  <div class="landing-cross">
-    <svg width="120" height="60" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Cross with decorative lines">
-      <line x1="0" y1="30" x2="42" y2="30" stroke="#b8942a" stroke-width="1.5" stroke-dasharray="4 3"/>
-      <line x1="78" y1="30" x2="120" y2="30" stroke="#b8942a" stroke-width="1.5" stroke-dasharray="4 3"/>
-      <rect x="54" y="4" width="12" height="52" rx="3" fill="#d4aa3a"/>
-      <rect x="38" y="20" width="44" height="12" rx="3" fill="#d4aa3a"/>
+  <div class="landing-cross" id="landing-logo">
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Ballot">
+      <rect x="9" y="5" width="46" height="54" rx="4" stroke="#d4aa3a" stroke-width="3" fill="none"/>
+      <line x1="17" y1="20" x2="47" y2="20" stroke="#d4aa3a" stroke-width="2.5"/>
+      <line x1="17" y1="29" x2="47" y2="29" stroke="#d4aa3a" stroke-width="2.5"/>
+      <line x1="17" y1="38" x2="34" y2="38" stroke="#d4aa3a" stroke-width="2.5"/>
+      <polyline points="39,34 43,44 55,26" stroke="#2d9a5f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </div>
-  <h1 class="landing-title">Office Bearer Election</h1>
-  <p class="landing-sub">Congregational Membership Meeting</p>
+  <h1 class="landing-title" id="landing-title">Board Election</h1>
+  <p class="landing-sub" id="landing-sub">Election Hub</p>
 
   <nav class="nav-grid" role="navigation" aria-label="Admin navigation">
     <button class="nav-card" onclick="goLogin()" aria-label="Election Setup">
       <span class="nav-icon">⚙️</span>
       <span class="nav-label">Election Setup</span>
-      <span class="nav-desc">Configure nominees &amp; tokens</span>
+      <span class="nav-desc">Configure nominees &amp; open positions</span>
     </button>
     <button class="nav-card" onclick="goLogin('roundcontrol')" aria-label="Round Control">
       <span class="nav-icon">🎛️</span>
       <span class="nav-label">Round Control</span>
       <span class="nav-desc">Manage voting rounds</span>
     </button>
-
-
     <button class="nav-card full-width" onclick="goLogin('results')" aria-label="Election Dashboard">
       <span class="nav-icon">📋</span>
       <span class="nav-label">Election Dashboard</span>
-      <span class="nav-desc">Status, results &amp; elected officers</span>
+      <span class="nav-desc">Status, results &amp; elected members</span>
     </button>
   </nav>
 
@@ -1110,15 +1097,14 @@
     <!-- Tab Bar -->
     <div class="tab-bar" role="tablist" aria-label="Setup sections">
       <button class="tab-btn active" role="tab" aria-selected="true" onclick="switchTab('details')">Details</button>
-      <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('elder')">Elder Election</button>
-      <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('deacon')">Deacon Election</button>
+      <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('nominees')">Nominees</button>
       <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('settings')">Settings</button>
     </div>
 
     <!-- Details Tab -->
     <div id="tab-details" class="tab-pane active">
       <div class="card">
-        <h3 class="section-title">Congregation Details</h3>
+        <h3 class="section-title">Election Details</h3>
         <div class="grid-2">
           <div class="form-group">
             <label for="setup-date">Meeting Date</label>
@@ -1148,14 +1134,9 @@
       </div>
     </div>
 
-    <!-- Elder Election Tab -->
-    <div id="tab-elder" class="tab-pane">
-      <div id="elder-setup-content"></div>
-    </div>
-
-    <!-- Deacon Election Tab -->
-    <div id="tab-deacon" class="tab-pane">
-      <div id="deacon-setup-content"></div>
+    <!-- Nominees Tab -->
+    <div id="tab-nominees" class="tab-pane">
+      <div id="election-setup-content"></div>
     </div>
 
     <!-- Settings Tab -->
@@ -1266,7 +1247,7 @@
     <!-- Action Buttons -->
     <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem">
       <button class="btn btn-lg btn-green" id="rt-launch-btn" onclick="rtLaunchNextRound()">🚀 Launch Next Round</button>
-      <button class="btn btn-lg btn-navy" id="rt-complete-btn" onclick="rtCompleteOffice()">✅ Complete This Office</button>
+      <button class="btn btn-lg btn-navy" id="rt-complete-btn" onclick="rtCompleteElection()">✅ Complete Election</button>
       <button class="btn btn-lg btn-ghost" style="color:#555;border-color:#ccc" onclick="showScreen('screen-round-control'); renderRoundControl()">← Back to Control</button>
     </div>
   </div>
@@ -1497,7 +1478,7 @@
 
     <div class="card" style="margin-bottom:1.25rem">
       <h3 class="section-title">Generate Voter Tokens</h3>
-      <p style="font-size:0.9rem;color:#666;margin-bottom:1rem">Each voter receives a unique 4-digit token. Tokens are shared across both the office bearer election and any congregational votes.</p>
+      <p style="font-size:0.9rem;color:#666;margin-bottom:1rem">Each voter receives a unique 4-digit token. Tokens are shared across all rounds of the board election and any congregational votes.</p>
       <div class="grid-2">
         <div class="form-group">
           <label for="token-count">Number of Tokens</label>
@@ -1584,16 +1565,16 @@
 
 function defaultState() {
   return {
-    landingPasswordHash: '',          // SHA-256 hex digest; '' = not yet initialised — gates access to the whole admin hub
-    adminPasswordHash: '',            // separate password for App Settings
-    electionPasswordHash: '',         // separate password for Election Setup / Round Control
-    resultsPasswordHash: '',          // separate password for viewing results
-    votingPasswordHash: '',           // separate password for Voting Setup / Voting Control
-    tokensPasswordHash: '',           // separate password for printing token cards
-    paperBallotPasswordHash: '',      // separate password for Paper Ballot Entry
-    church: '',
-    denomination: '',
-    churchLogo: '',
+    landingPasswordHash: '',
+    adminPasswordHash: '',
+    electionPasswordHash: '',
+    resultsPasswordHash: '',
+    votingPasswordHash: '',
+    tokensPasswordHash: '',
+    paperBallotPasswordHash: '',
+    org: '',
+    electionName: '',
+    orgLogo: '',
     primaryColor: '',
     secondaryColor: '',
     appFont: 'Playfair',
@@ -1604,24 +1585,10 @@ function defaultState() {
     completionMessage: '',
     surveyUrl: '',
     tokens: [],
-    activeOffice: null,
-    elder: {
+    election: {
       nominees: [],
-      positions: 2,
-      votesPerVoter: 2,
-      currentRound: 0,
-      votingOpen: false,
-      candidates: [],
-      ballots: [],
-      paperBallots: [],
-      rounds: [],
-      electedAll: [],
-      complete: false
-    },
-    deacon: {
-      nominees: [],
-      positions: 2,
-      votesPerVoter: 2,
+      openPositions: 4,
+      votesPerVoter: 4,
       currentRound: 0,
       votingOpen: false,
       candidates: [],
@@ -1640,7 +1607,7 @@ function defaultState() {
       ballots: [],
       expectedVoters: 0,
       absenteeCount: 0,
-      majorityType: '50plus1',        // '50plus1' | '75percent' | 'custom'
+      majorityType: '50plus1',
       majorityCustomPercent: 51
     }
   };
@@ -1658,8 +1625,8 @@ function deepMerge(target, source) {
   return out;
 }
 
-// Migrate saved state from the old 'motion' key name to 'voting' (renamed v1.3)
 function migrateState(parsed) {
+  // Migrate 'motion' → 'voting' (old key name)
   if (parsed.motion && !parsed.voting) {
     parsed.voting = parsed.motion;
     delete parsed.motion;
@@ -1669,7 +1636,37 @@ function migrateState(parsed) {
       t.votingVoted = t.motionVoted;
       delete t.motionVoted;
     }
+    // Migrate old nested usedRounds { elder: [], deacon: [] } → flat []
+    if (t.usedRounds && !Array.isArray(t.usedRounds)) {
+      const flat = [];
+      Object.values(t.usedRounds).forEach(arr => arr.forEach(r => { if (!flat.includes(r)) flat.push(r); }));
+      t.usedRounds = flat;
+    }
   });
+  // Migrate old elder/deacon state → single election
+  if ((parsed.elder || parsed.deacon) && !parsed.election) {
+    const src = parsed.elder || parsed.deacon || {};
+    parsed.election = {
+      nominees: src.nominees || [],
+      openPositions: src.positions || 4,
+      votesPerVoter: src.votesPerVoter || 4,
+      currentRound: src.currentRound || 0,
+      votingOpen: src.votingOpen || false,
+      candidates: src.candidates || [],
+      ballots: src.ballots || [],
+      paperBallots: src.paperBallots || [],
+      rounds: src.rounds || [],
+      electedAll: src.electedAll || [],
+      complete: src.complete || false
+    };
+    delete parsed.elder;
+    delete parsed.deacon;
+    delete parsed.activeOffice;
+  }
+  // Migrate church → org
+  if (parsed.church && !parsed.org) { parsed.org = parsed.church; delete parsed.church; }
+  if (parsed.denomination) delete parsed.denomination;
+  if (parsed.churchLogo && !parsed.orgLogo) { parsed.orgLogo = parsed.churchLogo; delete parsed.churchLogo; }
   return parsed;
 }
 
@@ -1686,7 +1683,7 @@ function load() {
   } catch (e) { /* server not available — fall through to localStorage */ }
   // Fallback: localStorage (single-device mode)
   try {
-    const raw = localStorage.getItem('frc_election_v3');
+    const raw = localStorage.getItem('bva_election_v1');
     if (!raw) return defaultState();
     return deepMerge(defaultState(), migrateState(JSON.parse(raw)));
   } catch (e) {
@@ -1705,7 +1702,7 @@ function save(state) {
   } catch (e) { /* server not available — fall through to localStorage */ }
   // Also mirror to localStorage as fallback
   try {
-    localStorage.setItem('frc_election_v3', JSON.stringify(state));
+    localStorage.setItem('bva_election_v1', JSON.stringify(state));
   } catch (e) {
     console.error('save error:', e);
   }
@@ -1784,15 +1781,11 @@ async function initPasswordHash() {
     changed = true;
   }
   if (!state.adminPasswordHash) {
-    state.adminPasswordHash = await hashPw('churchvoting');
+    state.adminPasswordHash = await hashPw('boardvoting');
     changed = true;
   }
   if (!state.electionPasswordHash) {
-    // Migrate: if admin hash was previously set to 'election2024' default, carry it over
-    const oldDefault = await hashPw('election2024');
-    state.electionPasswordHash = (state.adminPasswordHash === oldDefault)
-      ? oldDefault
-      : await hashPw('election2024');
+    state.electionPasswordHash = await hashPw('election2024');
     changed = true;
   }
   if (!state.resultsPasswordHash) {
@@ -1854,33 +1847,30 @@ function voteUrl() {
 }
 
 
-function officeColor(office) {
-  return office === 'elder'
-    ? { dark: '#7c3d12', mid: '#9a4f1a', tint: '#fdf0e6', border: '#f0c090', bar: '#9a4f1a' }
-    : { dark: '#1a3a5c', mid: '#1e4976', tint: '#e8f0fa', border: '#9bbde8', bar: '#1e4976' };
+function electionColor() {
+  return { dark: '#1a3a5c', mid: '#1e4976', tint: '#e8f0fa', border: '#9bbde8', bar: '#1e4976' };
 }
 
-function officeLabel(office) {
-  return office === 'elder' ? 'Elder' : 'Deacon';
+function electionLabel(state) {
+  return state.electionName || 'Board Election';
 }
 
-function officeBadge(office) {
-  const cls = office === 'elder' ? 'badge-elder' : 'badge-deacon';
-  return `<span class="badge ${cls}">${officeLabel(office)}</span>`;
+function electionBadge(state) {
+  return `<span class="badge badge-election">${electionLabel(state)}</span>`;
 }
 
-function countBallotVotes(state, office) {
-  const o = state[office];
-  const digital = o.ballots ? o.ballots.filter(b => b.round === o.currentRound).length : 0;
-  const paper = o.paperBallots ? o.paperBallots.filter(b => b.round === o.currentRound).length : 0;
+function countBallotVotes(state) {
+  const o = state.election;
+  const digital  = o.ballots      ? o.ballots.filter(b => b.round === o.currentRound).length : 0;
+  const paper    = o.paperBallots ? o.paperBallots.filter(b => b.round === o.currentRound).length : 0;
   const absentee = o.paperBallots ? o.paperBallots.filter(b => b.round === o.currentRound && b.absentee).length : 0;
   return { digital, paper, total: digital + paper, absentee };
 }
 
-function buildResults(state, office) {
-  const o = state[office];
-  const candidates = (o.candidates || []).map(c => ({ name: c.name, votes: c.votes || 0 }));
-  return candidates.sort((a, b) => b.votes - a.votes);
+function buildResults(state) {
+  const o = state.election;
+  return (o.candidates || []).map(c => ({ name: c.name, votes: c.votes || 0 }))
+    .sort((a, b) => b.votes - a.votes);
 }
 
 function formatDate(dateStr) {
@@ -1905,6 +1895,12 @@ function renderLanding() {
 
   const warn = document.getElementById('file-protocol-warning');
   if (warn) warn.style.display = window.location.protocol === 'file:' ? 'block' : 'none';
+
+  const state = load();
+  const titleEl = document.getElementById('landing-title');
+  if (titleEl) titleEl.textContent = state.electionName || 'Board Election';
+  const subEl = document.getElementById('landing-sub');
+  if (subEl) subEl.textContent = state.org || 'Election Hub';
 }
 
 function showHome() {
@@ -1912,11 +1908,10 @@ function showHome() {
   renderTokens();
   renderHomeScreenLogo();
   const state = load();
+  const titleEl = document.getElementById('home-title');
+  if (titleEl) titleEl.textContent = state.org || 'Board Voting App';
   const subtitle = document.getElementById('home-subtitle');
-  if (subtitle) {
-    const parts = [state.church, state.denomination].filter(Boolean);
-    subtitle.textContent = parts.length ? parts.join(' · ') : 'Congregational Membership Meeting';
-  }
+  if (subtitle) subtitle.textContent = state.electionName || 'Board Election System';
   const warnEl = document.getElementById('home-default-pwd-warn');
   if (warnEl) warnEl.style.display = (sessionStorage.getItem('chapAuthDefault') === '1') ? '' : 'none';
 }
@@ -2141,20 +2136,15 @@ function goToRoundControl() {
 
 function renderSetup() {
   const state = load();
-  // Church name in header
   const cn = document.getElementById('setup-church-name');
-  if (cn) cn.textContent = state.church || 'No congregation name set';
+  if (cn) cn.textContent = state.org || state.electionName || '';
 
-  // Show Round Control shortcut if at least one office is configured
-  const anyConfigured = ['elder', 'deacon'].some(k => (state[k]?.nominees || []).length > 0);
+  const anyConfigured = (state.election?.nominees || []).length > 0;
   const rcBtn = document.getElementById('setup-rc-btn');
   if (rcBtn) rcBtn.style.display = anyConfigured ? 'inline-flex' : 'none';
 
-  // Details tab
   const dateEl = document.getElementById('setup-date');
   if (dateEl) dateEl.value = state.meetingDate || '';
-
-  // Completion message settings
   const cmEl = document.getElementById('completion-message');
   if (cmEl) cmEl.value = state.completionMessage || '';
   const suEl = document.getElementById('survey-url');
@@ -2165,17 +2155,14 @@ function renderSetup() {
   if (absenteeEl) absenteeEl.value = state.absenteeCount || 0;
   updateMajorityDisplay();
 
-  // Office tabs
-  renderOfficeSetup('elder');
-  renderOfficeSetup('deacon');
+  renderElectionSetup();
 }
 
-function renderOfficeSetup(office) {
+function renderElectionSetup() {
   const state = load();
-  const o = state[office];
-  const colors = officeColor(office);
-  const label = officeLabel(office);
-  const el = document.getElementById(`${office}-setup-content`);
+  const o = state.election;
+  const colors = electionColor();
+  const el = document.getElementById('election-setup-content');
   if (!el) return;
 
   const inProgress = o.currentRound > 0;
@@ -2183,44 +2170,42 @@ function renderOfficeSetup(office) {
 
   if (!inProgress) {
     el.innerHTML = `
-      <div class="card card-${office}" style="margin-bottom:1rem">
-        <h3 class="section-title" style="color:${colors.dark}">${label} Election Setup</h3>
+      <div class="card card-election" style="margin-bottom:1rem">
+        <h3 class="section-title" style="color:${colors.dark}">Election Setup</h3>
         ${configured ? `<div style="background:${colors.tint};border:1px solid ${colors.border};border-radius:6px;padding:0.6rem 0.9rem;margin-bottom:0.9rem;font-size:0.85rem;color:${colors.dark}">
-          ✓ Setup saved — ${(o.nominees||[]).length} nominees, ${o.positions} position${o.positions!==1?'s':''}, ${o.votesPerVoter} vote${o.votesPerVoter!==1?'s':''} per voter. Start Round 1 from <strong>Round Control</strong>.
+          ✓ Setup saved — ${(o.nominees||[]).length} nominees, ${o.openPositions} open position${o.openPositions!==1?'s':''}, ${o.votesPerVoter} vote${o.votesPerVoter!==1?'s':''} per voter. Start Round 1 from <strong>Round Control</strong>.
         </div>` : ''}
         <div class="form-group">
-          <label for="${office}-nominees">Nominee Names (one per line)</label>
-          <textarea id="${office}-nominees" class="form-control" placeholder="John Smith&#10;Jane Doe&#10;...">${(o.nominees || []).join('\n')}</textarea>
+          <label for="election-nominees">Nominee Names (one per line)</label>
+          <textarea id="election-nominees" class="form-control" placeholder="John Smith&#10;Jane Doe&#10;...">${(o.nominees || []).join('\n')}</textarea>
         </div>
         <div class="grid-2">
           <div class="form-group">
-            <label for="${office}-positions">Positions to Fill</label>
-            <input type="number" id="${office}-positions" class="form-control" value="${o.positions || 2}" min="1">
+            <label for="election-positions">Open Positions to Fill</label>
+            <input type="number" id="election-positions" class="form-control" value="${o.openPositions || 4}" min="1">
           </div>
           <div class="form-group">
-            <label for="${office}-vpv">Votes per Voter per Round</label>
-            <input type="number" id="${office}-vpv" class="form-control" value="${o.votesPerVoter || 2}" min="1">
+            <label for="election-vpv">Votes per Voter (Round 1)</label>
+            <input type="number" id="election-vpv" class="form-control" value="${o.votesPerVoter || 4}" min="1">
           </div>
         </div>
-        <div id="${office}-setup-error" class="alert alert-error" style="display:none"></div>
-        <button class="btn btn-${office} btn-lg" onclick="saveOfficeSetup('${office}')">
-          💾 Save Setup
-        </button>
+        <div id="election-setup-error" class="alert alert-error" style="display:none"></div>
+        <button class="btn btn-election btn-lg" onclick="saveElectionSetup()">💾 Save Setup</button>
         ${(o.nominees || []).length > 0 ? `
         <hr style="border:none;border-top:1px solid #e0dbd0;margin:1.25rem 0 1rem">
         <div>
           <div style="font-size:0.82rem;font-weight:700;color:#555;margin-bottom:0.5rem">🖨️ Print Paper Ballots</div>
           <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
             <label style="font-size:0.82rem;color:#555">Copies:</label>
-            <input type="number" id="${office}-ballot-qty" value="20" min="1" max="500"
+            <input type="number" id="election-ballot-qty" value="20" min="1" max="500"
               style="width:60px;padding:0.25rem 0.4rem;border:1.5px solid #ccc;border-radius:4px;font-size:0.85rem;text-align:center">
-            <button class="btn btn-sm" style="background:${colors.dark};color:#fff" onclick="printPaperBallot('${office}')">🖨️ Print ${label} Ballots</button>
+            <button class="btn btn-sm" style="background:${colors.dark};color:#fff" onclick="printPaperBallot()">🖨️ Print Ballots</button>
           </div>
         </div>` : ''}
       </div>`;
   } else {
-    const ballotCounts = countBallotVotes(state, office);
-    const roundsHtml = (o.rounds || []).map((r, i) => `
+    const ballotCounts = countBallotVotes(state);
+    const roundsHtml = (o.rounds || []).map(r => `
       <div style="padding:0.5rem 0;border-bottom:1px solid #e8e0d0;font-size:0.88rem">
         <strong>Round ${r.round}</strong> — ${r.candidates ? r.candidates.length : 0} candidates,
         ${(r.ballots || []).length + (r.paperBallots || []).length} ballots
@@ -2228,8 +2213,8 @@ function renderOfficeSetup(office) {
       </div>`).join('');
 
     el.innerHTML = `
-      <div class="card card-${office}" style="margin-bottom:1rem">
-        <h3 class="section-title" style="color:${colors.dark}">${label} Election — In Progress</h3>
+      <div class="card card-election" style="margin-bottom:1rem">
+        <h3 class="section-title" style="color:${colors.dark}">Election — In Progress</h3>
         <div class="grid-2" style="margin-bottom:1rem">
           <div class="stat-box">
             <div class="stat-num" style="color:${colors.dark}">${o.currentRound}</div>
@@ -2250,7 +2235,7 @@ function renderOfficeSetup(office) {
             <div class="stat-lbl">${o.votingOpen ? 'Open' : 'Closed'}</div>
           </div>
         </div>
-        <button class="btn btn-${office} btn-lg" onclick="showScreen('screen-round-control'); renderRoundControl()">
+        <button class="btn btn-election btn-lg" onclick="showScreen('screen-round-control'); renderRoundControl()">
           🎛️ Go to Round Control
         </button>
         ${o.complete ? '<span class="badge badge-green" style="margin-left:0.75rem">✓ Complete</span>' : ''}
@@ -2259,9 +2244,9 @@ function renderOfficeSetup(office) {
           <div style="font-size:0.82rem;font-weight:700;color:#555;margin-bottom:0.5rem">🖨️ Print Paper Ballots</div>
           <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
             <label style="font-size:0.82rem;color:#555">Copies:</label>
-            <input type="number" id="${office}-ballot-qty" value="20" min="1" max="500"
+            <input type="number" id="election-ballot-qty" value="20" min="1" max="500"
               style="width:60px;padding:0.25rem 0.4rem;border:1.5px solid #ccc;border-radius:4px;font-size:0.85rem;text-align:center">
-            <button class="btn btn-sm" style="background:${colors.dark};color:#fff" onclick="printPaperBallot('${office}')">🖨️ Print ${label} Ballots</button>
+            <button class="btn btn-sm" style="background:${colors.dark};color:#fff" onclick="printPaperBallot()">🖨️ Print Ballots</button>
           </div>
         </div>
       </div>
@@ -2298,10 +2283,10 @@ function saveDetails() {
   setTimeout(() => { savedEl.style.display = 'none'; }, 2000);
 }
 
-function saveOfficeSetup(office) {
-  const textarea = document.getElementById(`${office}-nominees`);
+function saveElectionSetup() {
+  const textarea = document.getElementById('election-nominees');
   const names = textarea.value.split('\n').map(n => n.trim()).filter(n => n.length > 0);
-  const errEl = document.getElementById(`${office}-setup-error`);
+  const errEl = document.getElementById('election-setup-error');
 
   if (names.length < 1) {
     errEl.textContent = 'Please enter at least one nominee.';
@@ -2311,36 +2296,30 @@ function saveOfficeSetup(office) {
   errEl.style.display = 'none';
 
   const state = load();
-  const positions = parseInt(document.getElementById(`${office}-positions`).value) || 2;
-  const vpv = parseInt(document.getElementById(`${office}-vpv`).value) || 2;
-  state[office].nominees = names;
-  state[office].positions = positions;
-  state[office].votesPerVoter = vpv;
-  // Reset round state so it can be freshly started from Round Control
-  state[office].candidates = [];
-  state[office].currentRound = 0;
-  state[office].votingOpen = false;
-  state[office].ballots = [];
-  state[office].paperBallots = [];
-  state[office].rounds = [];
-  state[office].electedAll = [];
-  state[office].complete = false;
-  // Clear activeOffice if it was pointing to this office
-  if (state.activeOffice === office) state.activeOffice = null;
+  const positions = parseInt(document.getElementById('election-positions').value) || 4;
+  const vpv = parseInt(document.getElementById('election-vpv').value) || 4;
+  state.election.nominees = names;
+  state.election.openPositions = positions;
+  state.election.votesPerVoter = vpv;
+  state.election.candidates = [];
+  state.election.currentRound = 0;
+  state.election.votingOpen = false;
+  state.election.ballots = [];
+  state.election.paperBallots = [];
+  state.election.rounds = [];
+  state.election.electedAll = [];
+  state.election.complete = false;
   save(state);
 
-  // Show Round Control shortcut now that at least one office is configured
   const rcBtn = document.getElementById('setup-rc-btn');
   if (rcBtn) rcBtn.style.display = 'inline-flex';
 
-  renderOfficeSetup(office);
-  // Show brief success feedback
-  const errElAfter = document.getElementById(`${office}-setup-error`);
-  if (errElAfter) {
-    errElAfter.className = 'alert alert-success';
-    errElAfter.textContent = `${officeLabel(office)} election setup saved. Start Round 1 from Round Control.`;
-    errElAfter.style.display = 'block';
-    setTimeout(() => { errElAfter.style.display = 'none'; errElAfter.className = 'alert alert-error'; }, 4000);
+  renderElectionSetup();
+  if (errEl) {
+    errEl.className = 'alert alert-success';
+    errEl.textContent = 'Election setup saved. Start Round 1 from Round Control.';
+    errEl.style.display = 'block';
+    setTimeout(() => { errEl.style.display = 'none'; errEl.className = 'alert alert-error'; }, 4000);
   }
 }
 
@@ -2348,7 +2327,7 @@ function saveOfficeSetup(office) {
 
 function switchTab(name) {
   document.querySelectorAll('.tab-btn').forEach((btn, i) => {
-    const names = ['details','elder','deacon','settings'];
+    const names = ['details','nominees','settings'];
     btn.classList.toggle('active', names[i] === name);
     btn.setAttribute('aria-selected', names[i] === name ? 'true' : 'false');
   });
@@ -2356,8 +2335,7 @@ function switchTab(name) {
   const pane = document.getElementById('tab-' + name);
   if (pane) pane.classList.add('active');
 
-  if (name === 'elder') renderOfficeSetup('elder');
-  if (name === 'deacon') renderOfficeSetup('deacon');
+  if (name === 'nominees') renderElectionSetup();
   if (name === 'settings') renderSettings();
 }
 
@@ -2436,11 +2414,11 @@ function showAppSettings() {
 
 function renderAppSettings() {
   const state = load();
-  const churchEl = document.getElementById('app-church');
-  if (churchEl) churchEl.value = state.church || '';
-  const denomEl = document.getElementById('app-denomination');
-  if (denomEl) denomEl.value = state.denomination || '';
-  updateLogoPreview(state.churchLogo || '');
+  const orgEl = document.getElementById('app-org');
+  if (orgEl) orgEl.value = state.org || '';
+  const enEl = document.getElementById('app-election-name');
+  if (enEl) enEl.value = state.electionName || '';
+  updateLogoPreview(state.orgLogo || '');
   const primaryEl = document.getElementById('app-primary-color');
   const primaryPicker = document.getElementById('app-primary-color-picker');
   if (primaryEl) primaryEl.value = state.primaryColor || '';
@@ -2457,8 +2435,8 @@ function renderAppSettings() {
 
 function saveAppIdentity() {
   const state = load();
-  state.church = (document.getElementById('app-church')?.value || '').trim();
-  state.denomination = document.getElementById('app-denomination')?.value || '';
+  state.org          = (document.getElementById('app-org')?.value || '').trim();
+  state.electionName = (document.getElementById('app-election-name')?.value || '').trim();
   const primary = (document.getElementById('app-primary-color')?.value || '').trim();
   const secondary = (document.getElementById('app-secondary-color')?.value || '').trim();
   if (primary) state.primaryColor = primary;
@@ -2551,24 +2529,25 @@ function syncColorPicker(textId, pickerId) {
   }
 }
 
+const _ballotSvgSmall = `<svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="7" y="4" width="34" height="40" rx="3" stroke="#d4aa3a" stroke-width="2.5" fill="none"/><line x1="13" y1="15" x2="35" y2="15" stroke="#d4aa3a" stroke-width="2"/><line x1="13" y1="22" x2="35" y2="22" stroke="#d4aa3a" stroke-width="2"/><line x1="13" y1="29" x2="26" y2="29" stroke="#d4aa3a" stroke-width="2"/><polyline points="29,26 32,33 40,21" stroke="#2d9a5f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const _ballotSvgLarge = `<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Ballot"><rect x="9" y="5" width="46" height="54" rx="4" stroke="#d4aa3a" stroke-width="3" fill="none"/><line x1="17" y1="20" x2="47" y2="20" stroke="#d4aa3a" stroke-width="2.5"/><line x1="17" y1="29" x2="47" y2="29" stroke="#d4aa3a" stroke-width="2.5"/><line x1="17" y1="38" x2="34" y2="38" stroke="#d4aa3a" stroke-width="2.5"/><polyline points="39,34 43,44 55,26" stroke="#2d9a5f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
 function updateLogoPreview(logoUrl) {
   const preview = document.getElementById('app-logo-preview');
   if (!preview) return;
-  if (logoUrl) {
-    preview.innerHTML = `<img src="${logoUrl}" style="width:100%;height:100%;object-fit:contain">`;
-  } else {
-    preview.innerHTML = `<svg width="40" height="40" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="30" x2="42" y2="30" stroke="#b8942a" stroke-width="1.5" stroke-dasharray="4 3"/><line x1="78" y1="30" x2="120" y2="30" stroke="#b8942a" stroke-width="1.5" stroke-dasharray="4 3"/><rect x="54" y="4" width="12" height="52" rx="3" fill="#d4aa3a"/><rect x="38" y="20" width="44" height="12" rx="3" fill="#d4aa3a"/></svg>`;
-  }
+  preview.innerHTML = logoUrl
+    ? `<img src="${logoUrl}" style="width:100%;height:100%;object-fit:contain">`
+    : _ballotSvgSmall;
 }
 
 function renderHomeScreenLogo() {
   const state = load();
   const logoEl = document.getElementById('home-logo');
   if (!logoEl) return;
-  if (state.churchLogo) {
-    logoEl.innerHTML = `<img src="${state.churchLogo}" style="max-width:120px;max-height:80px;object-fit:contain;display:block;margin:0 auto">`;
+  if (state.orgLogo) {
+    logoEl.innerHTML = `<img src="${state.orgLogo}" style="max-width:120px;max-height:80px;object-fit:contain;display:block;margin:0 auto">`;
   } else {
-    logoEl.innerHTML = `<svg width="120" height="60" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Cross"><line x1="0" y1="30" x2="42" y2="30" stroke="#b8942a" stroke-width="1.5" stroke-dasharray="4 3"/><line x1="78" y1="30" x2="120" y2="30" stroke="#b8942a" stroke-width="1.5" stroke-dasharray="4 3"/><rect x="54" y="4" width="12" height="52" rx="3" fill="#d4aa3a"/><rect x="38" y="20" width="44" height="12" rx="3" fill="#d4aa3a"/></svg>`;
+    logoEl.innerHTML = _ballotSvgLarge;
   }
 }
 
@@ -2578,7 +2557,7 @@ function handleLogoUpload(input) {
   const reader = new FileReader();
   reader.onload = function(e) {
     const state = load();
-    state.churchLogo = e.target.result;
+    state.orgLogo = e.target.result;
     save(state);
     updateLogoPreview(e.target.result);
     renderHomeScreenLogo();
@@ -2588,7 +2567,7 @@ function handleLogoUpload(input) {
 
 function clearLogo() {
   const state = load();
-  state.churchLogo = '';
+  state.orgLogo = '';
   save(state);
   updateLogoPreview('');
   renderHomeScreenLogo();
@@ -2691,7 +2670,7 @@ function printQR() {
   if (!src) { alert('QR code not generated yet.'); return; }
   const url = voteUrl();
   const state = load();
-  const church = state.church || 'Office Bearer Election';
+  const org = state.org || 'Board Voting App';
   const w = window.open('', '_blank');
   w.document.write(`<!DOCTYPE html><html><head><title>Voter QR Code</title>
     <style>
@@ -2701,7 +2680,7 @@ function printQR() {
       p { font-size: 0.9rem; color: #555; margin-bottom: 0.25rem; word-break: break-all; }
       .url { font-weight: bold; color: #1a2744; }
     </style></head><body>
-    <h2>${esc(church)}</h2>
+    <h2>${esc(org)}</h2>
     <p>Scan to open the voter page</p>
     <img src="${src}" width="220" height="220" alt="QR Code">
     <p class="url">${esc(url)}</p>
@@ -2730,7 +2709,7 @@ function generateTokens() {
     codes.add(String(Math.floor(1000 + Math.random() * 9000)));
     attempts++;
   }
-  state.tokens = Array.from(codes).map(code => ({ code, usedRounds: { elder: [], deacon: [] } }));
+  state.tokens = Array.from(codes).map(code => ({ code, usedRounds: [] }));
   save(state);
   renderTokens();
 }
@@ -2740,16 +2719,14 @@ function renderTokens() {
   const tokens = state.tokens || [];
   const total = tokens.length;
 
-  // "Used" means voted in the current round of the current active office,
-  // or cast a congregational vote when that is the active mode
-  const activeOffice = state.activeOffice;
-  const currentRound = activeOffice ? state[activeOffice]?.currentRound : null;
-  const hasActiveRound = activeOffice && currentRound > 0;
+  const election = state.election || {};
+  const currentRound = election.currentRound || 0;
+  const hasActiveRound = currentRound > 0 && !!election.votingOpen;
   const voting = state.voting || {};
-  const hasActiveVoting = !activeOffice && !!voting.votingOpen && !voting.complete;
+  const hasActiveVoting = !!voting.votingOpen && !voting.complete;
 
   const usedThisRound = hasActiveRound
-    ? tokens.filter(t => (t.usedRounds?.[activeOffice] || []).includes(currentRound)).length
+    ? tokens.filter(t => (t.usedRounds || []).includes(currentRound)).length
     : 0;
   const usedForVoting = hasActiveVoting
     ? tokens.filter(t => t.votingVoted).length
@@ -2783,13 +2760,11 @@ function renderTokens() {
       grid.innerHTML = '<div class="empty-state">No tokens generated yet.</div>';
     } else {
       grid.innerHTML = tokens.map(t => {
-        const elderRounds = t.usedRounds?.elder || [];
-        const deaconRounds = t.usedRounds?.deacon || [];
-        const isUsedThisRound = hasActiveRound && (t.usedRounds?.[activeOffice] || []).includes(currentRound);
+        const usedRounds = t.usedRounds || [];
+        const isUsedThisRound = hasActiveRound && usedRounds.includes(currentRound);
         const isUsedForVoting = hasActiveVoting && !!t.votingVoted;
         const parts = [];
-        if (elderRounds.length) parts.push(`Elder: rounds ${elderRounds.join(', ')}`);
-        if (deaconRounds.length) parts.push(`Deacon: rounds ${deaconRounds.join(', ')}`);
+        if (usedRounds.length) parts.push(`Election rounds: ${usedRounds.join(', ')}`);
         if (t.votingVoted) parts.push('Congregational vote: cast');
         const tooltip = parts.length ? parts.join(' | ') : 'Not yet used';
         return `<span class="token-chip${(isUsedThisRound || isUsedForVoting) ? ' used' : ''}" title="${tooltip}">${esc(t.code)}</span>`;
@@ -2832,7 +2807,7 @@ async function printTokenCards() {
   if (tokens.length === 0) { alert('No tokens to print.'); return; }
 
   const url = voteUrl();
-  const church = state.church || 'Church Voting App';
+  const org = state.org || 'Board Voting App';
   const qrDataUrl = await getQrDataUrl(url);
   const qrHtml = qrDataUrl
     ? `<div class="print-qr"><img src="${qrDataUrl}" alt="QR code"></div>`
@@ -2843,7 +2818,7 @@ async function printTokenCards() {
     <div class="print-grid">
       ${tokens.map(t => `
         <div class="print-card">
-          <div class="print-church">${esc(church)}</div>
+          <div class="print-church">${esc(org)}</div>
           <div class="print-code">${esc(t.code)}</div>
           ${qrHtml}
           <div class="print-url">${esc(url)}</div>
@@ -2853,12 +2828,12 @@ async function printTokenCards() {
   window.print();
 }
 
-function printPaperBallot(office) {
+function printPaperBallot() {
   const state = load();
-  const o = state[office];
-  const church = state.church || 'Church Voting App';
-  const colors = officeColor(office);
-  const label = office === 'elder' ? 'Office of Elder' : 'Office of Deacon';
+  const o = state.election;
+  const org = state.org || 'Board Voting App';
+  const colors = electionColor();
+  const label = electionLabel(state);
 
   // Use current round candidates if in progress, otherwise nominees
   const names = o.currentRound > 0 && (o.candidates || []).length > 0
@@ -2866,13 +2841,13 @@ function printPaperBallot(office) {
     : (o.nominees || []);
 
   if (names.length === 0) {
-    alert(`No candidates configured for the ${label}. Add nominees in Election Setup first.`);
+    alert(`No candidates configured. Add nominees in Election Setup first.`);
     return;
   }
 
-  const qtyInput = document.getElementById(`${office}-ballot-qty`);
+  const qtyInput = document.getElementById('election-ballot-qty');
   const qty = Math.max(1, parseInt(qtyInput?.value) || 20);
-  const positions = o.positions || 1;
+  const positions = o.openPositions || 1;
 
   const candidateRows = names.map(n => `
     <div class="ballot-cand-row">
@@ -2883,7 +2858,7 @@ function printPaperBallot(office) {
   const oneCard = `
     <div class="ballot-card">
       <div class="ballot-card-office" style="color:${colors.dark}">${esc(label)}</div>
-      <div class="ballot-card-church">${esc(church)}</div>
+      <div class="ballot-card-church">${esc(org)}</div>
       <div class="ballot-card-instr">${positions} position${positions !== 1 ? 's' : ''} to be filled</div>
       ${candidateRows}
       <div class="ballot-card-footer">${esc(label)}</div>
@@ -3123,7 +3098,7 @@ function resetAllData() {
   if (!confirm('Are you sure? This will permanently erase ALL election data including nominees, ballots, tokens, and results. This cannot be undone.')) return;
   if (!confirm('Second confirmation: all data will be lost. Continue?')) return;
   // Clear localStorage
-  localStorage.removeItem('frc_election_v3');
+  localStorage.removeItem('bva_election_v1');
   // Clear server-side state — include the current adminPasswordHash so the
   // server's auth check accepts the write, then initPasswordHash re-hashes defaults.
   try {
@@ -3141,119 +3116,84 @@ function resetAllData() {
 
 function renderRoundControl() {
   const state = load();
-  let office = state.activeOffice;
+  const o = state.election;
+  const colors = electionColor();
 
-  // If no active office, check for a configured-but-not-started office
-  if (!office) {
-    const readyOffice = ['elder', 'deacon'].find(o =>
-      !state[o].complete && state[o].currentRound === 0 && (state[o].nominees || []).length > 0
-    );
+  // Not configured yet
+  if ((o.nominees || []).length === 0 && o.currentRound === 0) {
+    document.getElementById('rc-header').style.background = 'var(--navy)';
+    document.getElementById('rc-title').textContent = 'Round Control';
+    document.getElementById('rc-sub').textContent = 'No election configured. Set up nominees in Election Setup first.';
+    document.getElementById('rc-sequence').innerHTML = '';
+    document.getElementById('rc-stats').innerHTML = '<div class="alert alert-info" style="grid-column:1/-1">No election configured. Go to Election Setup to add nominees.</div>';
+    document.getElementById('rc-controls').innerHTML = '';
+    document.getElementById('rc-results').innerHTML = '';
+    return;
+  }
 
-    if (!readyOffice) {
-      document.getElementById('rc-header').style.background = 'var(--navy)';
-      document.getElementById('rc-title').textContent = 'Round Control';
-      document.getElementById('rc-sub').textContent = 'No election configured. Set up nominees in Election Setup first.';
-      document.getElementById('rc-sequence').innerHTML = '';
-      document.getElementById('rc-stats').innerHTML = '<div class="alert alert-info" style="grid-column:1/-1">No election configured. Go to Election Setup to add nominees.</div>';
-      document.getElementById('rc-controls').innerHTML = '';
-      document.getElementById('rc-results').innerHTML = '';
-      return;
-    }
-
-    // Show "ready to start" state for the configured office
-    const colors = officeColor(readyOffice);
-    const o = state[readyOffice];
+  // Ready to start (configured, round not yet started)
+  if (o.currentRound === 0 && !o.complete) {
     document.getElementById('rc-header').style.background = colors.dark;
     document.getElementById('rc-title').textContent = 'Round Control';
     document.getElementById('rc-sub').textContent =
-      `${state.church || 'Church'} · ${officeLabel(readyOffice)} Election · Ready to Start`;
+      `${state.org || ''} · ${electionLabel(state)} · Ready to Start`.replace(/^·\s+/, '');
     document.getElementById('rc-sequence').innerHTML = '';
     document.getElementById('rc-stats').innerHTML = '';
     document.getElementById('rc-results').innerHTML = '';
     document.getElementById('rc-controls').innerHTML = `
       <div style="padding:1.5rem;text-align:center">
         <div style="background:${colors.tint};border:1.5px solid ${colors.border};border-radius:10px;padding:1.25rem 1.5rem;margin-bottom:1.25rem;text-align:left">
-          <div style="font-weight:700;color:${colors.dark};margin-bottom:0.5rem">${officeLabel(readyOffice)} Election — Configured</div>
+          <div style="font-weight:700;color:${colors.dark};margin-bottom:0.5rem">${electionLabel(state)} — Configured</div>
           <div style="font-size:0.88rem;color:#555;line-height:1.7">
             <div><strong>${(o.nominees||[]).length}</strong> nominees</div>
-            <div><strong>${o.positions}</strong> position${o.positions!==1?'s':''} to fill</div>
+            <div><strong>${o.openPositions}</strong> open position${o.openPositions!==1?'s':''} to fill</div>
             <div><strong>${o.votesPerVoter}</strong> vote${o.votesPerVoter!==1?'s':''} per voter in Round 1</div>
           </div>
         </div>
         <button class="btn btn-lg" style="background:${colors.dark};color:#fff;width:100%;max-width:320px"
-          onclick="rcStartRound1('${readyOffice}')">
+          onclick="rcStartRound1()">
           🗳️ Start Round 1 Voting
         </button>
       </div>`;
     return;
   }
 
-  const colors = officeColor(office);
-  const o = state[office];
-
-  // Header
+  // Round in progress
   document.getElementById('rc-header').style.background = colors.dark;
   document.getElementById('rc-title').textContent = 'Round Control';
   document.getElementById('rc-sub').textContent =
-    `${state.church || 'Church'} · ${officeLabel(office)} Election · Round ${o.currentRound}`;
+    `${state.org || ''} · ${electionLabel(state)} · Round ${o.currentRound}`.replace(/^·\s+/, '');
 
-  // Sequence bar
-  const elderDone = state.elder.complete;
-  const deaconDone = state.deacon.complete;
-  const elderActive = office === 'elder';
-  const deaconActive = office === 'deacon';
-
-  const elderConfigured  = (state.elder.nominees  || []).length > 0;
-  const deaconConfigured = (state.deacon.nominees || []).length > 0;
-  const configuredOffices = [
-    elderConfigured  ? { key: 'elder',  label: 'Elder Election',  done: elderDone,  active: elderActive  } : null,
-    deaconConfigured ? { key: 'deacon', label: 'Deacon Election', done: deaconDone, active: deaconActive } : null,
-  ].filter(Boolean);
-  const allDone = configuredOffices.every(o => o.done);
+  // Sequence bar (simple: rounds 1…N → Complete)
+  const totalRounds = (o.rounds || []).length + (o.complete ? 0 : 1);
   let seqHtml = '';
-  configuredOffices.forEach((o, i) => {
-    if (i > 0) seqHtml += '<span class="seq-arrow">→</span>';
-    seqHtml += `
-      <div class="seq-step ${o.done ? 'done' : o.active ? 'active' : ''}" role="listitem">
-        <span class="seq-dot" style="${o.active ? 'background:'+colors.dark : ''}">${o.done ? '✓' : i+1}</span>
-        ${o.label}
-      </div>`;
-  });
+  for (let r = 1; r <= Math.max(o.currentRound, (o.rounds||[]).length); r++) {
+    if (r > 1) seqHtml += '<span class="seq-arrow">→</span>';
+    const isDone = r < o.currentRound || o.complete;
+    const isActive = r === o.currentRound && !o.complete;
+    seqHtml += `<div class="seq-step ${isDone?'done':isActive?'active':''}" role="listitem">
+      <span class="seq-dot" style="${isActive?'background:'+colors.dark:''}">${isDone?'✓':r}</span>Round ${r}</div>`;
+  }
   seqHtml += `<span class="seq-arrow">→</span>
-    <div class="seq-step ${allDone ? 'done' : ''}" role="listitem">
-      <span class="seq-dot">${allDone ? '✓' : configuredOffices.length + 1}</span>
-      Complete
-    </div>`;
+    <div class="seq-step ${o.complete?'done':''}" role="listitem">
+      <span class="seq-dot">${o.complete?'✓':''}</span>Complete</div>`;
   document.getElementById('rc-sequence').innerHTML = seqHtml;
 
   // Stats
-  const counts = countBallotVotes(state, office);
+  const counts = countBallotVotes(state);
   const totalExpected = o.currentRound === 1
     ? (state.expectedVoters || 0) + (state.absenteeCount || 0)
     : (state.expectedVoters || 0);
   const pct = totalExpected > 0 ? Math.round((counts.total / totalExpected) * 100) : 0;
-  document.getElementById('rc-stats').innerHTML = `
-    <div class="stat-box">
-      <div class="stat-num" style="color:${colors.dark}">${counts.total}</div>
-      <div class="stat-lbl">Ballots In</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-num">${counts.paper}</div>
-      <div class="stat-lbl">Paper Ballots</div>
-    </div>
-    ${o.currentRound === 1 ? `
-    <div class="stat-box">
-      <div class="stat-num" style="color:var(--navy)">${counts.absentee}</div>
-      <div class="stat-lbl">Absentee</div>
-    </div>` : ''}
-    <div class="stat-box">
-      <div class="stat-num">${totalExpected}</div>
-      <div class="stat-lbl">Expected Voters</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-num" style="color:${pct >= 50 ? 'var(--green)' : 'var(--navy)'}">${pct}%</div>
-      <div class="stat-lbl">Participation</div>
-    </div>`;
+
+  const renderStats = (counts, totalExpected, pct) => `
+    <div class="stat-box"><div class="stat-num" style="color:${colors.dark}">${counts.total}</div><div class="stat-lbl">Ballots In</div></div>
+    <div class="stat-box"><div class="stat-num">${counts.paper}</div><div class="stat-lbl">Paper Ballots</div></div>
+    ${o.currentRound === 1 ? `<div class="stat-box"><div class="stat-num" style="color:var(--navy)">${counts.absentee}</div><div class="stat-lbl">Absentee</div></div>` : ''}
+    <div class="stat-box"><div class="stat-num">${totalExpected}</div><div class="stat-lbl">Expected Voters</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:${pct>=50?'var(--green)':'var(--navy)'}">${pct}%</div><div class="stat-lbl">Participation</div></div>`;
+
+  document.getElementById('rc-stats').innerHTML = renderStats(counts, totalExpected, pct);
 
   // Control bar
   const votingOpen = o.votingOpen;
@@ -3266,44 +3206,31 @@ function renderRoundControl() {
     <button class="btn btn-red btn-sm" ${!votingOpen ? 'disabled' : ''} onclick="rcCloseVoting()">■ Close Voting</button>
     <button class="btn btn-navy btn-sm" ${votingOpen ? 'disabled' : ''} onclick="rcEndRound()">📊 End Round</button>`;
 
-  // Results
-  renderRCResults(state, office);
+  renderRCResults(state);
 
   // Auto-refresh
   const interval = setInterval(() => {
+    if (!document.getElementById('screen-round-control').classList.contains('active')) return;
     const s2 = load();
-    if (document.getElementById('screen-round-control').classList.contains('active')) {
-      renderRCResults(s2, s2.activeOffice || office);
-      const c2 = countBallotVotes(s2, s2.activeOffice || office);
-      const o2 = s2[s2.activeOffice || office];
-      const totalExp2 = o2 && o2.currentRound === 1
-        ? (s2.expectedVoters || 0) + (s2.absenteeCount || 0)
-        : (s2.expectedVoters || 0);
-      const p2 = totalExp2 > 0 ? Math.round((c2.total / totalExp2) * 100) : 0;
-      // Update stats only
-      const statsEl = document.getElementById('rc-stats');
-      if (statsEl) {
-        const col = officeColor(s2.activeOffice || office);
-        const isRound1 = o2 && o2.currentRound === 1;
-        statsEl.innerHTML = `
-          <div class="stat-box"><div class="stat-num" style="color:${col.dark}">${c2.total}</div><div class="stat-lbl">Ballots In</div></div>
-          <div class="stat-box"><div class="stat-num">${c2.paper}</div><div class="stat-lbl">Paper Ballots</div></div>
-          ${isRound1 ? `<div class="stat-box"><div class="stat-num" style="color:var(--navy)">${c2.absentee}</div><div class="stat-lbl">Absentee</div></div>` : ''}
-          <div class="stat-box"><div class="stat-num">${totalExp2}</div><div class="stat-lbl">Expected Voters</div></div>
-          <div class="stat-box"><div class="stat-num" style="color:${p2>=50?'var(--green)':'var(--navy)'}">${p2}%</div><div class="stat-lbl">Participation</div></div>`;
-      }
-    }
+    renderRCResults(s2);
+    const c2 = countBallotVotes(s2);
+    const o2 = s2.election;
+    const totalExp2 = o2.currentRound === 1
+      ? (s2.expectedVoters || 0) + (s2.absenteeCount || 0)
+      : (s2.expectedVoters || 0);
+    const p2 = totalExp2 > 0 ? Math.round((c2.total / totalExp2) * 100) : 0;
+    const statsEl = document.getElementById('rc-stats');
+    if (statsEl) statsEl.innerHTML = renderStats(c2, totalExp2, p2);
   }, 3000);
   refreshIntervals.push(interval);
 }
 
-function renderRCResults(state, office) {
-  if (!office) return;
-  const o = state[office];
-  const colors = officeColor(office);
-  const results = buildResults(state, office);
+function renderRCResults(state) {
+  const o = state.election;
+  const colors = electionColor();
+  const results = buildResults(state);
   const maxVotes = results.length > 0 ? results[0].votes : 1;
-  const totalBallots = countBallotVotes(state, office).total;
+  const totalBallots = countBallotVotes(state).total;
   const electedNames = new Set((o.electedAll || []).map(e => e.name));
 
   const el = document.getElementById('rc-results');
@@ -3333,23 +3260,21 @@ function renderRCResults(state, office) {
 
 function rcOpenVoting() {
   const state = load();
-  if (!state.activeOffice) return;
-  state[state.activeOffice].votingOpen = true;
+  state.election.votingOpen = true;
   save(state);
   renderRoundControl();
 }
 
 function rcCloseVoting() {
   const state = load();
-  if (!state.activeOffice) return;
-  state[state.activeOffice].votingOpen = false;
+  state.election.votingOpen = false;
   save(state);
   renderRoundControl();
 }
 
-function rcStartRound1(office) {
+function rcStartRound1() {
   const state = load();
-  const o = state[office];
+  const o = state.election;
   const names = o.nominees || [];
   if (names.length < 1) {
     alert('No nominees configured. Please complete Election Setup first.');
@@ -3363,39 +3288,35 @@ function rcStartRound1(office) {
   o.rounds = [];
   o.electedAll = [];
   o.complete = false;
-  state[office] = o;
-  state.activeOffice = office;
+  state.election = o;
   save(state);
   renderRoundControl();
 }
 
 function rcEndRound() {
   const state = load();
-  if (!state.activeOffice) return;
-  const office = state.activeOffice;
-  const o = state[office];
+  const o = state.election;
   if (o.votingOpen) { alert('Please close voting before ending the round.'); return; }
-  const counts = countBallotVotes(state, office);
-  if (!confirm(`End Round ${o.currentRound} of the ${officeLabel(office)} election?\n\n${counts.total} ballot${counts.total !== 1 ? 's' : ''} received. This will proceed to the Round Transition screen where you can confirm results and advance candidates.`)) return;
+  const counts = countBallotVotes(state);
+  if (!confirm(`End Round ${o.currentRound}?\n\n${counts.total} ballot${counts.total !== 1 ? 's' : ''} received. This will proceed to the Round Transition screen.`)) return;
   showScreen('screen-round-transition');
-  renderRoundTransition(state, office);
+  renderRoundTransition(state);
 }
 
 // ========== ROUND TRANSITION ==========
 
 let transitionState = {};
 
-function renderRoundTransition(state, office) {
-  const o = state[office];
-  const colors = officeColor(office);
-  const label = officeLabel(office);
+function renderRoundTransition(state) {
+  const o = state.election;
+  const colors = electionColor();
 
   // Header
   const hdr = document.getElementById('rt-header');
   hdr.style.background = colors.dark;
   document.getElementById('rt-title').textContent = 'Round Results & Transition';
   document.getElementById('rt-sub').textContent =
-    `${state.church || 'Church'} · ${label} Election · Round ${o.currentRound}`;
+    `${state.org || 'Organization'} · ${electionLabel(state)} · Round ${o.currentRound}`;
 
   // Step number colors
   ['rt-step1-num','rt-step2-num','rt-step3-num'].forEach(id => {
@@ -3404,10 +3325,10 @@ function renderRoundTransition(state, office) {
   });
 
   // Build sorted results
-  const sorted = buildResults(state, office);
+  const sorted = buildResults(state);
 
   // Majority threshold — round 1 includes absentee voters, round 2+ uses attending voters only
-  const totalBallotsNow = countBallotVotes(state, office).total;
+  const totalBallotsNow = countBallotVotes(state).total;
   const absenteeCount = state.absenteeCount || 0;
   const expectedTotal = o.currentRound === 1
     ? (state.expectedVoters || 0) + absenteeCount
@@ -3420,7 +3341,6 @@ function renderRoundTransition(state, office) {
 
   // Init transitionState — pre-populate majority winners as elected
   transitionState = {
-    office,
     round: o.currentRound,
     sorted,
     elected: [...autoElected],
@@ -3435,11 +3355,10 @@ function renderRoundTransition(state, office) {
 
   // Render final results summary
   document.getElementById('rt-results-title').textContent = `Final Results — Round ${o.currentRound}`;
-  const totalBallots = countBallotVotes(state, office).total;
-  const maxVotes = sorted.length > 0 ? sorted[0].votes : 1;
+  const totalBallots = countBallotVotes(state).total;
 
   document.getElementById('rt-results-list').innerHTML = sorted.map((c, i) => {
-    const isTop = i < o.positions;
+    const isTop = i < o.openPositions;
     const rankCircle = isTop
       ? `<span style="display:inline-flex;width:26px;height:26px;border-radius:50%;background:var(--gold);color:#fff;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:0.8rem;font-weight:700;flex-shrink:0">${i+1}</span>`
       : `<span style="display:inline-flex;width:26px;height:26px;border-radius:50%;background:#e0dbd0;color:#aaa;align-items:center;justify-content:center;font-size:0.8rem;flex-shrink:0">${i+1}</span>`;
@@ -3482,11 +3401,11 @@ function renderTransitionSteps() {
 
   // Compute positions filled status
   const stateNow = load();
-  const oNow = stateNow[transitionState.office];
+  const oNow = stateNow.election;
   const alreadyElected = (oNow.electedAll || []).length;
   const electedThisRound = transitionState.elected.length;
   const totalElected = alreadyElected + electedThisRound;
-  const positions = oNow.positions || 1;
+  const positions = oNow.openPositions || 1;
   const remaining = Math.max(0, positions - totalElected);
   const allFilled = totalElected >= positions;
 
@@ -3501,7 +3420,7 @@ function renderTransitionSteps() {
     if (step3Card) step3Card.style.display = '';
 
     // Step 2: advancing candidates checkboxes
-    const colors = officeColor(transitionState.office);
+    const colors = electionColor();
     document.getElementById('rt-advanced-list').innerHTML = sorted
       .filter(c => !elected.includes(c.name))
       .map(c => {
@@ -3529,22 +3448,11 @@ function renderTransitionSteps() {
   const filledBanner = document.getElementById('rt-all-filled-banner');
 
   if (allFilled) {
-    const other = transitionState.office === 'elder' ? 'deacon' : 'elder';
-    const otherLabel = other === 'elder' ? 'Elder' : 'Deacon';
-    const otherStarted = stateNow[other].currentRound > 0 && !stateNow[other].complete;
-    const otherPending = !stateNow[other].complete && stateNow[other].currentRound === 0;
-    const nextStep = otherStarted
-      ? `The ${otherLabel} election is already in progress and will become active.`
-      : otherPending
-        ? `Click <strong>Complete This Office</strong> to move to the ${otherLabel} election.`
-        : 'Both offices will be complete. The election will end.';
-
     if (filledBanner) {
       filledBanner.style.display = 'block';
       filledBanner.innerHTML = `
         <strong>✅ All ${positions} position${positions !== 1 ? 's' : ''} filled.</strong>
-        No further rounds are needed for the ${transitionState.office === 'elder' ? 'Elder' : 'Deacon'} election.
-        ${nextStep}`;
+        No further rounds are needed. Click <strong>Complete Election</strong> to finish.`;
     }
     if (launchBtn) { launchBtn.disabled = true; launchBtn.style.opacity = '0.4'; launchBtn.title = 'All positions are filled — no next round needed'; }
   } else {
@@ -3583,9 +3491,9 @@ function rtToggleAdvanced(name, checked) {
 
 
 function rtLaunchNextRound() {
-  const { office, sorted, elected, advanced, round } = transitionState;
+  const { sorted, elected, advanced, round } = transitionState;
   const state = load();
-  const o = state[office];
+  const o = state.election;
 
   // Build next round candidates from advancing (non-elected) candidates
   const nextCandidates = advanced
@@ -3598,7 +3506,6 @@ function rtLaunchNextRound() {
   }
 
   // Commit current round
-  const counts = countBallotVotes(state, office);
   const roundRecord = {
     round,
     candidates: sorted,
@@ -3628,17 +3535,17 @@ function rtLaunchNextRound() {
   o.candidates = nextCandidates;
   o.votesPerVoter = nextVpv;
   o.votingOpen = false;
-  state[office] = o;
+  state.election = o;
   save(state);
 
   showScreen('screen-round-control');
   renderRoundControl();
 }
 
-function rtCompleteOffice() {
-  const { office, sorted, elected, round } = transitionState;
+function rtCompleteElection() {
+  const { sorted, elected, round } = transitionState;
   const state = load();
-  const o = state[office];
+  const o = state.election;
 
   // Commit current round
   const roundRecord = {
@@ -3663,39 +3570,18 @@ function rtCompleteOffice() {
 
   o.complete = true;
   o.votingOpen = false;
-  state[office] = o;
-
-  const other = office === 'elder' ? 'deacon' : 'elder';
-  const otherConfigured = (state[other].nominees || []).length > 0;
-
-  if (state[other].currentRound > 0 && !state[other].complete) {
-    // Other office already in progress — make it active
-    state.activeOffice = other;
-  } else {
-    state.activeOffice = null;
-  }
-
-  // If the other office has no nominees, treat it as skipped/complete
-  if (!otherConfigured && !state[other].complete) {
-    state[other].complete = true;
-  }
-
+  state.election = o;
   save(state);
 
-  // Navigate: go to Round Control if other office still needs to be run, else election complete
-  if (otherConfigured && !state[other].complete) {
-    showScreen('screen-round-control');
-    renderRoundControl();
-  } else {
-    showScreen('screen-election-complete');
-    renderElectionComplete();
-  }
+  showScreen('screen-election-complete');
+  renderElectionComplete();
 }
 
 // ========== ELECTION COMPLETE SUMMARY ==========
 
 function renderElectionComplete() {
   const state = load();
+  const colors = electionColor();
 
   // Date
   const dateEl = document.getElementById('ec-date');
@@ -3703,34 +3589,28 @@ function renderElectionComplete() {
     const [y, m, d] = state.meetingDate.split('-').map(Number);
     dateEl.textContent = new Date(y, m - 1, d).toLocaleDateString('en-ZA', { day: 'numeric', month: 'long', year: 'numeric' });
   } else {
-    dateEl.textContent = state.church || '';
+    dateEl.textContent = state.org || '';
   }
 
-  const offices = [
-    { key: 'elder',  label: 'Office of Elder',  color: 'var(--elder-dark)',  tint: '#fdf0e6', border: '#f0c090' },
-    { key: 'deacon', label: 'Office of Deacon', color: 'var(--deacon-dark)', tint: '#e8f0fa', border: '#9bbde8' },
-  ].filter(({ key }) => (state[key].nominees || []).length > 0);
+  const o = state.election;
+  const elected = o && o.electedAll ? o.electedAll : [];
+  const label = electionLabel(state);
 
-  let html = '';
-  for (const { key, label, color, tint, border } of offices) {
-    const o = state[key];
-    const elected = o && o.electedAll ? o.electedAll : [];
-    html += `
-      <div style="margin-bottom:1.5rem;border-radius:10px;border:1.5px solid ${border};background:${tint};overflow:hidden;">
-        <div style="background:${color};padding:0.6rem 1.25rem;">
-          <span style="color:#fff;font-weight:700;font-size:0.95rem;letter-spacing:0.03em;">${label}</span>
-        </div>
-        <div style="padding:1rem 1.25rem;">
-          ${elected.length === 0
-            ? `<p style="color:#888;font-size:0.9rem;font-style:italic;margin:0;">No candidates elected.</p>`
-            : elected.map(e => `
-              <div style="display:flex;align-items:center;gap:0.6rem;padding:0.45rem 0;border-bottom:1px solid ${border};">
-                <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${color};flex-shrink:0;"></span>
-                <span style="font-size:1rem;color:#1a2744;font-weight:600;">${esc(e.name)}</span>
-              </div>`).join('')}
-        </div>
-      </div>`;
-  }
+  const html = `
+    <div style="margin-bottom:1.5rem;border-radius:10px;border:1.5px solid ${colors.border};background:${colors.tint};overflow:hidden;">
+      <div style="background:${colors.dark};padding:0.6rem 1.25rem;">
+        <span style="color:#fff;font-weight:700;font-size:0.95rem;letter-spacing:0.03em;">${esc(label)}</span>
+      </div>
+      <div style="padding:1rem 1.25rem;">
+        ${elected.length === 0
+          ? `<p style="color:#888;font-size:0.9rem;font-style:italic;margin:0;">No candidates elected.</p>`
+          : elected.map(e => `
+            <div style="display:flex;align-items:center;gap:0.6rem;padding:0.45rem 0;border-bottom:1px solid ${colors.border};">
+              <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${colors.dark};flex-shrink:0;"></span>
+              <span style="font-size:1rem;color:#1a2744;font-weight:600;">${esc(e.name)}</span>
+            </div>`).join('')}
+      </div>
+    </div>`;
 
   document.getElementById('ec-body').innerHTML = html;
 }
@@ -3739,10 +3619,9 @@ function renderElectionComplete() {
 
 function updatePBLog() {
   const state = load();
-  const office = state.activeOffice;
   const logEl = document.getElementById('pb-log');
-  if (!logEl || !office) return;
-  const o = state[office];
+  if (!logEl) return;
+  const o = state.election;
   if (!o || !o.votingOpen) return;
   const paperBallots = (o.paperBallots || []).filter(b => b.round === o.currentRound);
   const absenteeBallots = paperBallots.filter(b => b.absentee);
@@ -3771,7 +3650,7 @@ function renderUnifiedPaperBallot() {
   const elSec = document.getElementById('pb-election-section');
   const vtSec = document.getElementById('pb-voting-section');
   const noSec = document.getElementById('pb-nothing-section');
-  const hasElection = !!state.activeOffice;
+  const hasElection = !!(state.election && state.election.votingOpen);
   const voting = state.voting || {};
   const hasVoting = !!voting.question && !!voting.votingOpen && !voting.complete;
 
@@ -3794,9 +3673,9 @@ function renderUnifiedPaperBallot() {
 
 function unifiedPBKey() {
   const s = load();
-  const o = s.activeOffice ? s[s.activeOffice] : null;
+  const o = s.election || {};
   const v = s.voting || {};
-  return [s.activeOffice, o ? o.currentRound : '', o ? o.votingOpen : '',
+  return [o.currentRound || '', o.votingOpen || '',
           v.question || '', v.votingOpen || '', v.complete || ''].join('|');
 }
 
@@ -3814,7 +3693,7 @@ function startUnifiedPaperBallotPoller() {
     }
     // Log-only refresh (preserves form selections)
     const s = load();
-    if (s.activeOffice && s[s.activeOffice] && s[s.activeOffice].votingOpen) {
+    if ((s.election || {}).votingOpen) {
       updatePBLog();
     } else if ((s.voting || {}).votingOpen) {
       updateVPBLog();
@@ -3829,22 +3708,14 @@ let pbIsAbsentee = false;
 
 function renderPaperBallot() {
   const state = load();
-  const office = state.activeOffice;
+  const o = state.election;
   const contentEl = document.getElementById('pb-content');
   const logEl = document.getElementById('pb-log');
+  const colors = electionColor();
 
-  if (!office || !state[office]) {
-    contentEl.innerHTML = '<div class="alert alert-warning">No voting is currently open. Please check Round Control.</div>';
-    logEl.innerHTML = '';
-    return;
-  }
-
-  const o = state[office];
-  const colors = officeColor(office);
-
-  if (!o.votingOpen) {
+  if (!o || !o.votingOpen) {
     contentEl.innerHTML = `<div class="alert alert-warning">
-      ${officeBadge(office)} Voting is currently <strong>closed</strong> for the ${officeLabel(office)} election, Round ${o.currentRound}.
+      ${electionBadge(state)} Voting is currently <strong>${o && o.currentRound > 0 ? 'closed' : 'not open'}</strong> for the ${electionLabel(state)} election${o && o.currentRound > 0 ? ', Round ' + o.currentRound : ''}.
     </div>`;
     logEl.innerHTML = '';
     return;
@@ -3859,8 +3730,8 @@ function renderPaperBallot() {
   contentEl.innerHTML = `
     <div class="card" style="margin-bottom:1.25rem;border-top:4px solid ${colors.dark}">
       <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem">
-        <h3 class="font-playfair" style="font-size:1.2rem">Round ${o.currentRound} — ${officeLabel(office)} Ballot</h3>
-        ${officeBadge(office)}
+        <h3 class="font-playfair" style="font-size:1.2rem">Round ${o.currentRound} — ${electionLabel(state)} Ballot</h3>
+        ${electionBadge(state)}
       </div>
       <div id="pb-edit-banner" style="display:none;background:#fff8e6;border:1px solid #f0c060;border-radius:6px;padding:0.6rem 1rem;margin-bottom:1rem;font-size:0.88rem;color:#7c5a00">
         ✏️ Editing ballot <strong id="pb-edit-num"></strong> — make changes below and click <em>Update Paper Ballot</em>
@@ -3869,8 +3740,8 @@ function renderPaperBallot() {
       <div id="pb-candidates">
         ${candidates.map(c => `
           <div class="ballot-candidate" id="pbc-${esc(c.name).replace(/\s/g,'_')}"
-            onclick="pbToggle('${escAttr(c.name)}', '${office}')" role="checkbox" aria-checked="false" tabindex="0"
-            onkeydown="if(event.key===' '||event.key==='Enter'){event.preventDefault();pbToggle('${escAttr(c.name)}','${office}')}">
+            onclick="pbToggle('${escAttr(c.name)}')" role="checkbox" aria-checked="false" tabindex="0"
+            onkeydown="if(event.key===' '||event.key==='Enter'){event.preventDefault();pbToggle('${escAttr(c.name)}')}">
             <span class="cand-cb" id="pbc-cb-${esc(c.name).replace(/\s/g,'_')}"></span>
             <span class="cand-name">${esc(c.name)}</span>
           </div>`).join('')}
@@ -3884,10 +3755,10 @@ function renderPaperBallot() {
         </label>
       </div>` : ''}
       <div id="pb-submit-error" class="alert alert-error" style="display:none"></div>
-      <button id="pb-submit-btn" class="btn btn-green btn-lg btn-full" onclick="pbSubmit('${office}')">Submit Paper Ballot</button>
+      <button id="pb-submit-btn" class="btn btn-green btn-lg btn-full" onclick="pbSubmit()">Submit Paper Ballot</button>
       <button id="pb-cancel-btn" class="btn btn-ghost btn-full" style="display:none;margin-top:0.5rem;color:#555;border-color:#ccc" onclick="pbCancelEdit()">Cancel Edit</button>
       ${(o.paperBallots || []).filter(b => b.round === o.currentRound).length > 0
-        ? `<button class="btn btn-ghost btn-full" style="margin-top:0.5rem;color:var(--red);border-color:var(--red)" onclick="pbDeleteLast('${office}')">🗑️ Delete Last Entry</button>`
+        ? `<button class="btn btn-ghost btn-full" style="margin-top:0.5rem;color:var(--red);border-color:var(--red)" onclick="pbDeleteLast()">🗑️ Delete Last Entry</button>`
         : ''}
     </div>`;
 
@@ -3920,8 +3791,8 @@ function renderPaperBallot() {
 
 function pbStateKey() {
   const s = load();
-  const o2 = s.activeOffice ? s[s.activeOffice] : null;
-  return `${s.activeOffice}|${o2 ? o2.currentRound : ''}|${o2 ? o2.votingOpen : ''}`;
+  const o2 = s.election || {};
+  return `${o2.currentRound || ''}|${o2.votingOpen || ''}`;
 }
 
 let pbPollerKey = null;
@@ -3945,9 +3816,9 @@ function startPaperBallotPoller() {
   refreshIntervals.push(interval);
 }
 
-function pbToggle(name, office) {
+function pbToggle(name) {
   const state = load();
-  const o = state[office];
+  const o = state.election;
   const maxVotes = o.votesPerVoter || 2;
   const idx = pbSelected.indexOf(name);
   const safeId = name.replace(/\s/g, '_').replace(/[^a-zA-Z0-9_]/g, '');
@@ -3957,7 +3828,7 @@ function pbToggle(name, office) {
   if (idx >= 0) {
     pbSelected.splice(idx, 1);
     if (row) {
-      row.classList.remove('selected-elder', 'selected-deacon');
+      row.classList.remove('selected-election');
       row.setAttribute('aria-checked', 'false');
     }
     if (cb) cb.textContent = '';
@@ -3969,7 +3840,7 @@ function pbToggle(name, office) {
     }
     pbSelected.push(name);
     if (row) {
-      row.classList.add(`selected-${office}`);
+      row.classList.add('selected-election');
       row.setAttribute('aria-checked', 'true');
     }
     if (cb) cb.textContent = '✓';
@@ -3978,9 +3849,9 @@ function pbToggle(name, office) {
   if (errEl) errEl.style.display = 'none';
 }
 
-function pbSubmit(office) {
+function pbSubmit() {
   const state = load();
-  const o = state[office];
+  const o = state.election;
   const errEl = document.getElementById('pb-submit-error');
 
   if (pbSelected.length === 0) {
@@ -4035,7 +3906,7 @@ function pbSubmit(office) {
     o.paperBallots.push(ballot);
   }
 
-  state[office] = o;
+  state.election = o;
   save(state);
   pbSelected = [];
   pbIsAbsentee = false;
@@ -4044,9 +3915,8 @@ function pbSubmit(office) {
 
 function pbStartEdit(index) {
   const state = load();
-  const office = state.activeOffice;
-  if (!office) return;
-  const o = state[office];
+  const o = state.election;
+  if (!o) return;
   const currentRoundBallots = (o.paperBallots || []).filter(b => b.round === o.currentRound);
   const ballot = currentRoundBallots[index];
   if (!ballot) return;
@@ -4061,7 +3931,7 @@ function pbStartEdit(index) {
 
   // Clear all visual selections
   document.querySelectorAll('.ballot-candidate').forEach(row => {
-    row.classList.remove('selected-elder', 'selected-deacon');
+    row.classList.remove('selected-election');
     row.setAttribute('aria-checked', 'false');
     const cb = row.querySelector('.cand-cb');
     if (cb) cb.textContent = '';
@@ -4072,7 +3942,7 @@ function pbStartEdit(index) {
     const safeId = name.replace(/\s/g, '_').replace(/[^a-zA-Z0-9_]/g, '');
     const row = document.getElementById('pbc-' + safeId);
     const cb = document.getElementById('pbc-cb-' + safeId);
-    if (row) { row.classList.add(`selected-${office}`); row.setAttribute('aria-checked', 'true'); }
+    if (row) { row.classList.add('selected-election'); row.setAttribute('aria-checked', 'true'); }
     if (cb) cb.textContent = '✓';
   });
 
@@ -4100,10 +3970,10 @@ function pbCancelEdit() {
   renderPaperBallot();
 }
 
-function pbDeleteLast(office) {
+function pbDeleteLast() {
   if (!confirm('Delete the last paper ballot entry? This cannot be undone.')) return;
   const state = load();
-  const o = state[office];
+  const o = state.election;
   const currentRoundBallots = (o.paperBallots || []).filter(b => b.round === o.currentRound);
   if (currentRoundBallots.length === 0) return;
 
@@ -4121,7 +3991,7 @@ function pbDeleteLast(office) {
 
   pbEditIndex = null;
   pbSelected = [];
-  state[office] = o;
+  state.election = o;
   save(state);
   renderPaperBallot();
 }
@@ -4130,39 +4000,32 @@ function pbDeleteLast(office) {
 
 function renderSummary() {
   const state = load();
+  const colors = electionColor();
+  const label = electionLabel(state);
 
   document.getElementById('sum-title').textContent = 'Election Dashboard';
   document.getElementById('sum-date').textContent =
-    (state.church ? state.church + ' · ' : '') + (state.meetingDate ? formatDate(state.meetingDate) : '');
+    (state.org ? state.org + ' · ' : '') + (state.meetingDate ? formatDate(state.meetingDate) : '');
 
   // ── Status section ──
   const statusEl = document.getElementById('sum-status');
-  const office = state.activeOffice;
+  const o = state.election;
   let statusHtml = '';
 
-  if (office && !state[office].complete) {
-    const o = state[office];
-    const colors = officeColor(office);
-    const label = officeLabel(office);
+  if (o && !o.complete && o.currentRound > 0) {
     const roundNum = o.currentRound;
 
-    // Voting status pill
     let statusPill, statusDesc;
     if (o.votingOpen) {
       statusPill = `<span style="display:inline-flex;align-items:center;gap:0.4rem;background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7;border-radius:20px;padding:0.3rem 0.75rem;font-size:0.82rem;font-weight:600">
         <span style="width:8px;height:8px;background:#43a047;border-radius:50%;display:inline-block;animation:pulse-dot 1.5s infinite"></span>Voting Open</span>`;
       statusDesc = `Members may cast their ballots now.`;
-    } else if (roundNum > 0) {
+    } else {
       statusPill = `<span style="display:inline-flex;align-items:center;gap:0.4rem;background:#fff3e0;color:#e65100;border:1px solid #ffcc80;border-radius:20px;padding:0.3rem 0.75rem;font-size:0.82rem;font-weight:600">
         ■ Voting Closed</span>`;
       statusDesc = `Round ${roundNum} is closed. Results being reviewed.`;
-    } else {
-      statusPill = `<span style="display:inline-flex;align-items:center;gap:0.4rem;background:#e3f2fd;color:#1565c0;border:1px solid #90caf9;border-radius:20px;padding:0.3rem 0.75rem;font-size:0.82rem;font-weight:600">
-        ⚙ Configuring</span>`;
-      statusDesc = `${label} election is being set up.`;
     }
 
-    // Candidates list
     const candidates = (o.candidates || []).map(c => c.name);
     const candHtml = candidates.length > 0
       ? `<div style="margin-top:0.75rem">
@@ -4173,7 +4036,6 @@ function renderSummary() {
         </div>`
       : '';
 
-    // Majority for this round
     const absCnt = state.absenteeCount || 0;
     const expTotal = roundNum === 1
       ? (state.expectedVoters || 0) + absCnt
@@ -4186,28 +4048,26 @@ function renderSummary() {
     statusHtml = `
       <div style="background:#f8f6f1;border:1px solid #e0d8c8;border-radius:8px;padding:1rem 1.25rem;margin-bottom:0">
         <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;margin-bottom:0.35rem">
-          <span style="font-size:0.85rem;font-weight:700;color:${colors.dark};text-transform:uppercase;letter-spacing:0.06em">${label} Election · Round ${roundNum > 0 ? roundNum : '—'}</span>
+          <span style="font-size:0.85rem;font-weight:700;color:${colors.dark};text-transform:uppercase;letter-spacing:0.06em">${esc(label)} · Round ${roundNum}</span>
           ${statusPill}
-          ${roundNum > 0 ? majorityHtml : ''}
+          ${majorityHtml}
         </div>
         <div style="font-size:0.85rem;color:#666">${statusDesc}</div>
-        ${roundNum > 0 ? `<div style="font-size:0.82rem;color:#888;margin-top:0.3rem">Each voter may select <strong style="color:${colors.dark}">${o.votesPerVoter}</strong> candidate${o.votesPerVoter !== 1 ? 's' : ''} this round</div>` : ''}
+        <div style="font-size:0.82rem;color:#888;margin-top:0.3rem">Each voter may select <strong style="color:${colors.dark}">${o.votesPerVoter}</strong> candidate${o.votesPerVoter !== 1 ? 's' : ''} this round</div>
         ${candHtml}
       </div>`;
-  } else if (state.elder.complete && state.deacon.complete) {
+  } else if (o && o.complete) {
     statusHtml = `
       <div style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;padding:1rem 1.25rem;margin-bottom:0">
         <div style="font-weight:700;color:#2e7d32;margin-bottom:0.25rem">Election Complete</div>
-        <div style="font-size:0.85rem;color:#555">All offices have been filled. See results below.</div>
+        <div style="font-size:0.85rem;color:#555">All positions have been filled. See results below.</div>
       </div>`;
   } else {
-    // No active office yet
-    const nextOffice = ['elder','deacon'].find(o => !state[o].complete && (state[o].nominees||[]).length > 0);
-    if (nextOffice) {
-      const colors = officeColor(nextOffice);
+    const nominees = (o && o.nominees) || [];
+    if (nominees.length > 0) {
       statusHtml = `
         <div style="background:#f8f6f1;border:1px solid #e0d8c8;border-radius:8px;padding:1rem 1.25rem;margin-bottom:0">
-          <div style="font-weight:700;color:${colors.dark};margin-bottom:0.25rem">${officeLabel(nextOffice)} Election — Not Yet Started</div>
+          <div style="font-weight:700;color:${colors.dark};margin-bottom:0.25rem">${esc(label)} — Not Yet Started</div>
           <div style="font-size:0.85rem;color:#555">Waiting for Round Control to open voting.</div>
         </div>`;
     } else {
@@ -4225,7 +4085,6 @@ function renderSummary() {
   const infoEl = document.getElementById('sum-info');
   const expectedVoters = state.expectedVoters || 0;
   const absenteeCount  = state.absenteeCount  || 0;
-  const totalEligible  = expectedVoters + absenteeCount;
   infoEl.innerHTML = `
     <div style="display:flex;flex-wrap:wrap;gap:0.6rem;align-items:center">
       <div style="background:#f8f6f1;border:1px solid #e0d8c8;border-radius:8px;padding:0.5rem 1rem;display:flex;align-items:center;gap:0.5rem">
@@ -4240,34 +4099,25 @@ function renderSummary() {
 
   const body = document.getElementById('sum-body');
 
-  const renderElected = (office) => {
-    const o = state[office];
+  const renderElectionResults = () => {
     const electedAll = o.electedAll || [];
-    const colors = officeColor(office);
-    const label = officeLabel(office);
 
-    // Detect "round ended, awaiting transition" — voting closed, round in progress,
-    // but current round not yet committed to o.rounds
     const committedRoundNums = new Set((o.rounds || []).map(r => r.round));
-    // Show current round results when voting is open OR when round has ended but not yet transitioned
     const inTransition = o.currentRound > 0 && !o.votingOpen && !o.complete
       && !committedRoundNums.has(o.currentRound) && (o.candidates || []).length > 0;
     const isActiveRound = o.currentRound > 0 && o.votingOpen
       && !committedRoundNums.has(o.currentRound) && (o.candidates || []).length > 0;
 
-    // Majority for the current round (used in transition banner)
     const absCntR = state.absenteeCount || 0;
     const expTotalR = o.currentRound === 1
       ? (state.expectedVoters || 0) + absCntR
       : (state.expectedVoters || 0);
     const majorityReqR = expTotalR > 0 ? Math.floor(expTotalR / 2) + 1 : 0;
 
-    // Current round results block (shown when voting is open OR round ended awaiting transition)
     let currentRoundHtml = '';
     if (isActiveRound || inTransition) {
       const sorted = (o.candidates || []).slice().sort((a, b) => (b.votes || 0) - (a.votes || 0));
       const maxV = sorted.length > 0 ? (sorted[0].votes || 0) : 1;
-      const totalBallots = countBallotVotes(state, office).total;
       const rows = sorted.map(c => {
         const barW = maxV > 0 ? Math.round(((c.votes || 0) / maxV) * 100) : 0;
         const hasMajority = majorityReqR > 0 && c.votes >= majorityReqR;
@@ -4281,7 +4131,7 @@ function renderSummary() {
             <div class="bar-wrap"><div class="bar-fill" style="width:${barW}%;background:${colors.bar}"></div></div>
           </div>`;
       }).join('');
-      const counts = countBallotVotes(state, office);
+      const counts = countBallotVotes(state);
       const pct = expTotalR > 0 ? Math.round((counts.total / expTotalR) * 100) : 0;
       const statusTag = inTransition
         ? `<span style="font-size:0.78rem;background:#fff3e0;color:#e65100;border:1px solid #ffcc80;border-radius:10px;padding:0.1rem 0.45rem;font-weight:600">Awaiting transition</span>`
@@ -4326,18 +4176,13 @@ function renderSummary() {
     if (electedAll.length === 0 && (o.rounds || []).length === 0 && !inTransition && !isActiveRound) {
       const nominees = o.nominees || [];
       if (nominees.length === 0) {
-        return `
-          <div class="summary-section">
-            <h2><span class="badge badge-${office}">${label}</span> Office of ${label}</h2>
-            <div class="empty-state">Not configured.</div>
-          </div>`;
+        return `<div class="summary-section"><h2>${esc(label)}</h2><div class="empty-state">Not configured.</div></div>`;
       }
-      // Round 1 not yet started — show pre-round info
       const r1Expected = (state.expectedVoters || 0) + (state.absenteeCount || 0);
       const r1Majority = r1Expected > 0 ? Math.floor(r1Expected / 2) + 1 : '—';
       return `
         <div class="summary-section">
-          <h2><span class="badge badge-${office}">${label}</span> Office of ${label}</h2>
+          <h2>${esc(label)}</h2>
           <div style="background:#f8f6f1;border:1px solid #e0d8c8;border-radius:8px;padding:0.75rem 1rem;margin-bottom:0.5rem">
             <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;margin-bottom:0.6rem">
               <span style="font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:${colors.dark}">Round 1 — Not Yet Started</span>
@@ -4348,12 +4193,11 @@ function renderSummary() {
             <div style="display:flex;flex-wrap:wrap;gap:0.35rem">
               ${nominees.map(n => `<span style="background:#fff;border:1px solid #ddd5c0;border-radius:6px;padding:0.2rem 0.6rem;font-size:0.88rem;color:#333">${esc(n)}</span>`).join('')}
             </div>
-            <div style="margin-top:0.6rem;font-size:0.82rem;color:#888">Positions to fill: <strong style="color:${colors.dark}">${o.positions || 1}</strong> · Votes per voter: <strong style="color:${colors.dark}">${o.votesPerVoter || 1}</strong></div>
+            <div style="margin-top:0.6rem;font-size:0.82rem;color:#888">Positions to fill: <strong style="color:${colors.dark}">${o.openPositions || 1}</strong> · Votes per voter: <strong style="color:${colors.dark}">${o.votesPerVoter || 1}</strong></div>
           </div>
         </div>`;
     }
 
-    // Aggregate all committed rounds
     const allRounds = o.rounds || [];
     const candidateMap = {};
     allRounds.forEach(r => {
@@ -4400,20 +4244,16 @@ function renderSummary() {
 
     return `
       <div class="summary-section">
-        <h2><span class="badge badge-${office}">${label}</span> Office of ${label}</h2>
+        <h2>${esc(label)}</h2>
         ${currentRoundHtml}
         ${historicalSection}
       </div>`;
   };
 
   const renderRoundHistory = () => {
-    const allRounds = [];
-    ['elder', 'deacon'].forEach(office => {
-      (state[office].rounds || []).forEach(r => {
-        allRounds.push({ office, ...r });
-      });
-    });
+    const allRounds = o.rounds || [];
     if (allRounds.length === 0) return '';
+    const rCol = colors;
 
     return `
       <hr class="divider">
@@ -4429,7 +4269,6 @@ function renderSummary() {
             : (state.expectedVoters || 0);
           const rPct = rExpected > 0 ? Math.round((rTotal / rExpected) * 100) : 0;
           const rMajority = rExpected > 0 ? Math.floor(rExpected / 2) + 1 : '—';
-          const rCol = officeColor(r.office);
           const electedTags = (r.elected || []).map(e =>
             `<span class="badge badge-gold" style="margin-left:0.3rem">${esc(e.name)}</span>`
           ).join('');
@@ -4437,7 +4276,7 @@ function renderSummary() {
             ? `<span style="font-size:0.72rem;background:#f8f6f1;border:1px solid #e0d8c8;border-radius:6px;padding:0.15rem 0.5rem;color:#888">Absentee: ${rAbsentee}</span>` : '';
           return `<div class="round-hist-row" style="flex-direction:column;align-items:stretch;gap:0.4rem">
             <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
-              ${officeBadge(r.office)}
+              ${electionBadge(state)}
               <span style="font-weight:700;font-size:0.9rem">Round ${r.round}</span>
               <span style="font-size:0.75rem;color:#999;margin-left:auto">Majority required: ${rMajority}</span>
             </div>
@@ -4458,10 +4297,8 @@ function renderSummary() {
       </div>`;
   };
 
-  const electionComplete = ['elder','deacon']
-    .filter(k => (state[k].nominees || []).length > 0)
-    .every(k => state[k].complete);
-  const deleteBtn = electionComplete
+  const isComplete = o && o.complete && (o.nominees || []).length > 0;
+  const deleteBtn = isComplete
     ? `<div style="padding:1.5rem 2rem;border-top:1px solid #2a3a60;">
         <h3 style="font-size:1rem;font-weight:700;color:var(--red);margin:0 0 0.5rem">Danger Zone</h3>
         <p style="font-size:0.85rem;color:#aab;margin:0 0 1rem">This will permanently erase all election data including nominees, ballots, tokens, and results.</p>
@@ -4469,8 +4306,8 @@ function renderSummary() {
       </div>`
     : '';
 
-  const configuredOfficeKeys = ['elder', 'deacon'].filter(k => (state[k].nominees || []).length > 0);
-  body.innerHTML = configuredOfficeKeys.map(renderElected).join('') + deleteBtn;
+  const hasNominees = o && (o.nominees || []).length > 0;
+  body.innerHTML = (hasNominees ? renderElectionResults() : '') + renderRoundHistory() + deleteBtn;
 
   if (!_summaryPolling) {
     _summaryPolling = true;
@@ -4484,41 +4321,38 @@ function renderSummary() {
 
 function exportSummary() {
   const state = load();
+  const o = state.election;
+  const label = electionLabel(state);
   const lines = [];
-  lines.push('CHURCH OFFICE BEARER ELECTION SUMMARY');
-  lines.push('=====================================');
-  lines.push(`Congregation: ${state.church || '—'}`);
+  lines.push('BOARD ELECTION SUMMARY');
+  lines.push('======================');
+  lines.push(`Organization: ${state.org || '—'}`);
+  lines.push(`Election: ${label}`);
   lines.push(`Date: ${state.meetingDate ? formatDate(state.meetingDate) : '—'}`);
   lines.push('');
 
-  ['elder', 'deacon'].forEach(office => {
-    const o = state[office];
-    const label = officeLabel(office);
-    lines.push(`--- ${label.toUpperCase()} ELECTION ---`);
-
-    const electedNames = new Set((o.electedAll || []).map(e => e.name));
-    const candidateMap = {};
-    (o.rounds || []).forEach(r => {
-      (r.candidates || []).forEach(c => {
-        if (!candidateMap[c.name] || r.round >= candidateMap[c.name].lastRound) {
-          candidateMap[c.name] = { name: c.name, votes: c.votes, lastRound: r.round };
-        }
-      });
+  lines.push(`--- ${label.toUpperCase()} ---`);
+  const electedNames = new Set((o.electedAll || []).map(e => e.name));
+  const candidateMap = {};
+  (o.rounds || []).forEach(r => {
+    (r.candidates || []).forEach(c => {
+      if (!candidateMap[c.name] || r.round >= candidateMap[c.name].lastRound) {
+        candidateMap[c.name] = { name: c.name, votes: c.votes, lastRound: r.round };
+      }
     });
-    const allCandidates = Object.values(candidateMap).sort((a, b) => b.votes - a.votes);
-
-    if (allCandidates.length > 0) {
-      allCandidates.forEach((c, i) => {
-        const electedEntry = (o.electedAll || []).find(e => e.name === c.name);
-        const status = electedEntry ? `Elected (Round ${electedEntry.round})` : 'Not elected';
-        lines.push(`  ${i+1}. ${c.name} — ${c.votes} votes — ${status}`);
-      });
-    } else {
-      lines.push(`  No results yet.`);
-    }
-    lines.push('');
   });
+  const allCandidates = Object.values(candidateMap).sort((a, b) => b.votes - a.votes);
 
+  if (allCandidates.length > 0) {
+    allCandidates.forEach((c, i) => {
+      const electedEntry = (o.electedAll || []).find(e => e.name === c.name);
+      const status = electedEntry ? `Elected (Round ${electedEntry.round})` : 'Not elected';
+      lines.push(`  ${i+1}. ${c.name} — ${c.votes} votes — ${status}`);
+    });
+  } else {
+    lines.push(`  No results yet.`);
+  }
+  lines.push('');
   lines.push('Generated: ' + new Date().toLocaleString());
 
   const blob = new Blob([lines.join('\n')], { type: 'text/plain' });
@@ -4537,7 +4371,7 @@ function renderVotingHub() {
   const voting = state.voting || {};
 
   const churchEl = document.getElementById('mh-church');
-  if (churchEl) churchEl.textContent = state.church || '';
+  if (churchEl) churchEl.textContent = state.org || '';
 
   const urlEl = document.getElementById('voting-voter-url');
   if (urlEl) urlEl.textContent = voteUrl();
@@ -4738,7 +4572,7 @@ function renderVotingControl() {
     voting.complete ? 'var(--gold)' : voting.votingOpen ? 'var(--green)' : 'var(--navy)';
   document.getElementById('mc-title').textContent = 'Voting Control';
   document.getElementById('mc-sub').textContent =
-    (state.church ? state.church + ' · ' : '') + 'Congregational Vote';
+    (state.org ? state.org + ' · ' : '') + 'Congregational Vote';
 
   // Question banner
   const bannerEl = document.getElementById('mc-question-banner');
@@ -5053,7 +4887,7 @@ function printVotingBallot() {
   if (qtyStr === null) return;
   const qty = Math.max(1, parseInt(qtyStr) || 20);
 
-  const church      = state.church || 'Church Vote';
+  const church      = state.org || 'Board Vote';
   const answerRows  = (voting.answers || []).map(a => `
     <div class="ballot-cand-row">
       <span class="ballot-cbox"></span>
@@ -5085,8 +4919,8 @@ function renderVotingDashboard() {
   // Header
   document.getElementById('mdash-title').textContent = 'Voting Dashboard';
   const dateStr = (() => {
-    if (state.church && state.meetingDate) return state.church + ' · ' + formatDate(state.meetingDate);
-    if (state.church) return state.church;
+    if (state.org && state.meetingDate) return state.org + ' · ' + formatDate(state.meetingDate);
+    if (state.org) return state.org;
     if (state.meetingDate) return formatDate(state.meetingDate);
     return 'Congregational Meeting';
   })();
