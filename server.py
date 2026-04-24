@@ -8,7 +8,6 @@ devices share the same election state:
   GET  /api/state          — read current state (public)
   POST /api/state          — overwrite state (admin-authenticated)
   POST /api/ballot         — atomic ballot submission (token-authenticated)
-  POST /api/voting-ballot  — atomic congregational vote submission
 
 Local usage:
     python3 server.py          # port 8080
@@ -135,55 +134,6 @@ class Handler(BaseHTTPRequestHandler):
                 os.makedirs(os.path.dirname(STATE_FILE), exist_ok=True)
                 with open(STATE_FILE, 'w', encoding='utf-8') as f:
                     f.write(body.decode('utf-8'))
-
-            self._send(200, 'application/json; charset=utf-8', b'{"ok":true}')
-            return
-
-        # ── /api/voting-ballot — atomic congregational vote submission ────────
-        if path == '/api/voting-ballot':
-            token_code = payload.get('tokenCode')
-            answer     = payload.get('answer')
-
-            def merr(msg):
-                self._send(400, 'application/json; charset=utf-8',
-                           json.dumps({'error': msg}).encode())
-
-            with lock:
-                if not os.path.exists(STATE_FILE):
-                    return merr('No state configured')
-                with open(STATE_FILE, 'r', encoding='utf-8') as f:
-                    state = json.load(f)
-
-                voting = state.get('voting', {})
-                if not voting.get('question'):
-                    return merr('No vote configured')
-                if not voting.get('votingOpen'):
-                    return merr('Voting is not open')
-
-                valid_answers = voting.get('answers', [])
-                if answer not in valid_answers:
-                    return merr('Invalid answer')
-
-                token = next((t for t in state.get('tokens', [])
-                              if t.get('code') == token_code), None)
-                if not token:
-                    return merr('Token not found')
-                if token.get('votingVoted'):
-                    return merr('Token already used for this vote')
-
-                from datetime import datetime, timezone
-                votes = voting.setdefault('votes', {})
-                votes[answer] = votes.get(answer, 0) + 1
-                voting.setdefault('ballots', []).append({
-                    'token':     token_code,
-                    'answer':    answer,
-                    'timestamp': datetime.now(timezone.utc).isoformat()
-                })
-                token['votingVoted'] = True
-
-                state['voting'] = voting
-                with open(STATE_FILE, 'w', encoding='utf-8') as f:
-                    json.dump(state, f)
 
             self._send(200, 'application/json; charset=utf-8', b'{"ok":true}')
             return

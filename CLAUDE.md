@@ -40,13 +40,12 @@ python3 server.py 9000     # custom port
 | `/api/state` | GET | None | Read full election state |
 | `/api/state` | POST | `adminPasswordHash` in payload must match stored hash | Full state overwrite (admin) |
 | `/api/ballot` | POST | Valid token code + round | Atomic ballot submission (voters) |
-| `/api/voting-ballot` | POST | Valid token code | Atomic congregational vote submission |
 
 ### Security on Public Hosting
 `POST /api/state` validates that the `adminPasswordHash` in the incoming payload matches the stored hash. The first write (empty state) is accepted unconditionally.
 
 ### Passwords
-- Seven passwords: **Landing**, **Admin**, **Election**, **Results**, **Voting**, **Tokens**, **Paper Ballot**
+- Six passwords: **Landing**, **Admin**, **Election**, **Results**, **Tokens**, **Paper Ballot**
 - Stored as SHA-256 hashes in state
 - Admin default: `boardvoting`; Results default: `results2024`
 - `hashPw()` uses `crypto.subtle.digest` with a pure-JS `sha256Fallback()` for plain HTTP contexts
@@ -65,8 +64,8 @@ python3 server.py 9000     # custom port
 | Election Dashboard | 3s | Full re-render |
 
 ### Voter Page States (vote.html)
-`'token' | 'ballot' | 'done' | 'waiting' | 'no-election' | 'complete'`
-- `waitingPoller`: 3s interval in `waiting / no-election / token / complete` states
+`'token' | 'election-ballot' | 'election-done' | 'election-complete' | 'waiting' | 'idle'`
+- `waitingPoller`: 3s interval in `waiting / idle / token / election-complete` states
 - `donePoller`: 5s interval after vote submitted — notifies voter when next round opens
 - Date display fix: `state.meetingDate` is parsed as local date parts (not `new Date(string)`) to avoid UTC timezone offset shifting the day
 
@@ -97,8 +96,8 @@ python3 server.py 9000     # custom port
 ### vote.html
 | Function | Purpose |
 |---|---|
-| `determineMode()` | Returns which state the voter should see |
-| `handleVoteSubmit()` | POSTs to `/api/ballot`, shows done state |
+| `determineMode()` | Returns `'election' \| 'election-complete' \| 'idle'` |
+| `handleElectionVoteSubmit()` | POSTs to `/api/ballot`, shows done state |
 | `checkForNextBallot()` | Polls for round change while in done state |
 | `renderWaitingState()` | "Voting Round Closed" or "Not Yet Open" |
 | `renderElectionCompleteState()` | Thank-you screen when election is complete |

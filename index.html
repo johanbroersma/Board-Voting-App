@@ -339,103 +339,6 @@
     .home-tile .ht-title { font-family: var(--heading-font, 'Playfair Display', serif); font-size: 1.1rem; font-weight: 700; color: var(--tile-accent); line-height: 1.25; }
     .home-tile .ht-desc { font-size: 0.8rem; color: var(--tile-desc); line-height: 1.45; }
 
-    /* ===== MOTION HUB SCREEN ===== */
-    #screen-voting-hub { padding: 0; }
-    .mh-header {
-      background: var(--navy);
-      color: #fff;
-      padding: 1.5rem 2rem 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .mh-header h1 { font-size: 1.6rem; color: var(--gold-light); }
-    .mh-body { max-width: 700px; margin: 0 auto; padding: 2rem 1.5rem; }
-    .voting-status-card {
-      background: #fff;
-      border-radius: 10px;
-      padding: 1.25rem 1.5rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      margin-bottom: 1.5rem;
-    }
-    .voting-status-open  { border-left: 5px solid var(--green); }
-    .voting-status-closed{ border-left: 5px solid #888; }
-    .voting-status-none  { border-left: 5px solid #ddd; }
-    .voting-status-complete { border-left: 5px solid var(--gold); }
-
-    /* ===== MOTION SETUP SCREEN ===== */
-    #screen-voting-setup { padding: 0; }
-    .ms-header {
-      background: var(--navy);
-      color: #fff;
-      padding: 1.25rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-    .ms-header h1 { font-size: 1.5rem; color: var(--gold-light); font-family: 'Playfair Display', serif; }
-    .ms-body { max-width: 700px; margin: 0 auto; padding: 1.5rem; }
-    .answer-row {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      margin-bottom: 0.5rem;
-    }
-    .answer-row input { flex: 1; }
-    .answer-row .btn-rm { background: none; border: none; cursor: pointer; color: var(--red); font-size: 1.2rem; padding: 0 0.3rem; line-height: 1; }
-    .answer-row .drag-handle { color: #ccc; cursor: grab; font-size: 1rem; }
-
-    /* ===== MOTION CONTROL SCREEN ===== */
-    #screen-voting-control { padding: 0; min-height: 100vh; }
-    .mc-header {
-      padding: 1.25rem 1.5rem;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-    .mc-header h1 { font-size: 1.5rem; font-family: 'Playfair Display', serif; }
-    .mc-body { max-width: 900px; margin: 0 auto; padding: 1.5rem; }
-    .voting-question-banner {
-      background: #fff;
-      border-radius: 10px;
-      padding: 1.1rem 1.5rem;
-      margin-bottom: 1.25rem;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
-      border-left: 5px solid var(--gold);
-    }
-    .voting-question-banner .mq-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #888; margin-bottom: 0.3rem; }
-    .voting-question-banner .mq-text { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--navy); line-height: 1.4; }
-
-    /* ===== MOTION DASHBOARD SCREEN ===== */
-    #screen-voting-dashboard { background: var(--navy); min-height: 100vh; padding: 2rem 1rem 3rem; }
-    .voting-dash-card { background: #fff; border-radius: 12px; max-width: 780px; margin: 0 auto; overflow: hidden; }
-    .voting-dash-header { background: var(--navy); color: #fff; padding: 1.75rem 2rem; }
-    .voting-dash-header h1 { font-size: 1.8rem; color: var(--gold-light); }
-    .voting-dash-body { padding: 2rem; }
-
-    /* ===== VOTING PAPER BALLOT SCREEN ===== */
-    .vpb-header {
-      background: #e8f4ee;
-      border-bottom: 2px solid #a0d4bb;
-      padding: 1.25rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    .vpb-header h1 { font-size: 1.3rem; color: var(--green); font-family: 'Playfair Display', serif; }
-    .vpb-body { max-width: 680px; margin: 0 auto; padding: 1.5rem; }
-    .ballot-candidate.selected-voting { border-color: var(--navy); background: #eef1f8; }
-    .ballot-candidate.selected-voting .cand-cb { border-color: var(--navy); background: var(--navy); color: #fff; }
-
     /* ===== LOGIN SCREEN ===== */
     #screen-login {
       background: var(--navy);
@@ -803,11 +706,6 @@
       <span class="ht-title">Board Election</span>
       <span class="ht-desc">Multi-round candidate election by ballot</span>
     </button>
-    <button class="home-tile" onclick="showVotingHub()" aria-label="Congregational Vote">
-      <span class="ht-icon">🗳️</span>
-      <span class="ht-title">Congregational Vote</span>
-      <span class="ht-desc">Vote on any question or resolution</span>
-    </button>
     <button class="home-tile" onclick="goLogin('paperballet')" aria-label="Paper Ballot Entry">
       <span class="ht-icon">📝</span>
       <span class="ht-title">Paper Ballot Entry</span>
@@ -961,20 +859,6 @@
           <div class="form-group"><label for="rpwd-confirm">Confirm New</label><input type="password" id="rpwd-confirm" class="form-control" autocapitalize="none" autocorrect="off" spellcheck="false"></div>
         </div>
         <button class="btn btn-navy btn-sm" onclick="changeResultsPassword()">🔒 Update Results Password</button>
-      </div>
-
-      <div style="border:1px solid #e8e0d0;border-radius:8px;padding:1rem;margin-bottom:1rem">
-        <h4 style="font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem">Congregational Voting Password</h4>
-        <p style="font-size:0.8rem;color:#888;margin-bottom:0.75rem">Voting Setup &amp; Voting Control. Default: <code>voting2024</code></p>
-        <div id="vpwd-error" class="alert alert-error" style="display:none"></div>
-        <div id="vpwd-success" class="alert alert-success" style="display:none"></div>
-        <div class="grid-2">
-          <div class="form-group"><label for="vpwd-current">Current Password</label><input type="password" id="vpwd-current" class="form-control" autocapitalize="none" autocorrect="off" spellcheck="false"></div>
-          <div></div>
-          <div class="form-group"><label for="vpwd-new">New Password</label><input type="password" id="vpwd-new" class="form-control" autocapitalize="none" autocorrect="off" spellcheck="false"></div>
-          <div class="form-group"><label for="vpwd-confirm">Confirm New</label><input type="password" id="vpwd-confirm" class="form-control" autocapitalize="none" autocorrect="off" spellcheck="false"></div>
-        </div>
-        <button class="btn btn-navy btn-sm" onclick="changeVotingPassword()">🔒 Update Voting Password</button>
       </div>
 
       <div style="border:1px solid #e8e0d0;border-radius:8px;padding:1rem;margin-bottom:1rem">
@@ -1273,15 +1157,9 @@
       <div id="pb-log"></div>
     </div>
 
-    <!-- Congregational Vote paper ballot -->
-    <div id="pb-voting-section" style="display:none">
-      <div id="vpb-content"></div>
-      <div id="vpb-log"></div>
-    </div>
-
     <!-- Nothing active -->
     <div id="pb-nothing-section" style="display:none">
-      <div class="alert alert-info">No election or congregational vote is currently open. Please check with the election officer.</div>
+      <div class="alert alert-info">No election is currently open. Please check with the election officer.</div>
     </div>
   </div>
 </div>
@@ -1319,152 +1197,6 @@
   </div>
 </div>
 
-<!-- ===== SCREEN: MOTION HUB ===== -->
-<div id="screen-voting-hub" class="screen">
-  <div class="mh-header">
-    <div>
-      <h1>🗳️ Congregational Vote</h1>
-      <div id="mh-church" style="font-size:0.85rem;color:#8090b0;margin-top:0.2rem"></div>
-    </div>
-    <div style="display:flex;gap:0.5rem;align-items:center">
-      <button class="btn btn-ghost btn-sm" style="color:var(--nav-back-color);border-color:var(--nav-back-border)" onclick="showHome()">← Home</button>
-    </div>
-  </div>
-  <div class="mh-body">
-    <div id="mh-status-card"></div>
-
-    <nav class="nav-grid" role="navigation" aria-label="Congregational Vote navigation">
-      <button class="nav-card" onclick="goLogin('votingsetup')" aria-label="Voting Setup">
-        <span class="nav-icon">⚙️</span>
-        <span class="nav-label">Voting Setup</span>
-        <span class="nav-desc">Configure question &amp; answers</span>
-      </button>
-      <button class="nav-card" onclick="goLogin('votingcontrol')" aria-label="Voting Control">
-        <span class="nav-icon">🎛️</span>
-        <span class="nav-label">Voting Control</span>
-        <span class="nav-desc">Open / close voting</span>
-      </button>
-
-
-      <button class="nav-card full-width" onclick="goLogin('votingdashboard')" aria-label="Voting Dashboard">
-        <span class="nav-icon">📊</span>
-        <span class="nav-label">Voting Dashboard</span>
-        <span class="nav-desc">Chairman live results view</span>
-      </button>
-    </nav>
-
-    <div class="vote-url-box" style="margin-top:1.5rem" role="complementary" aria-label="Voter URL">
-      <div class="url-label">Voter URL</div>
-      <div class="url-text" id="voting-voter-url">—</div>
-    </div>
-    <p class="landing-note">Members use this URL to cast their vote</p>
-  </div>
-</div>
-
-<!-- ===== SCREEN: MOTION SETUP ===== -->
-<div id="screen-voting-setup" class="screen">
-  <div class="ms-header">
-    <div>
-      <h1>⚙️ Voting Setup</h1>
-      <div style="font-size:0.82rem;color:#8090b0;margin-top:0.15rem">Configure the question and answer options</div>
-    </div>
-    <div style="display:flex;gap:0.5rem;align-items:center">
-      <button id="ms-control-btn" class="btn btn-green btn-sm" style="display:none" onclick="showScreen('screen-voting-control'); renderVotingControl()">▶ Voting Control</button>
-      <button class="btn btn-ghost btn-sm" style="color:var(--nav-back-color);border-color:var(--nav-back-border)" onclick="showScreen('screen-voting-hub'); renderVotingHub()">← Back</button>
-    </div>
-  </div>
-  <div class="ms-body">
-    <div class="card" style="margin-bottom:1.25rem">
-      <h3 class="section-title">Voting Question</h3>
-      <p style="font-size:0.88rem;color:#666;margin-bottom:0.75rem">Enter the question or resolution to be voted on by the congregation.</p>
-      <div class="form-group">
-        <label for="voting-question">Question / Resolution</label>
-        <textarea id="voting-question" class="form-control" rows="3"
-          placeholder="e.g. Do you agree with the proposed resolution?"></textarea>
-      </div>
-    </div>
-
-    <div class="card" style="margin-bottom:1.25rem">
-      <h3 class="section-title">Answer Options</h3>
-      <p style="font-size:0.88rem;color:#666;margin-bottom:0.75rem">Define the choices members will select from. At least two options are required.</p>
-      <div id="voting-answers-list"></div>
-      <button class="btn btn-ghost btn-sm" style="color:var(--navy);border-color:#bbb;margin-top:0.5rem" onclick="addVotingAnswer()">+ Add Option</button>
-    </div>
-
-    <div class="card" style="margin-bottom:1.25rem">
-      <h3 class="section-title">Expected Voters</h3>
-      <p style="font-size:0.88rem;color:#666;margin-bottom:0.75rem">Defaults to the election setup value if left at 0.</p>
-      <div class="form-group" style="max-width:220px">
-        <label for="voting-expected-voters">Number of eligible voters</label>
-        <input type="number" id="voting-expected-voters" class="form-control" min="0" value="0">
-      </div>
-    </div>
-
-    <div class="card" style="margin-bottom:1.25rem">
-      <h3 class="section-title">Absentee Voters</h3>
-      <p style="font-size:0.88rem;color:#666;margin-bottom:0.75rem">Number of absentee votes to include in the majority calculation.</p>
-      <div class="form-group" style="max-width:220px">
-        <label for="voting-absentee-count">Absentee vote count</label>
-        <input type="number" id="voting-absentee-count" class="form-control" min="0" value="0">
-      </div>
-    </div>
-
-    <div class="card" style="margin-bottom:1.25rem">
-      <h3 class="section-title">Majority Threshold</h3>
-      <p style="font-size:0.88rem;color:#666;margin-bottom:0.75rem">Select the majority threshold required for a vote to pass.</p>
-      <div class="form-group">
-        <label style="display:flex;align-items:center;gap:0.5rem;cursor:pointer;margin-bottom:0.5rem">
-          <input type="radio" name="voting-majority-type" id="voting-majority-50plus1" value="50plus1" onchange="toggleVotingMajorityCustom()">
-          50% + 1 vote (simple majority)
-        </label>
-        <label style="display:flex;align-items:center;gap:0.5rem;cursor:pointer;margin-bottom:0.5rem">
-          <input type="radio" name="voting-majority-type" id="voting-majority-75percent" value="75percent" onchange="toggleVotingMajorityCustom()">
-          75% of eligible voters
-        </label>
-        <label style="display:flex;align-items:center;gap:0.5rem;cursor:pointer;margin-bottom:0.75rem">
-          <input type="radio" name="voting-majority-type" id="voting-majority-custom" value="custom" onchange="toggleVotingMajorityCustom()">
-          Custom percentage
-        </label>
-        <div id="voting-majority-custom-wrap" style="display:none;max-width:220px;margin-left:1.5rem">
-          <label for="voting-majority-custom-pct">Required percentage (%)</label>
-          <input type="number" id="voting-majority-custom-pct" class="form-control" min="1" max="100" value="51">
-        </div>
-      </div>
-    </div>
-
-    <div id="voting-setup-msg" class="alert" style="display:none;margin-bottom:1rem"></div>
-    <div style="display:flex;gap:0.75rem;flex-wrap:wrap">
-      <button class="btn btn-navy btn-lg" onclick="saveVotingSetup()">💾 Save Voting Setup</button>
-      <button class="btn btn-ghost btn-lg" style="color:var(--navy);border-color:#9bbde8" onclick="printVotingBallot()">🖨️ Print Voting Ballots</button>
-    </div>
-    <p style="font-size:0.8rem;color:#888;margin-top:0.75rem">Saving resets all member voting records for this vote, allowing fresh votes.</p>
-
-  </div>
-</div>
-
-<!-- ===== SCREEN: MOTION CONTROL ===== -->
-<div id="screen-voting-control" class="screen">
-  <div id="mc-header" class="rc-header">
-    <div>
-      <h1 id="mc-title">Voting Control</h1>
-      <div class="rc-sub" id="mc-sub"></div>
-    </div>
-    <div style="display:flex;gap:0.5rem;align-items:center">
-      <button class="btn btn-ghost btn-sm" style="color:#fff;border-color:rgba(255,255,255,0.4)" onclick="showScreen('screen-voting-hub'); renderVotingHub()">← Back</button>
-    </div>
-  </div>
-  <div class="rc-body">
-    <div id="mc-question-banner" class="voting-question-banner" style="display:none"></div>
-    <div class="stats-bar" id="mc-stats"></div>
-    <div class="control-bar" id="mc-controls"></div>
-    <h3 class="section-title">Live Results</h3>
-    <div id="mc-results" class="results-list"></div>
-  </div>
-</div>
-
-
-
-
 <!-- ===== SCREEN: TOKENS ===== -->
 <div id="screen-tokens" class="screen">
   <div style="background:var(--navy);color:#fff;padding:1.5rem 2rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
@@ -1478,7 +1210,7 @@
 
     <div class="card" style="margin-bottom:1.25rem">
       <h3 class="section-title">Generate Voter Tokens</h3>
-      <p style="font-size:0.9rem;color:#666;margin-bottom:1rem">Each voter receives a unique 4-digit token. Tokens are shared across all rounds of the board election and any congregational votes.</p>
+      <p style="font-size:0.9rem;color:#666;margin-bottom:1rem">Each voter receives a unique 4-digit token. Tokens are shared across all rounds of the board election.</p>
       <div class="grid-2">
         <div class="form-group">
           <label for="token-count">Number of Tokens</label>
@@ -1542,22 +1274,6 @@
   </div>
 </div>
 
-<!-- ===== SCREEN: VOTING DASHBOARD ===== -->
-<div id="screen-voting-dashboard" class="screen">
-  <div style="max-width:780px;margin:0 auto;padding:1.5rem 1rem">
-    <button class="btn btn-ghost" style="color:var(--nav-back-color);border-color:var(--nav-back-border);margin-bottom:1rem" onclick="showScreen('screen-voting-hub'); renderVotingHub()">← Back</button>
-  </div>
-  <div class="summary-card">
-    <div class="summary-header">
-      <h1 id="mdash-title">Voting Dashboard</h1>
-      <div class="sum-date" id="mdash-sub"></div>
-    </div>
-    <div id="mdash-status" style="padding:1.25rem 2rem 0"></div>
-    <div id="mdash-info" style="padding:0.75rem 2rem 0"></div>
-    <div class="summary-body" id="mdash-body"></div>
-  </div>
-</div>
-
 <script>
 'use strict';
 
@@ -1569,7 +1285,6 @@ function defaultState() {
     adminPasswordHash: '',
     electionPasswordHash: '',
     resultsPasswordHash: '',
-    votingPasswordHash: '',
     tokensPasswordHash: '',
     paperBallotPasswordHash: '',
     org: '',
@@ -1598,18 +1313,6 @@ function defaultState() {
       electedAll: [],
       complete: false
     },
-    voting: {
-      question: '',
-      answers: ['In favour', 'Not in favour'],
-      votingOpen: false,
-      complete: false,
-      votes: {},
-      ballots: [],
-      expectedVoters: 0,
-      absenteeCount: 0,
-      majorityType: '50plus1',
-      majorityCustomPercent: 51
-    }
   };
 }
 
@@ -1626,16 +1329,7 @@ function deepMerge(target, source) {
 }
 
 function migrateState(parsed) {
-  // Migrate 'motion' → 'voting' (old key name)
-  if (parsed.motion && !parsed.voting) {
-    parsed.voting = parsed.motion;
-    delete parsed.motion;
-  }
   (parsed.tokens || []).forEach(t => {
-    if ('motionVoted' in t && !('votingVoted' in t)) {
-      t.votingVoted = t.motionVoted;
-      delete t.motionVoted;
-    }
     // Migrate old nested usedRounds { elder: [], deacon: [] } → flat []
     if (t.usedRounds && !Array.isArray(t.usedRounds)) {
       const flat = [];
@@ -1792,10 +1486,6 @@ async function initPasswordHash() {
     state.resultsPasswordHash = await hashPw('results2024');
     changed = true;
   }
-  if (!state.votingPasswordHash) {
-    state.votingPasswordHash = await hashPw('voting2024');
-    changed = true;
-  }
   if (!state.tokensPasswordHash) {
     state.tokensPasswordHash = await hashPw('tokens2024');
     changed = true;
@@ -1813,16 +1503,12 @@ let refreshIntervals = [];
 // Guard flags: prevent each render function from creating a second interval
 // when it is called again from its own interval callback.
 let _summaryPolling = false;
-let _votingDashPolling = false;
-let _votingCtrlPolling = false;
 let _tokensPolling = false;
 
 function clearIntervals() {
   refreshIntervals.forEach(id => clearInterval(id));
   refreshIntervals = [];
   _summaryPolling = false;
-  _votingDashPolling = false;
-  _votingCtrlPolling = false;
   _tokensPolling = false;
 }
 
@@ -1921,19 +1607,13 @@ function showElectionHub() {
   renderLanding();
 }
 
-function showVotingHub() {
-  showScreen('screen-voting-hub');
-  renderVotingHub();
-}
-
-let loginDestination = 'setup'; // 'setup' | 'roundcontrol' | 'results' | 'votingsetup' | 'votingcontrol' | 'votingdashboard' | 'tokens' | 'paperballet' | 'appsettings'
+let loginDestination = 'setup'; // 'setup' | 'roundcontrol' | 'results' | 'tokens' | 'paperballet' | 'appsettings'
 let loginReturnScreen = 'screen-landing';
 
 function loginGoBack() {
   if (loginReturnScreen === 'screen-home') { showHome(); return; }
   showScreen(loginReturnScreen);
-  if (loginReturnScreen === 'screen-voting-hub') renderVotingHub();
-  else renderLanding();
+  renderLanding();
 }
 
 function goLogin(dest = 'setup') {
@@ -1948,9 +1628,6 @@ function goLogin(dest = 'setup') {
     setup:          'Enter the election password to access Election Setup.',
     roundcontrol:   'Enter the election password to access Round Control.',
     results:        'Enter the results password to view confidential election results.',
-    votingsetup:    'Enter the voting password to access Voting Setup.',
-    votingcontrol:  'Enter the voting password to access Voting Control.',
-    votingdashboard:'Enter the results password to view the Voting Dashboard.',
     tokens:         'Enter the tokens password to manage voter tokens.',
     paperballet:    'Enter the paper ballot password to access Paper Ballot Entry.',
     appsettings:    'Enter the admin password to access App Settings.'
@@ -1959,9 +1636,6 @@ function goLogin(dest = 'setup') {
     setup:          'Enter Setup',
     roundcontrol:   'Enter Round Control',
     results:        'View Results',
-    votingsetup:    'Enter Voting Setup',
-    votingcontrol:  'Enter Voting Control',
-    votingdashboard:'View Voting Dashboard',
     tokens:         'Open Voter Tokens',
     paperballet:    'Open Paper Ballot Entry',
     appsettings:    'Open App Settings'
@@ -2060,11 +1734,10 @@ async function doLogin() {
     document.getElementById('login-password').focus();
   }
 
-  // Results password — Election Dashboard & Voting Dashboard
-  if (loginDestination === 'results' || loginDestination === 'votingdashboard') {
+  // Results password — Election Dashboard
+  if (loginDestination === 'results') {
     if (hash === state.resultsPasswordHash) {
-      if (loginDestination === 'results') { showScreen('screen-summary'); renderSummary(); }
-      else { showScreen('screen-voting-dashboard'); renderVotingDashboard(); }
+      showScreen('screen-summary'); renderSummary();
     } else {
       showErr('Incorrect results password. Please try again.');
     }
@@ -2090,20 +1763,9 @@ async function doLogin() {
       renderTokens();
       renderSettings();
       const churchEl = document.getElementById('tokens-church');
-      if (churchEl) { const s = load(); churchEl.textContent = s.church || ''; }
+      if (churchEl) { const s = load(); churchEl.textContent = s.org || ''; }
     } else {
       showErr('Incorrect tokens password. Please try again.');
-    }
-    return;
-  }
-
-  // Voting password — Voting Setup & Voting Control
-  if (loginDestination === 'votingsetup' || loginDestination === 'votingcontrol') {
-    if (hash === state.votingPasswordHash) {
-      if (loginDestination === 'votingsetup') { showScreen('screen-voting-setup'); renderVotingSetup(); }
-      else { showScreen('screen-voting-control'); renderVotingControl(); }
-    } else {
-      showErr('Incorrect voting password. Please try again.');
     }
     return;
   }
@@ -2722,17 +2384,11 @@ function renderTokens() {
   const election = state.election || {};
   const currentRound = election.currentRound || 0;
   const hasActiveRound = currentRound > 0 && !!election.votingOpen;
-  const voting = state.voting || {};
-  const hasActiveVoting = !!voting.votingOpen && !voting.complete;
 
   const usedThisRound = hasActiveRound
     ? tokens.filter(t => (t.usedRounds || []).includes(currentRound)).length
     : 0;
-  const usedForVoting = hasActiveVoting
-    ? tokens.filter(t => t.votingVoted).length
-    : 0;
   const availThisRound = total - usedThisRound;
-  const availForVoting = total - usedForVoting;
 
   const statsEl = document.getElementById('token-stats');
   if (statsEl) {
@@ -2741,11 +2397,6 @@ function renderTokens() {
         <div><strong style="font-family:'Playfair Display',serif;font-size:1.4rem">${total}</strong><br><span class="text-muted">Total</span></div>
         <div><strong style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--red)">${usedThisRound}</strong><br><span class="text-muted">Used (Rd ${currentRound})</span></div>
         <div><strong style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--green)">${availThisRound}</strong><br><span class="text-muted">Available (Rd ${currentRound})</span></div>`;
-    } else if (hasActiveVoting) {
-      statsEl.innerHTML = `
-        <div><strong style="font-family:'Playfair Display',serif;font-size:1.4rem">${total}</strong><br><span class="text-muted">Total</span></div>
-        <div><strong style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--red)">${usedForVoting}</strong><br><span class="text-muted">Voted</span></div>
-        <div><strong style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--green)">${availForVoting}</strong><br><span class="text-muted">Not yet voted</span></div>`;
     } else {
       statsEl.innerHTML = `
         <div><strong style="font-family:'Playfair Display',serif;font-size:1.4rem">${total}</strong><br><span class="text-muted">Total</span></div>
@@ -2762,12 +2413,8 @@ function renderTokens() {
       grid.innerHTML = tokens.map(t => {
         const usedRounds = t.usedRounds || [];
         const isUsedThisRound = hasActiveRound && usedRounds.includes(currentRound);
-        const isUsedForVoting = hasActiveVoting && !!t.votingVoted;
-        const parts = [];
-        if (usedRounds.length) parts.push(`Election rounds: ${usedRounds.join(', ')}`);
-        if (t.votingVoted) parts.push('Congregational vote: cast');
-        const tooltip = parts.length ? parts.join(' | ') : 'Not yet used';
-        return `<span class="token-chip${(isUsedThisRound || isUsedForVoting) ? ' used' : ''}" title="${tooltip}">${esc(t.code)}</span>`;
+        const tooltip = usedRounds.length ? `Election rounds: ${usedRounds.join(', ')}` : 'Not yet used';
+        return `<span class="token-chip${isUsedThisRound ? ' used' : ''}" title="${tooltip}">${esc(t.code)}</span>`;
       }).join('');
     }
   }
@@ -2979,43 +2626,6 @@ async function changeResultsPassword() {
   document.getElementById('rpwd-current').value = '';
   document.getElementById('rpwd-new').value = '';
   document.getElementById('rpwd-confirm').value = '';
-}
-
-async function changeVotingPassword() {
-  const current = document.getElementById('vpwd-current').value;
-  const nw = document.getElementById('vpwd-new').value;
-  const conf = document.getElementById('vpwd-confirm').value;
-  const errEl = document.getElementById('vpwd-error');
-  const okEl = document.getElementById('vpwd-success');
-  errEl.style.display = 'none';
-  okEl.style.display = 'none';
-
-  if (nw.length < 4) {
-    errEl.textContent = 'New password must be at least 4 characters.';
-    errEl.style.display = 'block';
-    return;
-  }
-  if (nw !== conf) {
-    errEl.textContent = 'New passwords do not match.';
-    errEl.style.display = 'block';
-    return;
-  }
-
-  const currentHash = await hashPw(current);
-  const state = load();
-  if (currentHash !== state.votingPasswordHash) {
-    errEl.textContent = 'Current voting password is incorrect.';
-    errEl.style.display = 'block';
-    return;
-  }
-
-  state.votingPasswordHash = await hashPw(nw);
-  save(state);
-  okEl.textContent = 'Voting password updated successfully.';
-  okEl.style.display = 'block';
-  document.getElementById('vpwd-current').value = '';
-  document.getElementById('vpwd-new').value = '';
-  document.getElementById('vpwd-confirm').value = '';
 }
 
 async function changeTokensPassword() {
@@ -3648,25 +3258,15 @@ function updatePBLog() {
 function renderUnifiedPaperBallot() {
   const state = load();
   const elSec = document.getElementById('pb-election-section');
-  const vtSec = document.getElementById('pb-voting-section');
   const noSec = document.getElementById('pb-nothing-section');
   const hasElection = !!(state.election && state.election.votingOpen);
-  const voting = state.voting || {};
-  const hasVoting = !!voting.question && !!voting.votingOpen && !voting.complete;
 
   if (hasElection) {
     if (elSec) elSec.style.display = '';
-    if (vtSec) vtSec.style.display = 'none';
     if (noSec) noSec.style.display = 'none';
     renderPaperBallot();
-  } else if (hasVoting) {
-    if (elSec) elSec.style.display = 'none';
-    if (vtSec) vtSec.style.display = '';
-    if (noSec) noSec.style.display = 'none';
-    renderVotingPaperBallot();
   } else {
     if (elSec) elSec.style.display = 'none';
-    if (vtSec) vtSec.style.display = 'none';
     if (noSec) noSec.style.display = '';
   }
 }
@@ -3674,9 +3274,7 @@ function renderUnifiedPaperBallot() {
 function unifiedPBKey() {
   const s = load();
   const o = s.election || {};
-  const v = s.voting || {};
-  return [o.currentRound || '', o.votingOpen || '',
-          v.question || '', v.votingOpen || '', v.complete || ''].join('|');
+  return [o.currentRound || '', o.votingOpen || ''].join('|');
 }
 
 function startUnifiedPaperBallotPoller() {
@@ -3695,8 +3293,6 @@ function startUnifiedPaperBallotPoller() {
     const s = load();
     if ((s.election || {}).votingOpen) {
       updatePBLog();
-    } else if ((s.voting || {}).votingOpen) {
-      updateVPBLog();
     }
   }, 4000);
   refreshIntervals.push(interval);
@@ -4362,690 +3958,6 @@ function exportSummary() {
   a.download = `election-summary-${Date.now()}.txt`;
   a.click();
   URL.revokeObjectURL(url);
-}
-
-// ========== VOTING HUB ==========
-
-function renderVotingHub() {
-  const state = load();
-  const voting = state.voting || {};
-
-  const churchEl = document.getElementById('mh-church');
-  if (churchEl) churchEl.textContent = state.org || '';
-
-  const urlEl = document.getElementById('voting-voter-url');
-  if (urlEl) urlEl.textContent = voteUrl();
-
-  const card = document.getElementById('mh-status-card');
-  if (!card) return;
-
-  if (!voting.question) {
-    card.innerHTML = `
-      <div class="voting-status-card voting-status-none">
-        <div style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#aaa;margin-bottom:0.3rem">Voting Status</div>
-        <div style="font-size:1rem;color:#888">No vote configured yet. Use <strong>Voting Setup</strong> to add a question.</div>
-      </div>`;
-    return;
-  }
-
-  const statusCls  = voting.complete ? 'voting-status-complete'
-                   : voting.votingOpen ? 'voting-status-open'
-                   : 'voting-status-closed';
-  const statusText = voting.complete ? '✓ Complete'
-                   : voting.votingOpen ? '● Voting Open'
-                   : '⏸ Voting Closed';
-  const statusColor= voting.complete ? 'var(--gold)'
-                   : voting.votingOpen ? 'var(--green)'
-                   : '#888';
-  const totalVotes = Object.values(voting.votes || {}).reduce((s, v) => s + v, 0);
-  const expected   = (voting.expectedVoters > 0 ? voting.expectedVoters : state.expectedVoters) || 0;
-  const pct        = expected > 0 ? Math.round((totalVotes / expected) * 100) : 0;
-
-  card.innerHTML = `
-    <div class="voting-status-card ${statusCls}">
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:0.75rem;margin-bottom:0.6rem;flex-wrap:wrap">
-        <div style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#888">Current Vote</div>
-        <span style="font-size:0.82rem;font-weight:700;color:${statusColor}">${statusText}</span>
-      </div>
-      <div style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--navy);line-height:1.4;margin-bottom:0.75rem">${esc(voting.question)}</div>
-      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;font-size:0.82rem;color:#666">
-        <span>Options: <strong>${(voting.answers || []).map(a => esc(a)).join(' · ')}</strong></span>
-        ${expected > 0 ? `<span style="margin-left:auto">Votes: <strong>${totalVotes}</strong> / ${expected} (${pct}%)</span>` : `<span style="margin-left:auto">Votes cast: <strong>${totalVotes}</strong></span>`}
-      </div>
-    </div>`;
-}
-
-// ========== VOTING SETUP ==========
-
-function renderVotingSetup() {
-  const state = load();
-  const voting = state.voting || {};
-
-  const qEl = document.getElementById('voting-question');
-  if (qEl) qEl.value = voting.question || '';
-
-  const evEl = document.getElementById('voting-expected-voters');
-  if (evEl) evEl.value = voting.expectedVoters || 0;
-
-  const abEl = document.getElementById('voting-absentee-count');
-  if (abEl) abEl.value = voting.absenteeCount || 0;
-
-  // Majority type radio buttons
-  const majorityType = voting.majorityType || '50plus1';
-  const radioEl = document.querySelector(`input[name="voting-majority-type"][value="${majorityType}"]`);
-  if (radioEl) radioEl.checked = true;
-  const customPctEl = document.getElementById('voting-majority-custom-pct');
-  if (customPctEl) customPctEl.value = voting.majorityCustomPercent || 51;
-  toggleVotingMajorityCustom();
-
-  const controlBtn = document.getElementById('ms-control-btn');
-  if (controlBtn) controlBtn.style.display = voting.question ? 'inline-flex' : 'none';
-
-  renderVotingAnswersList(voting.answers && voting.answers.length ? voting.answers : ['In favour', 'Not in favour']);
-
-  const msgEl = document.getElementById('voting-setup-msg');
-  if (msgEl) { msgEl.style.display = 'none'; }
-}
-
-function toggleVotingMajorityCustom() {
-  const customRadio = document.getElementById('voting-majority-custom');
-  const wrap = document.getElementById('voting-majority-custom-wrap');
-  if (wrap) wrap.style.display = (customRadio && customRadio.checked) ? 'block' : 'none';
-}
-
-function renderVotingAnswersList(answers) {
-  const container = document.getElementById('voting-answers-list');
-  if (!container) return;
-  container.innerHTML = answers.map((ans, i) => `
-    <div class="answer-row" id="answer-row-${i}">
-      <span class="drag-handle">⠿</span>
-      <input type="text" class="form-control" id="voting-answer-${i}"
-        value="${esc(ans)}" placeholder="Answer option ${i+1}"
-        autocapitalize="none" autocorrect="off" spellcheck="false">
-      <button class="btn-rm" onclick="removeVotingAnswer(${i})" title="Remove" aria-label="Remove answer">✕</button>
-    </div>`).join('');
-}
-
-function addVotingAnswer() {
-  const answers = collectVotingAnswers();
-  answers.push('');
-  renderVotingAnswersList(answers);
-  const newInput = document.getElementById(`voting-answer-${answers.length - 1}`);
-  if (newInput) newInput.focus();
-}
-
-function removeVotingAnswer(idx) {
-  const answers = collectVotingAnswers();
-  if (answers.length <= 2) {
-    alert('A vote must have at least 2 answer options.');
-    return;
-  }
-  answers.splice(idx, 1);
-  renderVotingAnswersList(answers);
-}
-
-function collectVotingAnswers() {
-  const answers = [];
-  let i = 0;
-  while (document.getElementById(`voting-answer-${i}`)) {
-    answers.push(document.getElementById(`voting-answer-${i}`).value.trim());
-    i++;
-  }
-  return answers;
-}
-
-function saveVotingSetup() {
-  const question = (document.getElementById('voting-question')?.value || '').trim();
-  const answers  = collectVotingAnswers().filter(a => a.length > 0);
-  const expected = parseInt(document.getElementById('voting-expected-voters')?.value) || 0;
-  const absentee = parseInt(document.getElementById('voting-absentee-count')?.value) || 0;
-  const majorityTypeEl = document.querySelector('input[name="voting-majority-type"]:checked');
-  const majorityType = majorityTypeEl ? majorityTypeEl.value : '50plus1';
-  const majorityCustomPercent = parseInt(document.getElementById('voting-majority-custom-pct')?.value) || 51;
-  const msgEl    = document.getElementById('voting-setup-msg');
-
-  function showMsg(type, text) {
-    if (!msgEl) return;
-    msgEl.className = `alert alert-${type}`;
-    msgEl.textContent = text;
-    msgEl.style.display = 'block';
-  }
-
-  if (!question) { showMsg('error', 'Please enter the voting question.'); return; }
-  if (answers.length < 2) { showMsg('error', 'Please provide at least 2 answer options.'); return; }
-  if (majorityType === 'custom' && (majorityCustomPercent < 1 || majorityCustomPercent > 100)) {
-    showMsg('error', 'Custom percentage must be between 1 and 100.'); return;
-  }
-
-  const state = load();
-
-  // Reset votingVoted on all tokens so members can vote fresh
-  (state.tokens || []).forEach(t => { t.votingVoted = false; });
-
-  state.voting = {
-    question,
-    answers,
-    votingOpen: false,
-    complete:   false,
-    votes:      {},
-    ballots:    [],
-    expectedVoters: expected,
-    absenteeCount: absentee,
-    majorityType,
-    majorityCustomPercent
-  };
-
-  save(state);
-  showMsg('success', '✓ Voting setup saved. Go to Voting Control to open voting.');
-
-  const controlBtn = document.getElementById('ms-control-btn');
-  if (controlBtn) controlBtn.style.display = 'inline-flex';
-}
-
-// Returns the required vote count for the configured majority threshold, or null if no eligible voters set
-function votingMajorityThreshold(voting, state) {
-  const expected = (voting.expectedVoters > 0 ? voting.expectedVoters : state.expectedVoters) || 0;
-  const absentee = voting.absenteeCount || 0;
-  const total = expected + absentee;
-  if (total <= 0) return null;
-  const type = voting.majorityType || '50plus1';
-  if (type === '75percent') return Math.ceil(total * 0.75);
-  if (type === 'custom') return Math.ceil(total * ((voting.majorityCustomPercent || 51) / 100));
-  return Math.floor(total / 2) + 1; // 50%+1
-}
-
-function votingMajorityLabel(voting) {
-  const type = voting.majorityType || '50plus1';
-  if (type === '75percent') return '75%';
-  if (type === 'custom') return `${voting.majorityCustomPercent || 51}%`;
-  return '50%+1';
-}
-
-// ========== VOTING CONTROL ==========
-
-function renderVotingControl() {
-  const state  = load();
-  const voting = state.voting || {};
-
-  // Header
-  document.getElementById('mc-header').style.background =
-    voting.complete ? 'var(--gold)' : voting.votingOpen ? 'var(--green)' : 'var(--navy)';
-  document.getElementById('mc-title').textContent = 'Voting Control';
-  document.getElementById('mc-sub').textContent =
-    (state.org ? state.org + ' · ' : '') + 'Congregational Vote';
-
-  // Question banner
-  const bannerEl = document.getElementById('mc-question-banner');
-  if (voting.question) {
-    bannerEl.style.display = '';
-    bannerEl.innerHTML = `<div class="mq-label">Voting Question</div><div class="mq-text">${esc(voting.question)}</div>`;
-  } else {
-    bannerEl.style.display = 'none';
-  }
-
-  // Control bar (static — only changes on manual officer actions)
-  renderVCControls(state, voting);
-
-  // Stats + Results
-  renderVCStats(state, voting);
-  renderVCResults(state, voting);
-
-  // Auto-refresh (3s, targeted — only stats + results)
-  if (!_votingCtrlPolling) {
-    _votingCtrlPolling = true;
-    const interval = setInterval(() => {
-      if (!document.getElementById('screen-voting-control').classList.contains('active')) return;
-      const s2 = load();
-      renderVCStats(s2, s2.voting || {});
-      renderVCResults(s2, s2.voting || {});
-    }, 3000);
-    refreshIntervals.push(interval);
-  }
-}
-
-function renderVCStats(state, voting) {
-  const statsEl = document.getElementById('mc-stats');
-  if (!statsEl) return;
-  const totalVotes  = Object.values(voting.votes || {}).reduce((s, v) => s + v, 0);
-  const baseExpected = (voting.expectedVoters > 0 ? voting.expectedVoters : state.expectedVoters) || 0;
-  const expected    = baseExpected + (voting.absenteeCount || 0);
-  const pct         = expected > 0 ? Math.round((totalVotes / expected) * 100) : 0;
-  const majThresh   = votingMajorityThreshold(voting, state);
-  statsEl.innerHTML = `
-    <div class="stat-box">
-      <div class="stat-num" style="color:var(--navy)">${totalVotes}</div>
-      <div class="stat-lbl">Votes Cast</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-num">${expected || '—'}</div>
-      <div class="stat-lbl">Expected</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-num" style="color:${pct >= 50 ? 'var(--green)' : 'var(--navy)'}">${expected > 0 ? pct + '%' : '—'}</div>
-      <div class="stat-lbl">Turnout</div>
-    </div>
-    ${majThresh !== null ? `
-    <div class="stat-box">
-      <div class="stat-num" style="color:var(--navy)">${majThresh}</div>
-      <div class="stat-lbl">Majority (${votingMajorityLabel(voting)})</div>
-    </div>` : ''}`;
-}
-
-function renderVCControls(state, voting) {
-  const ctrlEl = document.getElementById('mc-controls');
-  if (!ctrlEl) return;
-  const open     = voting.votingOpen;
-  const complete = voting.complete;
-  const hasQ     = !!voting.question;
-
-  if (!hasQ) {
-    ctrlEl.innerHTML = `<span style="color:#888;font-size:0.9rem">No vote configured. <a href="#" onclick="showScreen('screen-voting-setup');renderVotingSetup();return false" style="color:var(--navy)">Go to Setup →</a></span>`;
-    return;
-  }
-  if (complete) {
-    ctrlEl.innerHTML = `
-      <div class="voting-status">
-        <span class="pulse-dot grey"></span>
-        <span style="color:#888">Voting Complete</span>
-      </div>
-      <button class="btn btn-ghost btn-sm" style="color:var(--red);border-color:var(--red)" onclick="votingReset()">🔄 Reset &amp; New Vote</button>`;
-    return;
-  }
-  ctrlEl.innerHTML = `
-    <div class="voting-status">
-      <span class="pulse-dot ${open ? 'green' : 'grey'}"></span>
-      <span style="color:${open ? 'var(--green)' : '#888'}">${open ? 'Voting Open' : 'Voting Closed'}</span>
-    </div>
-    <button class="btn btn-green btn-sm" ${open ? 'disabled' : ''} onclick="votingOpenVoting()">▶ Open Voting</button>
-    <button class="btn btn-red btn-sm" ${!open ? 'disabled' : ''} onclick="votingCloseVoting()">■ Close Voting</button>
-    <button class="btn btn-navy btn-sm" ${open ? 'disabled' : ''} onclick="votingMarkComplete()">✅ Mark Complete</button>`;
-}
-
-function renderVCResults(state, voting) {
-  const resultsEl = document.getElementById('mc-results');
-  if (!resultsEl) return;
-  const baseExpected = (voting.expectedVoters > 0 ? voting.expectedVoters : state.expectedVoters) || 0;
-  const expected    = baseExpected + (voting.absenteeCount || 0);
-  const majThresh   = votingMajorityThreshold(voting, state);
-
-  if (!voting.answers || voting.answers.length === 0) {
-    resultsEl.innerHTML = '<div class="empty-state">No answers configured.</div>';
-    return;
-  }
-  const maxVotes = Math.max(...voting.answers.map(a => (voting.votes || {})[a] || 0), 1);
-  resultsEl.innerHTML = voting.answers.map(answer => {
-    const votes    = (voting.votes || {})[answer] || 0;
-    const barW     = Math.round((votes / maxVotes) * 100);
-    const majReached = majThresh !== null && votes >= majThresh;
-    return `
-      <div class="result-row${votes === maxVotes && votes > 0 ? ' top' : ''}">
-        <div class="result-name">${esc(answer)}${majReached ? ' <span class="badge badge-green" style="font-size:0.72rem;padding:0.15rem 0.5rem;vertical-align:middle">✓ Majority</span>' : ''}</div>
-        <div class="bar-wrap"><div class="bar-fill" style="width:${barW}%;background:${majReached ? 'var(--green)' : '#243460'}"></div></div>
-        <div class="result-pct">${expected > 0 ? Math.round((votes / expected) * 100) + '%' : ''}</div>
-        <div class="result-votes">${votes}</div>
-      </div>`;
-  }).join('');
-}
-
-function votingOpenVoting() {
-  const state = load();
-  if (!state.voting || !state.voting.question) { alert('No vote configured. Set up a vote in Voting Setup first.'); return; }
-  state.voting.votingOpen = true;
-  state.voting.complete   = false;
-  save(state);
-  renderVotingControl();
-}
-
-function votingCloseVoting() {
-  const state = load();
-  state.voting.votingOpen = false;
-  save(state);
-  renderVotingControl();
-}
-
-function votingMarkComplete() {
-  if (!confirm('Mark this vote as complete? Voting will be closed permanently.')) return;
-  const state = load();
-  state.voting.votingOpen = false;
-  state.voting.complete   = true;
-  save(state);
-  renderVotingControl();
-}
-
-function votingReset() {
-  if (!confirm('Reset this vote? This will clear all votes and allow a new vote to be configured.')) return;
-  const state = load();
-  (state.tokens || []).forEach(t => { t.votingVoted = false; });
-  state.voting = {
-    question: '', answers: ['In favour', 'Not in favour'],
-    votingOpen: false, complete: false, votes: {}, ballots: [], expectedVoters: 0
-  };
-  save(state);
-  showScreen('screen-voting-hub');
-  renderVotingHub();
-}
-
-// ========== VOTING PAPER BALLOT ==========
-
-let vpbSelectedAnswer = null;
-
-function renderVotingPaperBallot() {
-  const state  = load();
-  const voting = state.voting || {};
-  const contentEl = document.getElementById('vpb-content');
-  if (!contentEl) return;
-
-  vpbSelectedAnswer = null;
-
-  if (!voting.question) {
-    contentEl.innerHTML = `<div class="alert alert-warning">No vote has been configured yet. Use <strong>Voting Setup</strong> to add a question first.</div>`;
-    updateVPBLog();
-    return;
-  }
-
-  if (voting.complete) {
-    contentEl.innerHTML = `<div class="alert alert-info">This vote has been marked as complete. No further ballots can be entered.</div>`;
-    updateVPBLog();
-    return;
-  }
-
-  if (!voting.votingOpen) {
-    contentEl.innerHTML = `
-      <div class="alert alert-warning" style="margin-bottom:1rem">Voting is currently closed. The chairman must open voting before ballots can be entered.</div>
-      <div class="voting-question-banner">
-        <div class="mq-label">Voting Question</div>
-        <div class="mq-text">${esc(voting.question)}</div>
-      </div>`;
-    updateVPBLog();
-    return;
-  }
-
-  const rows = (voting.answers || []).map(answer => `
-    <div class="ballot-candidate" onclick="vpbSelect(this, '${escAttr(answer)}')" tabindex="0" role="radio" aria-checked="false">
-      <div class="cand-cb"></div>
-      <span class="cand-name">${esc(answer)}</span>
-    </div>`).join('');
-
-  contentEl.innerHTML = `
-    <div class="voting-question-banner" style="margin-bottom:1rem">
-      <div class="mq-label">Voting Question</div>
-      <div class="mq-text">${esc(voting.question)}</div>
-    </div>
-    <div class="form-group">
-      <label style="font-weight:600;margin-bottom:0.6rem;display:block">Select the member's answer:</label>
-      <div id="vpb-answers" role="radiogroup">${rows}</div>
-    </div>
-    <div id="vpb-error" class="alert alert-error" style="display:none;margin-bottom:0.75rem"></div>
-    <div class="form-group" style="margin-top:0.5rem">
-      <label style="display:flex;align-items:center;gap:0.5rem;cursor:pointer;font-weight:600">
-        <input type="checkbox" id="vpb-absentee" style="width:18px;height:18px;cursor:pointer">
-        Absentee ballot
-      </label>
-    </div>
-    <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:0.25rem">
-      <button class="btn btn-green" onclick="submitVotingPaperBallot()">✓ Record Paper Vote</button>
-      <button class="btn btn-ghost btn-sm" style="color:var(--navy);border-color:#bbb" onclick="printVotingBallot()">🖨️ Print Ballots</button>
-    </div>`;
-
-  updateVPBLog();
-
-  // Re-attach keyboard support
-  document.querySelectorAll('#vpb-answers .ballot-candidate').forEach(row => {
-    row.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); row.click(); }
-    });
-  });
-}
-
-function vpbSelect(el, answer) {
-  vpbSelectedAnswer = answer;
-  document.querySelectorAll('#vpb-answers .ballot-candidate').forEach(c => {
-    c.classList.remove('selected-voting');
-    c.setAttribute('aria-checked', 'false');
-    c.querySelector('.cand-cb').textContent = '';
-  });
-  el.classList.add('selected-voting');
-  el.setAttribute('aria-checked', 'true');
-  el.querySelector('.cand-cb').textContent = '✓';
-  const errEl = document.getElementById('vpb-error');
-  if (errEl) errEl.style.display = 'none';
-}
-
-function submitVotingPaperBallot() {
-  const errEl = document.getElementById('vpb-error');
-  if (!vpbSelectedAnswer) {
-    if (errEl) { errEl.textContent = 'Please select an answer before recording.'; errEl.style.display = 'block'; }
-    return;
-  }
-
-  const state = load();
-  if (!state.voting || !state.voting.votingOpen) {
-    alert('Voting is not currently open.');
-    return;
-  }
-  if (!(state.voting.answers || []).includes(vpbSelectedAnswer)) {
-    alert('Invalid answer selected.');
-    return;
-  }
-
-  const isAbsentee = !!(document.getElementById('vpb-absentee')?.checked);
-
-  state.voting.votes[vpbSelectedAnswer] = (state.voting.votes[vpbSelectedAnswer] || 0) + 1;
-  state.voting.ballots.push({
-    answer:    vpbSelectedAnswer,
-    paper:     true,
-    absentee:  isAbsentee,
-    timestamp: new Date().toISOString()
-  });
-  save(state);
-
-  vpbSelectedAnswer = null;
-  renderVotingPaperBallot();
-}
-
-function updateVPBLog() {
-  const state        = load();
-  const voting       = state.voting || {};
-  const paperBallots = (voting.ballots || []).filter(b => b.paper);
-  const logEl        = document.getElementById('vpb-log');
-  if (!logEl) return;
-
-  if (paperBallots.length === 0) { logEl.innerHTML = ''; return; }
-
-  // Tally per answer for the summary line
-  const tally = {};
-  const absenteeCnt = paperBallots.filter(b => b.absentee).length;
-  paperBallots.forEach(b => { tally[b.answer] = (tally[b.answer] || 0) + 1; });
-  const tallyText = Object.entries(tally).map(([a, n]) => `${esc(a)}: <strong>${n}</strong>`).join(' · ');
-  const absenteeNote = absenteeCnt > 0 ? ` · Absentee: <strong>${absenteeCnt}</strong>` : '';
-
-  logEl.innerHTML = `
-    <div class="ballot-log" style="margin-top:1.5rem">
-      <h3 class="section-title">Paper Ballots Entered (${paperBallots.length}) — ${tallyText}${absenteeNote}</h3>
-      ${paperBallots.slice().reverse().map(b => `
-        <div class="ballot-log-entry" style="display:flex;justify-content:space-between;align-items:center">
-          <span><strong>${esc(b.answer)}</strong>${b.absentee ? ' <span class="badge badge-deacon" style="font-size:0.7rem;padding:0.1rem 0.4rem;margin-left:0.4rem">Absentee</span>' : ''}</span>
-          <span class="text-muted">${new Date(b.timestamp).toLocaleTimeString()}</span>
-        </div>`).join('')}
-    </div>`;
-}
-
-function startVotingPaperBallotPoller() {
-  const interval = setInterval(() => {
-    if (!document.getElementById('screen-voting-paper').classList.contains('active')) return;
-    updateVPBLog();
-  }, 4000);
-  refreshIntervals.push(interval);
-}
-
-function printVotingBallot() {
-  const state  = load();
-  const voting = state.voting || {};
-  if (!voting.question) { alert('No vote configured. Set up a vote in Voting Setup first.'); return; }
-
-  const qtyStr = prompt('How many ballot slips to print?', '20');
-  if (qtyStr === null) return;
-  const qty = Math.max(1, parseInt(qtyStr) || 20);
-
-  const church      = state.org || 'Board Vote';
-  const answerRows  = (voting.answers || []).map(a => `
-    <div class="ballot-cand-row">
-      <span class="ballot-cbox"></span>
-      <span>${esc(a)}</span>
-    </div>`).join('');
-
-  const oneCard = `
-    <div class="ballot-card">
-      <div class="ballot-card-office" style="color:#1a2744">Congregational Vote</div>
-      <div class="ballot-card-church">${esc(church)}</div>
-      <div class="ballot-card-instr" style="white-space:normal;line-height:1.35">${esc(voting.question)}</div>
-      ${answerRows}
-      <div class="ballot-card-footer">Congregational Vote</div>
-    </div>`;
-
-  document.getElementById('print-area').innerHTML = `
-    <div class="ballot-grid">
-      ${Array.from({ length: qty }, () => oneCard).join('')}
-    </div>`;
-  window.print();
-}
-
-// ========== VOTING DASHBOARD ==========
-
-function renderVotingDashboard() {
-  const state  = load();
-  const voting = state.voting || {};
-
-  // Header
-  document.getElementById('mdash-title').textContent = 'Voting Dashboard';
-  const dateStr = (() => {
-    if (state.org && state.meetingDate) return state.org + ' · ' + formatDate(state.meetingDate);
-    if (state.org) return state.org;
-    if (state.meetingDate) return formatDate(state.meetingDate);
-    return 'Congregational Meeting';
-  })();
-  document.getElementById('mdash-sub').textContent = dateStr;
-
-  // Status section (mirrors Election Dashboard style)
-  const statusEl = document.getElementById('mdash-status');
-  let statusHtml = '';
-  if (!voting.question) {
-    statusHtml = `
-      <div style="background:#f8f6f1;border:1px solid #e0d8c8;border-radius:8px;padding:1rem 1.25rem">
-        <div style="font-weight:700;color:#555;margin-bottom:0.25rem">No Vote Configured</div>
-        <div style="font-size:0.85rem;color:#888">Set up a vote in Voting Setup to begin.</div>
-      </div>`;
-  } else if (voting.complete) {
-    statusHtml = `
-      <div style="background:#fff8e6;border:1px solid #f0c060;border-radius:8px;padding:1rem 1.25rem">
-        <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;margin-bottom:0.35rem">
-          <span style="font-size:0.85rem;font-weight:700;color:#b8942a;text-transform:uppercase;letter-spacing:0.06em">Congregational Vote</span>
-          <span style="display:inline-flex;align-items:center;gap:0.4rem;background:#fff8e6;color:#b8942a;border:1px solid #f0c060;border-radius:20px;padding:0.3rem 0.75rem;font-size:0.82rem;font-weight:600">✓ Voting Complete</span>
-        </div>
-        <div style="font-size:0.85rem;color:#666">The vote has been finalised. See results below.</div>
-      </div>`;
-  } else if (voting.votingOpen) {
-    statusHtml = `
-      <div style="background:#f8f6f1;border:1px solid #e0d8c8;border-radius:8px;padding:1rem 1.25rem">
-        <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;margin-bottom:0.35rem">
-          <span style="font-size:0.85rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:0.06em">Congregational Vote</span>
-          <span style="display:inline-flex;align-items:center;gap:0.4rem;background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7;border-radius:20px;padding:0.3rem 0.75rem;font-size:0.82rem;font-weight:600">
-            <span style="width:8px;height:8px;background:#43a047;border-radius:50%;display:inline-block;animation:pulse-dot 1.5s infinite"></span>Voting Open</span>
-          ${votingMajorityThreshold(voting, state) !== null ? `<span style="font-size:0.82rem;background:#f0ece4;border:1px solid #ddd5c0;border-radius:12px;padding:0.2rem 0.6rem;color:#555;white-space:nowrap">Majority required: <strong style="color:var(--navy)">${votingMajorityThreshold(voting, state)}</strong></span>` : ''}
-        </div>
-        <div style="font-size:0.85rem;color:#666">Members may cast their votes now.</div>
-      </div>`;
-  } else {
-    statusHtml = `
-      <div style="background:#f8f6f1;border:1px solid #e0d8c8;border-radius:8px;padding:1rem 1.25rem">
-        <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;margin-bottom:0.35rem">
-          <span style="font-size:0.85rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:0.06em">Congregational Vote</span>
-          <span style="display:inline-flex;align-items:center;gap:0.4rem;background:#fff3e0;color:#e65100;border:1px solid #ffcc80;border-radius:20px;padding:0.3rem 0.75rem;font-size:0.82rem;font-weight:600">■ Voting Closed</span>
-          ${votingMajorityThreshold(voting, state) !== null ? `<span style="font-size:0.82rem;background:#f0ece4;border:1px solid #ddd5c0;border-radius:12px;padding:0.2rem 0.6rem;color:#555;white-space:nowrap">Majority required: <strong style="color:var(--navy)">${votingMajorityThreshold(voting, state)}</strong></span>` : ''}
-        </div>
-        <div style="font-size:0.85rem;color:#666">Voting is closed. Awaiting officer action.</div>
-      </div>`;
-  }
-  statusEl.innerHTML = statusHtml;
-
-  // Info strip (mirrors Election Dashboard sum-info)
-  const infoEl = document.getElementById('mdash-info');
-  const baseExpected = (voting.expectedVoters > 0 ? voting.expectedVoters : state.expectedVoters) || 0;
-  const absenteeCount = voting.absenteeCount || 0;
-  infoEl.innerHTML = `
-    <div style="display:flex;flex-wrap:wrap;gap:0.6rem;align-items:center">
-      <div style="background:#f8f6f1;border:1px solid #e0d8c8;border-radius:8px;padding:0.5rem 1rem;display:flex;align-items:center;gap:0.5rem">
-        <span style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#888">Expected Voters</span>
-        <span style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--navy)">${baseExpected}</span>
-      </div>
-      <div style="background:#f8f6f1;border:1px solid #e0d8c8;border-radius:8px;padding:0.5rem 1rem;display:flex;align-items:center;gap:0.5rem">
-        <span style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#888">Absentee Votes</span>
-        <span style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--navy)">${absenteeCount}</span>
-      </div>
-    </div>`;
-
-  const bodyEl = document.getElementById('mdash-body');
-  if (!voting.question) { bodyEl.innerHTML = ''; return; }
-
-  const totalVotes = Object.values(voting.votes || {}).reduce((s, v) => s + v, 0);
-  const expected   = baseExpected + absenteeCount;
-  const pct        = expected > 0 ? Math.round((totalVotes / expected) * 100) : 0;
-  const maxVotes   = Math.max(...(voting.answers || []).map(a => (voting.votes || {})[a] || 0), 1);
-  const majThresh  = votingMajorityThreshold(voting, state);
-
-  const answerRows = (voting.answers || []).map(answer => {
-    const votes      = (voting.votes || {})[answer] || 0;
-    const barW       = Math.round((votes / maxVotes) * 100);
-    const answerPct  = expected > 0 ? Math.round((votes / expected) * 100) : (totalVotes > 0 ? Math.round((votes / totalVotes) * 100) : 0);
-    const majReached = majThresh !== null && votes >= majThresh;
-    return `
-      <div class="elected-row" style="flex-direction:column;align-items:stretch;gap:0.3rem;padding:0.6rem 0">
-        <div style="display:flex;align-items:center;gap:0.5rem">
-          <div class="elected-name" style="flex:1">${esc(answer)}${majReached ? ' <span class="badge badge-green" style="font-size:0.72rem;padding:0.15rem 0.5rem">✓ Majority</span>' : ''}</div>
-          <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--navy);min-width:32px;text-align:right">${votes}</div>
-        </div>
-        <div class="bar-wrap"><div class="bar-fill" style="width:${barW}%;background:${majReached ? 'var(--green)' : '#243460'}"></div></div>
-        <div style="font-size:0.8rem;color:#888;margin-top:0.1rem">${answerPct}%${expected > 0 ? ' of eligible voters' : ' of votes cast'}${majThresh !== null ? ` · majority: ${majThresh} votes (${votingMajorityLabel(voting)})` : ''}</div>
-      </div>`;
-  }).join('');
-
-  bodyEl.innerHTML = `
-    <div style="background:#f8f6f1;border:1px solid #e0d8c8;border-radius:8px;padding:0.75rem 1rem;margin-bottom:1.25rem">
-      <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#888;margin-bottom:0.35rem">Vote Question</div>
-      <div style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--navy);line-height:1.45">${esc(voting.question)}</div>
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.25rem">
-      <div class="stat-box" style="background:#fff;border:1px solid #e0d8c8;border-radius:6px;padding:0.35rem 0.75rem;min-width:70px;text-align:center">
-        <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--navy)">${totalVotes}</div>
-        <div style="font-size:0.7rem;color:#888;text-transform:uppercase;letter-spacing:0.04em">Votes Cast</div>
-      </div>
-      ${expected > 0 ? `
-      <div class="stat-box" style="background:#fff;border:1px solid #e0d8c8;border-radius:6px;padding:0.35rem 0.75rem;min-width:70px;text-align:center">
-        <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--navy)">${expected}</div>
-        <div style="font-size:0.7rem;color:#888;text-transform:uppercase;letter-spacing:0.04em">Expected</div>
-      </div>
-      <div class="stat-box" style="background:#fff;border:1px solid #e0d8c8;border-radius:6px;padding:0.35rem 0.75rem;min-width:70px;text-align:center">
-        <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:${pct >= 50 ? 'var(--green)' : 'var(--navy)'}">${pct}%</div>
-        <div style="font-size:0.7rem;color:#888;text-transform:uppercase;letter-spacing:0.04em">Turnout</div>
-      </div>` : ''}
-      ${majThresh !== null ? `
-      <div class="stat-box" style="background:#fff;border:1px solid #e0d8c8;border-radius:6px;padding:0.35rem 0.75rem;min-width:70px;text-align:center">
-        <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--navy)">${majThresh}</div>
-        <div style="font-size:0.7rem;color:#888;text-transform:uppercase;letter-spacing:0.04em">Majority</div>
-      </div>` : ''}
-    </div>
-    <hr class="divider">
-    ${answerRows}`;
-
-  // Auto-refresh (3s) — guard prevents exponential interval growth
-  if (!_votingDashPolling) {
-    _votingDashPolling = true;
-    const interval = setInterval(() => {
-      if (!document.getElementById('screen-voting-dashboard').classList.contains('active')) return;
-      renderVotingDashboard();
-    }, 3000);
-    refreshIntervals.push(interval);
-  }
 }
 
 // ========== INIT ==========

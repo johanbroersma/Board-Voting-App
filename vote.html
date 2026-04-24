@@ -380,17 +380,13 @@
     primaryColor: '', secondaryColor: '',
     tokens: [],
     election: { ...defaultElection },
-    voting: {
-      question: '', answers: [], votingOpen: false,
-      complete: false, votes: {}, ballots: [], expectedVoters: 0
-    }
   };
 
   // ── State ──────────────────────────────────────────
   let state              = {};
   let enteredToken       = '';
   let selectedCandidates = [];
-  let selectedAnswer     = null;
+
   let votedNames         = [];
   let summaryOpen        = false;
   let view               = 'token';
@@ -442,24 +438,11 @@
     return state.electionName || 'Board Election';
   }
 
-  // Returns 'election' | 'election-complete' | 'voting' | 'voting-complete' | 'idle'
+  // Returns 'election' | 'election-complete' | 'idle'
   function determineMode() {
     const election = state.election || {};
-    const voting   = state.voting   || {};
-
-    if (election.complete) {
-      // Election done — yield to congregational vote if configured
-      if (voting.question) return voting.complete ? 'voting-complete' : 'voting';
-      return 'election-complete';
-    }
-
-    // Election configured or in progress
-    if ((election.nominees || []).length > 0 || election.currentRound > 0) {
-      return 'election';
-    }
-
-    if (voting.question) return voting.complete ? 'voting-complete' : 'voting';
-
+    if (election.complete) return 'election-complete';
+    if ((election.nominees || []).length > 0 || election.currentRound > 0) return 'election';
     return 'idle';
   }
 
@@ -485,12 +468,6 @@
         : `<span class="status-pill pill-closed">Voting Closed</span>`;
     }
     if (mode === 'election-complete') return `<span class="status-pill pill-none">Complete</span>`;
-    if (mode === 'voting') {
-      return (state.voting || {}).votingOpen
-        ? `<span class="status-pill pill-open">Voting Open</span>`
-        : `<span class="status-pill pill-closed">Voting Closed</span>`;
-    }
-    if (mode === 'voting-complete') return `<span class="status-pill pill-none">Complete</span>`;
     return `<span class="status-pill pill-none">No Vote</span>`;
   }
 
@@ -642,112 +619,15 @@
     </div>`;
   }
 
-  // ── Congregational Vote: Ballot ────────────────────
-  function renderVotingBallotState() {
-    const voting  = state.voting || {};
-    const answers = voting.answers || [];
-
-    const rows = answers.map(answer => {
-      const sel = selectedAnswer === answer;
-      return `<div class="answer-row${sel ? ' selected' : ''}" tabindex="0" role="radio"
-        aria-checked="${sel}" data-answer="${esc(answer)}">
-        <div class="answer-radio"><div class="answer-radio-dot"></div></div>
-        <span class="answer-label">${esc(answer)}</span>
-      </div>`;
-    }).join('');
-
-    return `${renderHeader()}
-    <div class="card-body">
-      <div class="vote-badge">General Vote</div>
-      <div class="question-card">
-        <div class="question-label">Question</div>
-        <div class="question-text">${esc(voting.question)}</div>
-      </div>
-      <p style="font-size:15px;font-weight:500;color:var(--text-muted);margin-bottom:14px">Select your answer:</p>
-      <div class="answers" id="answersList" role="radiogroup" aria-label="Vote answers">${rows}</div>
-      <div class="error-msg" id="ballotError" role="alert"></div>
-      <button class="btn btn-navy" id="ballotSubmit" ${!selectedAnswer ? 'disabled' : ''}>Cast My Vote</button>
-    </div>`;
-  }
-
-  // ── Congregational Vote: Done ──────────────────────
-  function renderVotingDoneState() {
-    const voting = state.voting || {};
-    return `${renderHeader()}
-    <div class="card-body" style="text-align:center">
-      <div class="icon-wrap">
-        <div class="icon-circle icon-circle-green">${svgBigCheck}</div>
-      </div>
-      <h1 class="heading">Vote Recorded</h1>
-      <p class="subtext">Thank you — your vote has been recorded.</p>
-      ${voting.question ? `<div class="question-card" style="text-align:left;margin-top:8px">
-        <div class="question-label">Question</div>
-        <div class="question-text">${esc(voting.question)}</div>
-      </div>` : ''}
-      ${selectedAnswer ? `<div class="question-card" style="text-align:left;margin-top:8px;border-left-color:var(--green)">
-        <div class="question-label" style="color:var(--green)">Your vote</div>
-        <div class="question-text" style="color:var(--green);font-weight:700">${esc(selectedAnswer)}</div>
-      </div>` : ''}
-    </div>`;
-  }
-
-  // ── Congregational Vote: Already Voted ─────────────
-  function renderVotingAlreadyVotedState() {
-    const voting = state.voting || {};
-    return `${renderHeader()}
-    <div class="card-body" style="text-align:center">
-      <div class="icon-wrap">
-        <div class="icon-circle icon-circle-green">${svgBigCheck}</div>
-      </div>
-      <h1 class="heading">Already Voted</h1>
-      <p class="subtext">Your vote on this matter has already been recorded. Thank you for participating.</p>
-      ${voting.question ? `<div class="question-card" style="text-align:left;margin-top:8px">
-        <div class="question-label">Question</div>
-        <div class="question-text">${esc(voting.question)}</div>
-      </div>` : ''}
-    </div>`;
-  }
-
-  // ── Congregational Vote: Complete ──────────────────
-  function renderVotingCompleteState() {
-    return `<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem;background:#f8f5ef;">
-      <div style="text-align:center;max-width:420px;">
-        <p style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:600;color:#1a2744;margin-bottom:1rem;line-height:1.35;">
-          Thank you for your vote.
-        </p>
-        <p style="font-size:1.05rem;color:#555;line-height:1.6;">
-          The voting is now complete.<br>The chairperson will announce the results.
-        </p>
-      </div>
-    </div>`;
-  }
-
   // ── Waiting ────────────────────────────────────────
   function renderWaitingState() {
-    const mode = determineMode();
-    let heading, subtext, extra = '';
-
-    if (mode === 'voting') {
-      const voting = state.voting || {};
-      const wasOpened = (voting.ballots || []).length > 0 || Object.values(voting.votes||{}).some(v=>v>0);
-      heading = wasOpened ? 'Voting Round Closed' : 'Voting Not Yet Open';
-      subtext = wasOpened
-        ? 'Voting has closed. Please wait for the chairperson to announce the results.'
-        : 'Voting has not yet opened. Please wait for the chairperson to open the vote.';
-      if (voting.question) {
-        extra = `<div class="question-card" style="margin-top:8px;text-align:left">
-          <div class="question-label">Question</div>
-          <div class="question-text">${esc(voting.question)}</div>
-        </div>`;
-      }
-    } else {
-      const election = state.election || {};
-      const roundInProgress = election.currentRound > 0;
-      heading = roundInProgress ? 'Voting Round Closed' : 'Voting Not Yet Open';
-      subtext = roundInProgress
-        ? 'The current voting round has closed. Please wait for further instructions.'
-        : 'Voting has not yet opened. Please wait for the election officer to open voting.';
-    }
+    const election = state.election || {};
+    const roundInProgress = election.currentRound > 0;
+    const heading = roundInProgress ? 'Voting Round Closed' : 'Voting Not Yet Open';
+    const subtext = roundInProgress
+      ? 'The current voting round has closed. Please wait for further instructions.'
+      : 'Voting has not yet opened. Please wait for the election officer to open voting.';
+    const extra = '';
 
     return `${renderHeader()}
     <div class="card-body" style="text-align:center">
@@ -777,23 +657,17 @@
 
   // ── Determine View ─────────────────────────────────
   function determineView() {
-    if (['election-ballot','election-done','voting-ballot','voting-done','voting-already-voted'].includes(view)) {
+    if (['election-ballot','election-done'].includes(view)) {
       return view;
     }
 
     const mode = determineMode();
     if (mode === 'election-complete') return 'election-complete';
-    if (mode === 'voting-complete')   return 'voting-complete';
     if (mode === 'idle')              return 'idle';
 
     if (mode === 'election') {
       const election = state.election || {};
       if (!election.votingOpen) return 'waiting';
-      return 'token';
-    }
-
-    if (mode === 'voting') {
-      if (!(state.voting || {}).votingOpen) return 'waiting';
       return 'token';
     }
 
@@ -817,35 +691,12 @@
               const token = state.tokens.find(t => t.code === enteredToken);
               const alreadyVoted = token && (token.usedRounds || []).includes(election.currentRound);
               if (!alreadyVoted) { checkForNextBallot(); return; }
-            } else if (state.voting?.votingOpen) {
-              const token = state.tokens.find(t => t.code === enteredToken);
-              if (token) {
-                if (waitingPoller) { clearInterval(waitingPoller); waitingPoller = null; }
-                if (token.votingVoted) { view = 'voting-already-voted'; render(); return; }
-                selectedAnswer = null; view = 'voting-ballot'; render(); return;
-              }
             }
           }
 
           if (next !== view) {
             if (waitingPoller) { clearInterval(waitingPoller); waitingPoller = null; }
             if (next === 'election-ballot') selectedCandidates = [];
-            // After election-complete: carry token into congregational vote
-            if (view === 'election-complete' && enteredToken) {
-              const mode = determineMode();
-              if (mode === 'voting') {
-                const token = state.tokens.find(t => t.code === enteredToken);
-                if (token) {
-                  if (token.votingVoted) { view = 'voting-already-voted'; render(); return; }
-                  if (state.voting?.votingOpen) {
-                    if (waitingPoller) { clearInterval(waitingPoller); waitingPoller = null; }
-                    selectedAnswer = null; view = 'voting-ballot'; render(); return;
-                  }
-                  view = 'waiting'; render(); return;
-                }
-              }
-              enteredToken = '';
-            }
             view = next;
             render();
           }
@@ -862,25 +713,6 @@
           }
         }, 3000);
       }
-    } else if (view === 'voting-ballot') {
-      if (!ballotPoller) {
-        ballotPoller = setInterval(() => {
-          state = load();
-          const voting = state.voting || {};
-          if (!voting.question) { clearInterval(ballotPoller); ballotPoller = null; view = 'idle'; render(); return; }
-          if (voting.complete)  { clearInterval(ballotPoller); ballotPoller = null; view = 'voting-complete'; render(); return; }
-          if (!voting.votingOpen) { clearInterval(ballotPoller); ballotPoller = null; view = 'waiting'; render(); }
-        }, 3000);
-      }
-    } else if (['voting-done','voting-already-voted'].includes(view)) {
-      if (!waitingPoller) {
-        waitingPoller = setInterval(() => {
-          state = load();
-          const voting = state.voting || {};
-          if (!voting.question) { if (waitingPoller) { clearInterval(waitingPoller); waitingPoller = null; } view = 'idle'; render(); return; }
-          if (!voting.votingOpen || voting.complete) { if (waitingPoller) { clearInterval(waitingPoller); waitingPoller = null; } view = 'voting-complete'; render(); return; }
-        }, 3000);
-      }
     } else {
       if (waitingPoller) { clearInterval(waitingPoller); waitingPoller = null; }
       if (ballotPoller)  { clearInterval(ballotPoller);  ballotPoller  = null; }
@@ -892,10 +724,6 @@
       case 'election-ballot':      html = renderElectionBallotState();     break;
       case 'election-done':        html = renderElectionDoneState();       break;
       case 'election-complete':    html = renderElectionCompleteState();   break;
-      case 'voting-ballot':        html = renderVotingBallotState();       break;
-      case 'voting-done':          html = renderVotingDoneState();         break;
-      case 'voting-already-voted': html = renderVotingAlreadyVotedState(); break;
-      case 'voting-complete':      html = renderVotingCompleteState();     break;
       case 'waiting':              html = renderWaitingState();            break;
       case 'idle':                 html = renderIdleState();               break;
       default:                     html = renderTokenState();              break;
@@ -910,7 +738,6 @@
       case 'token':           attachTokenListeners();          break;
       case 'election-ballot': attachElectionBallotListeners(); break;
       case 'election-done':   attachElectionDoneListeners();   break;
-      case 'voting-ballot':   attachVotingBallotListeners();   break;
       case 'waiting':
       case 'idle':            attachRefreshListeners();        break;
     }
@@ -950,7 +777,6 @@
     const mode = determineMode();
 
     if (mode === 'election-complete') { view = 'election-complete'; render(); return; }
-    if (mode === 'voting-complete')   { view = 'voting-complete';   render(); return; }
     if (mode === 'idle')              { view = 'idle';               render(); return; }
 
     const token = state.tokens.find(t => t.code === code);
@@ -966,14 +792,6 @@
       enteredToken = code; selectedCandidates = [];
       if (waitingPoller) { clearInterval(waitingPoller); waitingPoller = null; }
       view = 'election-ballot'; render(); return;
-    }
-
-    if (mode === 'voting') {
-      if (token.votingVoted) { enteredToken = code; view = 'voting-already-voted'; render(); return; }
-      if (!(state.voting || {}).votingOpen) { enteredToken = code; view = 'waiting'; render(); return; }
-      enteredToken = code; selectedAnswer = null;
-      if (waitingPoller) { clearInterval(waitingPoller); waitingPoller = null; }
-      view = 'voting-ballot'; render(); return;
     }
   }
 
@@ -1049,63 +867,6 @@
     render();
     if (donePoller) clearInterval(donePoller);
     donePoller = setInterval(checkForNextBallot, 5000);
-  }
-
-  // ── Congregational vote ballot listeners ──────────
-  function attachVotingBallotListeners() {
-    const list   = document.getElementById('answersList');
-    const submit = document.getElementById('ballotSubmit');
-
-    if (list) {
-      list.addEventListener('click', e => {
-        const row = e.target.closest('.answer-row');
-        if (!row) return;
-        selectedAnswer = row.dataset.answer;
-        list.querySelectorAll('.answer-row').forEach(r =>
-          r.classList.toggle('selected', r.dataset.answer === selectedAnswer)
-        );
-        if (submit) submit.disabled = false;
-      });
-      list.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          const row = e.target.closest('.answer-row');
-          if (row) row.click();
-        }
-      });
-    }
-    if (submit) submit.addEventListener('click', handleVotingVoteSubmit);
-  }
-
-  function handleVotingVoteSubmit() {
-    const errEl  = document.getElementById('ballotError');
-    const submit = document.getElementById('ballotSubmit');
-    if (!selectedAnswer) {
-      if (errEl) { errEl.textContent = 'Please select an answer before submitting.'; errEl.classList.add('visible'); }
-      return;
-    }
-    if (submit) { submit.disabled = true; submit.textContent = 'Submitting…'; }
-
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/api/voting-ballot', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        if (waitingPoller) { clearInterval(waitingPoller); waitingPoller = null; }
-        if (ballotPoller)  { clearInterval(ballotPoller);  ballotPoller  = null; }
-        view = 'voting-done'; render();
-      } else {
-        let msg = 'Submission failed. Please try again.';
-        try { msg = JSON.parse(xhr.responseText).error || msg; } catch (_) {}
-        if (errEl) { errEl.textContent = msg; errEl.classList.add('visible'); }
-        if (submit) { submit.disabled = false; submit.textContent = 'Cast My Vote'; }
-      }
-    };
-    xhr.onerror = () => {
-      if (errEl) { errEl.textContent = 'Network error. Please try again.'; errEl.classList.add('visible'); }
-      if (submit) { submit.disabled = false; submit.textContent = 'Cast My Vote'; }
-    };
-    xhr.send(JSON.stringify({ tokenCode: enteredToken, answer: selectedAnswer }));
   }
 
   // ── Election done listeners ────────────────────────
