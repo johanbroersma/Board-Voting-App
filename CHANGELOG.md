@@ -1,6 +1,38 @@
 # Changelog
 
-All notable changes to the Church Voting App are documented here.
+All notable changes to the Board Voting App are documented here.
+
+---
+
+## [3.0.2] — 2026-04-25
+### Changed
+- **Colour theme updated** — new palette throughout both `index.html` and `vote.html`:
+  - Primary `#6d776e` (sage green) replaces navy `#1a2744`
+  - Background `#faf9f8` (warm off-white) replaces cream `#f8f5ef`
+  - Accent `#ece7e4` (warm taupe) replaces gold `#b8942a`/`#d4aa3a`
+  - All derived variables (tints, borders, tile hover states, election palette) updated to match
+  - SVG icon strokes, print card styles, inline badge/alert colours, and `applyTheme()` fallbacks all updated
+
+---
+
+## [3.0.1] — 2026-04-25
+### Removed
+- **Congregational vote feature removed entirely** — the app now handles only board elections
+  - Deleted `/api/voting-ballot` server endpoint
+  - Removed all voting screens and JS functions (`renderVotingHub`, `renderVotingSetup`, `renderVotingControl`, `renderVotingDashboard`, paper ballot voting, etc.)
+  - Removed `voting` state object, `votingPasswordHash`, `votingVoted` token field, and all related login routing from `index.html` and `vote.html`
+  - Voter page (`vote.html`) simplified to three modes: `election`, `election-complete`, `idle`
+
+---
+
+## [3.0.0] — 2026-04-25
+### Changed
+- **Forked from Church Voting App and converted to generic Board Voting App**
+  - All church-specific fields removed: elder/deacon distinction, congregation name, denomination
+  - Single `election` object replaces the dual elder/deacon offices
+  - `org` (Organisation Name) and `electionName` replace church-specific branding fields
+  - Admin default password changed from `churchvoting` to `boardvoting`
+  - App renamed throughout UI, server startup banner, and documentation
 
 ---
 
