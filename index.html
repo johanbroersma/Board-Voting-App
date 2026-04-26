@@ -14,8 +14,8 @@
     html { font-size: 16px; }
     body {
       font-family: 'Source Sans 3', sans-serif;
-      background: #f8f5ef;
-      color: #1a2744;
+      background: #faf9f8;
+      color: #2d3530;
       min-height: 100vh;
       min-font-size: 11px;
     }
@@ -23,25 +23,25 @@
     /* ===== COLOR VARS ===== */
     :root {
       --heading-font: 'Playfair Display', serif;
-      --navy: #1a2744;
+      --navy: #6d776e;
       --primary-text: #ffffff;
-      --tile-bg: #243460;
-      --tile-bg-hover: #2d4080;
+      --tile-bg: #586059;
+      --tile-bg-hover: #4a5250;
       --tile-text: #ffffff;
-      --tile-accent: #d4aa3a;
-      --tile-desc: #8090b0;
-      --nav-back-color: #a0b0c0;
-      --nav-back-border: #405080;
+      --tile-accent: #ece7e4;
+      --tile-desc: #8a9a90;
+      --nav-back-color: #9aaa9c;
+      --nav-back-border: #7a8a7c;
       --primary-sub: rgba(255,255,255,0.6);
       --primary-note: rgba(255,255,255,0.38);
-      --navy-mid: #243460;
-      --gold: #b8942a;
-      --gold-light: #d4aa3a;
-      --election-dark: #1a3a5c;
-      --election-mid: #1e4976;
-      --election-tint: #e8f0fa;
-      --election-border: #9bbde8;
-      --cream: #f8f5ef;
+      --navy-mid: #586059;
+      --gold: #9e8e85;
+      --gold-light: #ece7e4;
+      --election-dark: #4a5e50;
+      --election-mid: #5a7060;
+      --election-tint: #edf0ec;
+      --election-border: #9ab8a4;
+      --cream: #faf9f8;
       --green: #2d6a4f;
       --red: #9b2335;
     }
@@ -139,7 +139,7 @@
     }
     .alert-error { background: #fce8ea; color: var(--red); border: 1px solid #f0b8be; }
     .alert-success { background: #e6f4ee; color: var(--green); border: 1px solid #a0d4bb; }
-    .alert-info { background: #e8f0fa; color: var(--election-dark); border: 1px solid var(--election-border); }
+    .alert-info { background: #edf0ec; color: var(--election-dark); border: 1px solid var(--election-border); }
     .alert-warning { background: #fff8e6; color: #7a5a00; border: 1px solid #e8cc80; }
 
     /* ===== TABS ===== */
@@ -184,7 +184,7 @@
         padding: 0;
       }
       .print-card {
-        border: 1.5px solid #1a2744;
+        border: 1.5px solid #6d776e;
         border-radius: 4mm;
         padding: 3mm 2mm;
         text-align: center;
@@ -194,8 +194,8 @@
         flex-direction: column;
         align-items: center;
       }
-      .print-card .print-church { font-size: 6pt; font-weight: 700; color: #1a2744; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1mm; }
-      .print-card .print-code { font-family: 'Playfair Display', serif; font-size: 22pt; font-weight: 700; color: #1a2744; letter-spacing: 0.2em; margin: 1mm 0; line-height: 1; }
+      .print-card .print-church { font-size: 6pt; font-weight: 700; color: #6d776e; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1mm; }
+      .print-card .print-code { font-family: 'Playfair Display', serif; font-size: 22pt; font-weight: 700; color: #6d776e; letter-spacing: 0.2em; margin: 1mm 0; line-height: 1; }
       .print-card .print-qr { margin: 1.5mm 0; line-height: 0; }
       .print-card .print-qr img { width: 18mm; height: 18mm; }
       .print-card .print-url { font-size: 5pt; color: #444; word-break: break-all; margin: 1mm 0; }
@@ -296,7 +296,7 @@
       max-width: 520px;
       width: 100%;
     }
-    .vote-url-box .url-label { font-size: 0.78rem; color: #8090b0; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.3rem; }
+    .vote-url-box .url-label { font-size: 0.78rem; color: #8a9a90; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.3rem; }
     .vote-url-box .url-text { font-family: 'Playfair Display', serif; color: var(--gold-light); font-size: 1rem; word-break: break-all; }
     .landing-note { margin-top: 1.2rem; font-size: 0.78rem; color: var(--primary-note, rgba(255,255,255,0.38)); text-align: center; max-width: 380px; }
 
@@ -544,7 +544,7 @@
       letter-spacing: 0.04em;
     }
     .nr-tag.advanced { background: #e8f4ee; color: var(--green); }
-    .nr-tag.added { background: #e8f0fa; color: var(--deacon-dark); }
+    .nr-tag.added { background: #edf0ec; color: var(--deacon-dark); }
 
     /* ===== PAPER BALLOT SCREEN ===== */
     #screen-paper-ballot { }
@@ -601,7 +601,7 @@
     .summary-card { background: #fff; border-radius: 12px; max-width: 780px; margin: 0 auto; overflow: hidden; }
     .summary-header { background: var(--navy); color: #fff; padding: 1.75rem 2rem; }
     .summary-header h1 { font-size: 1.8rem; color: var(--gold-light); }
-    .summary-header .sum-date { font-size: 0.9rem; color: #8090b0; margin-top: 0.3rem; }
+    .summary-header .sum-date { font-size: 0.9rem; color: #8a9a90; margin-top: 0.3rem; }
     .summary-body { padding: 2rem; }
     .summary-section { margin-bottom: 2rem; }
     .summary-section h2 { font-size: 1.2rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; }
@@ -659,10 +659,10 @@
   <div class="login-card">
     <div style="text-align:center;margin-bottom:1.25rem">
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Ballot">
-        <rect x="7" y="4" width="34" height="40" rx="3" stroke="#d4aa3a" stroke-width="2.5" fill="none"/>
-        <line x1="13" y1="15" x2="35" y2="15" stroke="#d4aa3a" stroke-width="2"/>
-        <line x1="13" y1="22" x2="35" y2="22" stroke="#d4aa3a" stroke-width="2"/>
-        <line x1="13" y1="29" x2="26" y2="29" stroke="#d4aa3a" stroke-width="2"/>
+        <rect x="7" y="4" width="34" height="40" rx="3" stroke="#9e8e85" stroke-width="2.5" fill="none"/>
+        <line x1="13" y1="15" x2="35" y2="15" stroke="#9e8e85" stroke-width="2"/>
+        <line x1="13" y1="22" x2="35" y2="22" stroke="#9e8e85" stroke-width="2"/>
+        <line x1="13" y1="29" x2="26" y2="29" stroke="#9e8e85" stroke-width="2"/>
         <polyline points="29,26 32,33 40,21" stroke="#2d9a5f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
@@ -686,10 +686,10 @@
 <div id="screen-home" class="screen">
   <div class="landing-cross" id="home-logo" style="margin:2.5rem 0 1.5rem">
     <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Ballot">
-      <rect x="9" y="5" width="46" height="54" rx="4" stroke="#d4aa3a" stroke-width="3" fill="none"/>
-      <line x1="17" y1="20" x2="47" y2="20" stroke="#d4aa3a" stroke-width="2.5"/>
-      <line x1="17" y1="29" x2="47" y2="29" stroke="#d4aa3a" stroke-width="2.5"/>
-      <line x1="17" y1="38" x2="34" y2="38" stroke="#d4aa3a" stroke-width="2.5"/>
+      <rect x="9" y="5" width="46" height="54" rx="4" stroke="#9e8e85" stroke-width="3" fill="none"/>
+      <line x1="17" y1="20" x2="47" y2="20" stroke="#9e8e85" stroke-width="2.5"/>
+      <line x1="17" y1="29" x2="47" y2="29" stroke="#9e8e85" stroke-width="2.5"/>
+      <line x1="17" y1="38" x2="34" y2="38" stroke="#9e8e85" stroke-width="2.5"/>
       <polyline points="39,34 43,44 55,26" stroke="#2d9a5f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </div>
@@ -727,7 +727,7 @@
   <div style="background:var(--navy);color:#fff;padding:1.5rem 2rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
     <div>
       <h1 style="font-size:1.6rem;color:var(--gold-light)">⚙ App Settings</h1>
-      <div style="font-size:0.85rem;color:#8090b0;margin-top:0.2rem">Organization identity, integration &amp; access passwords</div>
+      <div style="font-size:0.85rem;color:#8a9a90;margin-top:0.2rem">Organization identity, integration &amp; access passwords</div>
     </div>
     <button class="btn btn-ghost btn-sm" style="color:var(--nav-back-color);border-color:var(--nav-back-border)" onclick="showHome()">← Home</button>
   </div>
@@ -747,9 +747,9 @@
       <div class="form-group">
         <label>Organization Logo</label>
         <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
-          <div id="app-logo-preview" style="width:80px;height:80px;border:1.5px solid #ccc;border-radius:8px;display:flex;align-items:center;justify-content:center;background:#f8f5ef;overflow:hidden;flex-shrink:0"></div>
+          <div id="app-logo-preview" style="width:80px;height:80px;border:1.5px solid #ccc;border-radius:8px;display:flex;align-items:center;justify-content:center;background:#faf9f8;overflow:hidden;flex-shrink:0"></div>
           <div style="display:flex;flex-direction:column;gap:0.5rem">
-            <label class="btn btn-ghost btn-sm" style="color:var(--navy);border-color:#9bbde8;cursor:pointer;margin:0">
+            <label class="btn btn-ghost btn-sm" style="color:var(--navy);border-color:#a8b5aa;cursor:pointer;margin:0">
               📁 Choose Image
               <input type="file" id="app-logo-file" accept="image/*" style="display:none" onchange="handleLogoUpload(this)">
             </label>
@@ -763,14 +763,14 @@
           <label for="app-primary-color">Primary Colour</label>
           <div style="display:flex;gap:0.5rem;align-items:center">
             <input type="color" id="app-primary-color-picker" style="width:42px;height:36px;border:1.5px solid #ccc;border-radius:6px;cursor:pointer;padding:2px" oninput="document.getElementById('app-primary-color').value=this.value">
-            <input type="text" id="app-primary-color" class="form-control" placeholder="#1a2744" maxlength="7" oninput="syncColorPicker('app-primary-color','app-primary-color-picker')">
+            <input type="text" id="app-primary-color" class="form-control" placeholder="#6d776e" maxlength="7" oninput="syncColorPicker('app-primary-color','app-primary-color-picker')">
           </div>
         </div>
         <div class="form-group">
           <label for="app-secondary-color">Secondary Colour</label>
           <div style="display:flex;gap:0.5rem;align-items:center">
             <input type="color" id="app-secondary-color-picker" style="width:42px;height:36px;border:1.5px solid #ccc;border-radius:6px;cursor:pointer;padding:2px" oninput="document.getElementById('app-secondary-color').value=this.value">
-            <input type="text" id="app-secondary-color" class="form-control" placeholder="#b8942a" maxlength="7" oninput="syncColorPicker('app-secondary-color','app-secondary-color-picker')">
+            <input type="text" id="app-secondary-color" class="form-control" placeholder="#9e8e85" maxlength="7" oninput="syncColorPicker('app-secondary-color','app-secondary-color-picker')">
           </div>
         </div>
       </div>
@@ -900,10 +900,10 @@
   </div>
   <div class="landing-cross" id="landing-logo">
     <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Ballot">
-      <rect x="9" y="5" width="46" height="54" rx="4" stroke="#d4aa3a" stroke-width="3" fill="none"/>
-      <line x1="17" y1="20" x2="47" y2="20" stroke="#d4aa3a" stroke-width="2.5"/>
-      <line x1="17" y1="29" x2="47" y2="29" stroke="#d4aa3a" stroke-width="2.5"/>
-      <line x1="17" y1="38" x2="34" y2="38" stroke="#d4aa3a" stroke-width="2.5"/>
+      <rect x="9" y="5" width="46" height="54" rx="4" stroke="#9e8e85" stroke-width="3" fill="none"/>
+      <line x1="17" y1="20" x2="47" y2="20" stroke="#9e8e85" stroke-width="2.5"/>
+      <line x1="17" y1="29" x2="47" y2="29" stroke="#9e8e85" stroke-width="2.5"/>
+      <line x1="17" y1="38" x2="34" y2="38" stroke="#9e8e85" stroke-width="2.5"/>
       <polyline points="39,34 43,44 55,26" stroke="#2d9a5f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </div>
@@ -970,7 +970,7 @@
   <div class="setup-header">
     <div>
       <h1>⚙️ Election Setup</h1>
-      <div style="font-size:0.85rem;color:#8090b0;margin-top:0.2rem" id="setup-church-name"></div>
+      <div style="font-size:0.85rem;color:#8a9a90;margin-top:0.2rem" id="setup-church-name"></div>
     </div>
     <div style="display:flex;gap:0.5rem;align-items:center">
       <button id="setup-rc-btn" class="btn btn-green btn-sm" style="display:none" onclick="goToRoundControl()">▶ Round Control</button>
@@ -1166,12 +1166,12 @@
 
 <!-- ===== SCREEN: DASHBOARD ===== -->
 <div id="screen-election-complete" class="screen">
-  <div style="min-height:100vh;background:#f8f5ef;display:flex;align-items:center;justify-content:center;padding:2rem 1rem;">
+  <div style="min-height:100vh;background:#faf9f8;display:flex;align-items:center;justify-content:center;padding:2rem 1rem;">
     <div style="max-width:560px;width:100%;">
       <div style="background:#fff;border-radius:14px;box-shadow:0 4px 20px rgba(0,0,0,0.10);overflow:hidden;">
         <div style="background:var(--navy);padding:2rem 2.5rem;text-align:center;">
           <h1 class="font-playfair" style="color:#fff;font-size:1.8rem;margin-bottom:0.25rem;">Election Complete</h1>
-          <div id="ec-date" style="color:#8090b0;font-size:0.95rem;"></div>
+          <div id="ec-date" style="color:#8a9a90;font-size:0.95rem;"></div>
         </div>
         <div id="ec-body" style="padding:2rem 2.5rem;"></div>
         <div style="padding:0 2.5rem 2rem;text-align:center;">
@@ -1202,7 +1202,7 @@
   <div style="background:var(--navy);color:#fff;padding:1.5rem 2rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
     <div>
       <h1 style="font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--gold-light)">🎟️ Voter Tokens</h1>
-      <div id="tokens-church" style="font-size:0.85rem;color:#8090b0;margin-top:0.2rem"></div>
+      <div id="tokens-church" style="font-size:0.85rem;color:#8a9a90;margin-top:0.2rem"></div>
     </div>
     <button class="btn btn-ghost btn-sm" style="color:var(--nav-back-color);border-color:var(--nav-back-border)" onclick="showHome()">← Home</button>
   </div>
@@ -1240,11 +1240,11 @@
       <div id="url-current-display" style="background:#f4f1eb;border:1px solid #ddd;border-radius:6px;padding:0.6rem 0.9rem;margin-bottom:1rem;font-size:0.85rem;word-break:break-all"></div>
 
       <div style="background:#f0f4fb;border:1px solid #c8d8f0;border-radius:8px;padding:0.85rem 1rem;margin-bottom:1rem">
-        <div style="font-size:0.82rem;font-weight:700;color:#1a3a5c;margin-bottom:0.6rem">🔗 TinyURL Options</div>
+        <div style="font-size:0.82rem;font-weight:700;color:#4a5e50;margin-bottom:0.6rem">🔗 TinyURL Options</div>
         <div style="flex:1;min-width:150px">
           <label for="tinyurl-alias" style="font-size:0.78rem;color:#555;display:block;margin-bottom:0.3rem">Custom Alias <span style="color:#888;font-weight:400">(optional, min 5 chars)</span></label>
           <input type="text" id="tinyurl-alias" class="form-control" style="font-size:0.85rem" placeholder="e.g. sbc-vote" autocapitalize="none" autocorrect="off" spellcheck="false">
-          <p style="font-size:0.75rem;color:#888;margin-top:0.3rem">API key can be set in <a href="#" onclick="showAppSettings();return false;" style="color:#1a3a5c">App Settings</a>.</p>
+          <p style="font-size:0.75rem;color:#888;margin-top:0.3rem">API key can be set in <a href="#" onclick="showAppSettings();return false;" style="color:#4a5e50">App Settings</a>.</p>
         </div>
       </div>
 
@@ -1256,7 +1256,7 @@
       <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem">
         <button class="btn btn-navy" onclick="saveCustomUrl()">💾 Save URL</button>
         <button class="btn btn-ghost" style="color:#555;border-color:#ccc" onclick="clearCustomUrl()">✕ Clear (use auto-detected)</button>
-        <button class="btn btn-ghost" style="color:#1a3a5c;border-color:#9bbde8" onclick="createTinyUrl()" id="tinyurl-btn">🔗 Create TinyURL</button>
+        <button class="btn btn-ghost" style="color:#4a5e50;border-color:#a8b5aa" onclick="createTinyUrl()" id="tinyurl-btn">🔗 Create TinyURL</button>
       </div>
       <div id="tinyurl-status" style="display:none;font-size:0.82rem;margin-bottom:0.75rem;padding:0.5rem 0.75rem;border-radius:6px"></div>
 
@@ -1534,7 +1534,7 @@ function voteUrl() {
 
 
 function electionColor() {
-  return { dark: '#1a3a5c', mid: '#1e4976', tint: '#e8f0fa', border: '#9bbde8', bar: '#1e4976' };
+  return { dark: '#4a5e50', mid: '#5a7060', tint: '#edf0ec', border: '#9ab8a4', bar: '#5a7060' };
 }
 
 function electionLabel(state) {
@@ -2011,7 +2011,7 @@ function renderSettings() {
   const display = document.getElementById('url-current-display');
   if (display) {
     const tag = state.customVoteUrl
-      ? '<span style="background:#e8f0fa;color:#1a3a5c;border:1px solid #9bbde8;border-radius:4px;padding:0.1rem 0.4rem;font-size:0.75rem;margin-left:0.4rem;font-weight:600">custom</span>'
+      ? '<span style="background:#edf0ec;color:#4a5e50;border:1px solid #9ab8a4;border-radius:4px;padding:0.1rem 0.4rem;font-size:0.75rem;margin-left:0.4rem;font-weight:600">custom</span>'
       : '<span style="background:#e8f4ee;color:#2d6a4f;border:1px solid #a0d4bb;border-radius:4px;padding:0.1rem 0.4rem;font-size:0.75rem;margin-left:0.4rem;font-weight:600">auto-detected</span>';
     display.innerHTML = `<strong>Current URL:</strong> ${esc(url)} ${tag}`;
   }
@@ -2084,11 +2084,11 @@ function renderAppSettings() {
   const primaryEl = document.getElementById('app-primary-color');
   const primaryPicker = document.getElementById('app-primary-color-picker');
   if (primaryEl) primaryEl.value = state.primaryColor || '';
-  if (primaryPicker) primaryPicker.value = state.primaryColor || '#1a2744';
+  if (primaryPicker) primaryPicker.value = state.primaryColor || '#6d776e';
   const secondaryEl = document.getElementById('app-secondary-color');
   const secondaryPicker = document.getElementById('app-secondary-color-picker');
   if (secondaryEl) secondaryEl.value = state.secondaryColor || '';
-  if (secondaryPicker) secondaryPicker.value = state.secondaryColor || '#b8942a';
+  if (secondaryPicker) secondaryPicker.value = state.secondaryColor || '#9e8e85';
   const fontEl = document.getElementById('app-font');
   if (fontEl) fontEl.value = state.appFont || 'Playfair';
   const keyEl = document.getElementById('app-tinyurl-key');
@@ -2125,7 +2125,7 @@ function _hexLuminance(hex) {
 }
 
 function _contrastText(hex) {
-  return _hexLuminance(hex) > 0.5 ? '#1a2744' : '#ffffff';
+  return _hexLuminance(hex) > 0.5 ? '#2d3530' : '#ffffff';
 }
 
 function _adjustHex(hex, amount) {
@@ -2151,15 +2151,15 @@ function applyAppTheme(state) {
 
   if (primaryHex) {
     root.style.setProperty('--navy', primaryHex);
-    const primaryText = primaryIsLight ? '#1a2744' : '#ffffff';
+    const primaryText = primaryIsLight ? '#2d3530' : '#ffffff';
     root.style.setProperty('--primary-text', primaryText);
     // Nav back buttons and home screen muted text
-    const navBackColor = primaryIsLight ? '#405060' : '#a0b0c0';
-    const navBackBorder = primaryIsLight ? '#607080' : '#405080';
+    const navBackColor = primaryIsLight ? '#4a5a50' : '#9aaa9c';
+    const navBackBorder = primaryIsLight ? '#6a7a70' : '#7a8a7c';
     root.style.setProperty('--nav-back-color', navBackColor);
     root.style.setProperty('--nav-back-border', navBackBorder);
-    root.style.setProperty('--primary-sub',  primaryIsLight ? 'rgba(26,39,68,0.65)'  : 'rgba(255,255,255,0.6)');
-    root.style.setProperty('--primary-note', primaryIsLight ? 'rgba(26,39,68,0.42)'  : 'rgba(255,255,255,0.38)');
+    root.style.setProperty('--primary-sub',  primaryIsLight ? 'rgba(45,53,48,0.65)'  : 'rgba(255,255,255,0.6)');
+    root.style.setProperty('--primary-note', primaryIsLight ? 'rgba(45,53,48,0.42)'  : 'rgba(255,255,255,0.38)');
   }
 
   if (state.secondaryColor && /^#[0-9a-fA-F]{6}$/.test(state.secondaryColor)) {
@@ -2167,13 +2167,13 @@ function applyAppTheme(state) {
     root.style.setProperty('--gold-light', state.secondaryColor);
     const isLightTile = _hexLuminance(state.secondaryColor) > 0.5;
     // Tile text: strong contrast against the tile background
-    const tileText  = isLightTile ? '#1a2744' : '#ffffff';
+    const tileText  = isLightTile ? '#2d3530' : '#ffffff';
     // Tile accent (title): use primary colour on light tile for colour harmony; white on dark tile
     const tileAccent = isLightTile
-      ? (primaryHex || '#1a2744')
+      ? (primaryHex || '#6d776e')
       : '#ffffff';
     // Tile desc: muted version of the text direction
-    const tileDesc = isLightTile ? 'rgba(26,39,68,0.6)' : 'rgba(255,255,255,0.65)';
+    const tileDesc = isLightTile ? 'rgba(45,53,48,0.6)' : 'rgba(255,255,255,0.65)';
     const tileHover = _adjustHex(state.secondaryColor, isLightTile ? -22 : 22);
     root.style.setProperty('--tile-bg', state.secondaryColor);
     root.style.setProperty('--tile-bg-hover', tileHover);
@@ -2191,8 +2191,8 @@ function syncColorPicker(textId, pickerId) {
   }
 }
 
-const _ballotSvgSmall = `<svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="7" y="4" width="34" height="40" rx="3" stroke="#d4aa3a" stroke-width="2.5" fill="none"/><line x1="13" y1="15" x2="35" y2="15" stroke="#d4aa3a" stroke-width="2"/><line x1="13" y1="22" x2="35" y2="22" stroke="#d4aa3a" stroke-width="2"/><line x1="13" y1="29" x2="26" y2="29" stroke="#d4aa3a" stroke-width="2"/><polyline points="29,26 32,33 40,21" stroke="#2d9a5f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-const _ballotSvgLarge = `<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Ballot"><rect x="9" y="5" width="46" height="54" rx="4" stroke="#d4aa3a" stroke-width="3" fill="none"/><line x1="17" y1="20" x2="47" y2="20" stroke="#d4aa3a" stroke-width="2.5"/><line x1="17" y1="29" x2="47" y2="29" stroke="#d4aa3a" stroke-width="2.5"/><line x1="17" y1="38" x2="34" y2="38" stroke="#d4aa3a" stroke-width="2.5"/><polyline points="39,34 43,44 55,26" stroke="#2d9a5f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const _ballotSvgSmall = `<svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="7" y="4" width="34" height="40" rx="3" stroke="#9e8e85" stroke-width="2.5" fill="none"/><line x1="13" y1="15" x2="35" y2="15" stroke="#9e8e85" stroke-width="2"/><line x1="13" y1="22" x2="35" y2="22" stroke="#9e8e85" stroke-width="2"/><line x1="13" y1="29" x2="26" y2="29" stroke="#9e8e85" stroke-width="2"/><polyline points="29,26 32,33 40,21" stroke="#2d9a5f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const _ballotSvgLarge = `<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Ballot"><rect x="9" y="5" width="46" height="54" rx="4" stroke="#9e8e85" stroke-width="3" fill="none"/><line x1="17" y1="20" x2="47" y2="20" stroke="#9e8e85" stroke-width="2.5"/><line x1="17" y1="29" x2="47" y2="29" stroke="#9e8e85" stroke-width="2.5"/><line x1="17" y1="38" x2="34" y2="38" stroke="#9e8e85" stroke-width="2.5"/><polyline points="39,34 43,44 55,26" stroke="#2d9a5f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
 function updateLogoPreview(logoUrl) {
   const preview = document.getElementById('app-logo-preview');
@@ -2250,7 +2250,7 @@ async function createTinyUrl() {
     const themes = {
       success: ['#e8f4ee', '#a0d4bb', '#2d6a4f'],
       error:   ['#fff0f0', '#f5c6c6', '#c0392b'],
-      info:    ['#e8f0fa', '#9bbde8', '#1a3a5c'],
+      info:    ['#edf0ec', '#9ab8a4', '#4a5e50'],
     };
     const [bg, border, color] = themes[type] || themes.info;
     statusEl.style.background = bg;
@@ -2336,11 +2336,11 @@ function printQR() {
   const w = window.open('', '_blank');
   w.document.write(`<!DOCTYPE html><html><head><title>Voter QR Code</title>
     <style>
-      body { font-family: sans-serif; text-align: center; padding: 60px 40px; color: #1a2744; }
+      body { font-family: sans-serif; text-align: center; padding: 60px 40px; color: #6d776e; }
       img { display: block; margin: 0 auto 20px; }
       h2 { font-size: 1.2rem; margin-bottom: 0.4rem; }
       p { font-size: 0.9rem; color: #555; margin-bottom: 0.25rem; word-break: break-all; }
-      .url { font-weight: bold; color: #1a2744; }
+      .url { font-weight: bold; color: #6d776e; }
     </style></head><body>
     <h2>${esc(org)}</h2>
     <p>Scan to open the voter page</p>
@@ -2999,7 +2999,7 @@ function renderTransitionSteps() {
     const isElected = elected.includes(c.name);
     const wasAuto = autoElected.includes(c.name);
     const autoBadge = wasAuto
-      ? `<span style="font-size:0.72rem;background:#fff8e6;color:#b8942a;border:1px solid #f0c060;border-radius:10px;padding:0.1rem 0.45rem;margin-left:0.3rem;font-weight:600">majority</span>`
+      ? `<span style="font-size:0.72rem;background:#f0f2f0;color:#6d776e;border:1px solid #a8b5aa;border-radius:10px;padding:0.1rem 0.45rem;margin-left:0.3rem;font-weight:600">majority</span>`
       : '';
     return `<div class="candidate-check-row">
       <input type="checkbox" id="el-${esc(c.name)}" ${isElected ? 'checked' : ''}
@@ -3217,7 +3217,7 @@ function renderElectionComplete() {
           : elected.map(e => `
             <div style="display:flex;align-items:center;gap:0.6rem;padding:0.45rem 0;border-bottom:1px solid ${colors.border};">
               <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${colors.dark};flex-shrink:0;"></span>
-              <span style="font-size:1rem;color:#1a2744;font-weight:600;">${esc(e.name)}</span>
+              <span style="font-size:1rem;color:#2d3530;font-weight:600;">${esc(e.name)}</span>
             </div>`).join('')}
       </div>
     </div>`;
@@ -3246,7 +3246,7 @@ function updatePBLog() {
         <div class="ballot-log-entry">
           <span><strong>#${i+1}</strong> — ${b.votes.map(v => esc(v)).join(', ')}
           ${b.absentee ? '<span style="background:#e8f0f8;color:var(--navy);border:1px solid #9bb8d8;border-radius:10px;padding:0.1rem 0.45rem;font-size:0.72rem;font-weight:600;margin-left:0.3rem">Absentee</span>' : ''}
-          ${b.editedAt ? '<span style="color:#b8942a;font-size:0.75rem;margin-left:0.3rem">(edited)</span>' : ''}</span>
+          ${b.editedAt ? '<span style="color:#9e8e85;font-size:0.75rem;margin-left:0.3rem">(edited)</span>' : ''}</span>
           <span style="float:right;display:flex;align-items:center;gap:0.5rem">
             <button style="padding:0.15rem 0.55rem;font-size:0.78rem;background:#f5f5f5;border:1px solid #ccc;border-radius:4px;cursor:pointer;line-height:1.6" onclick="pbStartEdit(${i})">✏️ Edit</button>
             <span style="color:#bbb;font-size:0.8rem">${new Date(b.timestamp).toLocaleTimeString()}</span>
@@ -3372,7 +3372,7 @@ function renderPaperBallot() {
           <div class="ballot-log-entry">
             <span><strong>#${i+1}</strong> — ${b.votes.map(v => esc(v)).join(', ')}
             ${b.absentee ? '<span style="background:#e8f0f8;color:var(--navy);border:1px solid #9bb8d8;border-radius:10px;padding:0.1rem 0.45rem;font-size:0.72rem;font-weight:600;margin-left:0.3rem">Absentee</span>' : ''}
-            ${b.editedAt ? '<span style="color:#b8942a;font-size:0.75rem;margin-left:0.3rem">(edited)</span>' : ''}</span>
+            ${b.editedAt ? '<span style="color:#9e8e85;font-size:0.75rem;margin-left:0.3rem">(edited)</span>' : ''}</span>
             <span style="float:right;display:flex;align-items:center;gap:0.5rem">
               <button style="padding:0.15rem 0.55rem;font-size:0.78rem;background:#f5f5f5;border:1px solid #ccc;border-radius:4px;cursor:pointer;line-height:1.6" onclick="pbStartEdit(${i})">✏️ Edit</button>
               <span style="color:#bbb;font-size:0.8rem">${new Date(b.timestamp).toLocaleTimeString()}</span>
@@ -3721,7 +3721,7 @@ function renderSummary() {
           <div class="elected-row" style="flex-direction:column;align-items:stretch;gap:0.3rem;padding:0.6rem 0">
             <div style="display:flex;align-items:center;gap:0.5rem">
               <div class="elected-name" style="flex:1">${esc(c.name)}</div>
-              ${hasMajority ? `<span style="font-size:0.72rem;background:#fff8e6;color:#b8942a;border:1px solid #f0c060;border-radius:10px;padding:0.1rem 0.45rem;font-weight:600;flex-shrink:0">★ majority</span>` : ''}
+              ${hasMajority ? `<span style="font-size:0.72rem;background:#f0f2f0;color:#6d776e;border:1px solid #a8b5aa;border-radius:10px;padding:0.1rem 0.45rem;font-weight:600;flex-shrink:0">★ majority</span>` : ''}
               <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:${colors.dark};min-width:32px;text-align:right">${c.votes || 0}</div>
             </div>
             <div class="bar-wrap"><div class="bar-fill" style="width:${barW}%;background:${colors.bar}"></div></div>
